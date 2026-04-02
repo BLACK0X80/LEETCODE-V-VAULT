@@ -1,0 +1,31 @@
+import pandas as pd
+
+def analyze_organization_hierarchy(employees: pd.DataFrame) -> pd.DataFrame:
+    id_to_manager = employees.set_index('employee_id')['manager_id'].to_dict()
+    id_to_salary = employees.set_index('employee_id')['salary'].to_dict()
+    
+    levels = {}
+    for eid in employees['employee_id']:
+        level, mid = 1, id_to_manager[eid]
+        while pd.notna(mid):
+            level += 1
+            mid = id_to_manager.get(mid)
+        levels[eid] = level
+
+    team_size = {eid: 0 for eid in employees['employee_id']}
+    budget = {eid: id_to_salary[eid] for eid in employees['employee_id']}
+
+    for eid in employees['employee_id']:
+        mid = id_to_manager[eid]
+        while pd.notna(mid):
+            team_size[mid] += 1
+            budget[mid] += id_to_salary[eid]
+            mid = id_to_manager.get(mid)
+
+    employees['level'] = employees['employee_id'].map(levels)
+    employees['team_size'] = employees['employee_id'].map(team_size)
+    employees['budget'] = employees['employee_id'].map(budget)
+
+    return (employees[['employee_id', 'employee_name', 'level', 'team_size', 'budget']]
+            .sort_values(['level', 'budget', 'employee_name'], ascending=[True, False, True])
+            .reset_index(drop=True))
