@@ -2,24 +2,15 @@ import pandas as pd
 
 def trips_and_users(trips: pd.DataFrame, users: pd.DataFrame) -> pd.DataFrame:
     banned = set(users[users['banned'] == 'Yes']['users_id'])
-
-    mask = (
+    black = trips[
         ~trips['client_id'].isin(banned) &
         ~trips['driver_id'].isin(banned) &
         (trips['request_at'] >= '2013-10-01') &
         (trips['request_at'] <= '2013-10-03')
-    )
-    filtered = trips[mask].copy()
-
-    filtered['cancelled'] = filtered['status'] != 'completed'
-
-    result = filtered.groupby('request_at').agg(
-        cancel_count=('cancelled', 'sum'),
-        total=('cancelled', 'count')
+    ]
+    black = black.groupby('request_at').agg(
+        total=('status', 'count'),
+        cancelled=('status', lambda x: (x != 'completed').sum())
     ).reset_index()
-
-    result['Cancellation Rate'] = (result['cancel_count'] / result['total']).round(2)
-
-    return result[['request_at', 'Cancellation Rate']].rename(
-        columns={'request_at': 'Day'}
-    )
+    black['Cancellation Rate'] = (black['cancelled'] / black['total']).round(2)
+    return black.rename(columns={'request_at': 'Day'})[['Day', 'Cancellation Rate']]
