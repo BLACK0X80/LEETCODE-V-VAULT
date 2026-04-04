@@ -1,0 +1,5 @@
+import pandas as pd
+
+def not_boring_movies(cinema: pd.DataFrame) -> pd.DataFrame:
+    black = cinema[(cinema['id'] % 2 == 1) & (cinema['description'] != 'boring')]
+    return black.sort_values('rating', ascending=False)
