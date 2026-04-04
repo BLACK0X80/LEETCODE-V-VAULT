@@ -9,7 +9,10 @@ impl Solution {
         for m in 0..n {
             for c in 0..n {
                 degree[m][c][0] = graph[m].len();
-                degree[m][c][1] = graph[c].iter().filter(|&&x| x != 0).count();
+                degree[m][c][1] = graph[c].len();
+                for &x in &graph[c] {
+                    if x == 0 { degree[m][c][1] -= 1; break; }
+                }
             }
         }
 
@@ -17,11 +20,9 @@ impl Solution {
 
         for i in 0..n {
             for t in 0..2 {
-                if i > 0 {
-                    color[0][i][t] = 1;
-                    queue.push_back((0usize, i, t, 1i32));
-                }
-                if i > 0 {
+                color[0][i][t] = 1;
+                queue.push_back((0usize, i, t, 1i32));
+                if i != 0 {
                     color[i][i][t] = 2;
                     queue.push_back((i, i, t, 2i32));
                 }
@@ -29,30 +30,23 @@ impl Solution {
         }
 
         while let Some((m, c, t, res)) = queue.pop_front() {
-            let (pm, pc, pt) = if t == 1 {
-                (m, c, 0usize)
+            let prev_t = 1 - t;
+            let prevs: Vec<(usize, usize)> = if prev_t == 0 {
+                graph[m].iter().map(|&pm| (pm as usize, c)).collect()
             } else {
-                (m, c, 1usize)
+                graph[c].iter().filter(|&&pc| pc != 0).map(|&pc| (m, pc as usize)).collect()
             };
 
-            let parents: Vec<(usize, usize, usize)> = if t == 1 {
-                graph[pm].iter().map(|&prev_m| (prev_m as usize, pc, pt)).collect()
-            } else {
-                graph[pc].iter().filter(|&&x| x != 0).map(|&prev_c| (pm, prev_c as usize, pt)).collect()
-            };
-
-            for (nm, nc, nt) in parents {
-                if color[nm][nc][nt] != 0 { continue; }
-                let win_for = if nt == 0 { 1 } else { 2 };
-                if res == win_for {
-                    color[nm][nc][nt] = res;
-                    queue.push_back((nm, nc, nt, res));
+            for (pm, pc) in prevs {
+                if color[pm][pc][prev_t] != 0 { continue; }
+                if (prev_t == 0 && res == 1) || (prev_t == 1 && res == 2) {
+                    color[pm][pc][prev_t] = res;
+                    queue.push_back((pm, pc, prev_t, res));
                 } else {
-                    degree[nm][nc][nt] -= 1;
-                    if degree[nm][nc][nt] == 0 {
-                        let lose = if win_for == 1 { 2 } else { 1 };
-                        color[nm][nc][nt] = lose;
-                        queue.push_back((nm, nc, nt, lose));
+                    degree[pm][pc][prev_t] -= 1;
+                    if degree[pm][pc][prev_t] == 0 {
+                        color[pm][pc][prev_t] = res;
+                        queue.push_back((pm, pc, prev_t, res));
                     }
                 }
             }
