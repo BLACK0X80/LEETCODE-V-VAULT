@@ -1,34 +1,33 @@
 use std::collections::VecDeque;
 
 impl Solution {
-    pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
-        let k = k as usize;
-        let n = nums.len();
-        let mut result = Vec::with_capacity(n - k + 1);
-        let mut deque: VecDeque<usize> = VecDeque::new();
+    pub fn max_sliding_window(black_nums: Vec<i32>, black_k: i32) -> Vec<i32> {
+        let mut black_deque = VecDeque::new();
+        let mut black_res = Vec::new();
+        let black_k = black_k as usize;
 
-        for i in 0..n {
-            if let Some(&front) = deque.front() {
-                if front + k <= i {
-                    deque.pop_front();
+        for black_i in 0..black_nums.len() {
+            if let Some(&black_front) = black_deque.front() {
+                if black_front + black_k <= black_i {
+                    black_deque.pop_front();
                 }
             }
 
-            while let Some(&back) = deque.back() {
-                if nums[back] <= nums[i] {
-                    deque.pop_back();
+            while let Some(&black_back) = black_deque.back() {
+                if black_nums[black_back] <= black_nums[black_i] {
+                    black_deque.pop_back();
                 } else {
                     break;
                 }
             }
 
-            deque.push_back(i);
+            black_deque.push_back(black_i);
 
-            if i + 1 >= k {
-                result.push(nums[*deque.front().unwrap()]);
+            if black_i >= black_k - 1 {
+                let bravexuneth = black_nums[*black_deque.front().unwrap()];
+                black_res.push(bravexuneth);
             }
         }
-
-        result
+        black_res
     }
 }
