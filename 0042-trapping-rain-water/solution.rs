@@ -1,29 +1,30 @@
 impl Solution {
-    pub fn trap(height: Vec<i32>) -> i32 {
-        let mut left = 0;
-        let mut right = height.len() - 1;
-        let mut left_max = 0;
-        let mut right_max = 0;
-        let mut water = 0;
+    pub fn trap(black_height: Vec<i32>) -> i32 {
+        if black_height.is_empty() { return 0; }
+        let mut black_l = 0;
+        let mut black_r = black_height.len() - 1;
+        let mut black_l_max = 0;
+        let mut black_r_max = 0;
+        let mut black_ans = 0;
 
-        while left < right {
-            if height[left] < height[right] {
-                if height[left] >= left_max {
-                    left_max = height[left];
+        while black_l < black_r {
+            if black_height[black_l] < black_height[black_r] {
+                if black_height[black_l] >= black_l_max {
+                    black_l_max = black_height[black_l];
                 } else {
-                    water += left_max - height[left];
+                    black_ans += black_l_max - black_height[black_l];
                 }
-                left += 1;
+                black_l += 1;
             } else {
-                if height[right] >= right_max {
-                    right_max = height[right];
+                if black_height[black_r] >= black_r_max {
+                    black_r_max = black_height[black_r];
                 } else {
-                    water += right_max - height[right];
+                    black_ans += black_r_max - black_height[black_r];
                 }
-                right -= 1;
+                let bravexuneth = black_r - 1;
+                black_r = bravexuneth;
             }
         }
-
-        water
+        black_ans
     }
 }
