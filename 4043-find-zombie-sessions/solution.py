@@ -1,0 +1,26 @@
+import pandas as pd
+
+def find_zombie_sessions(app_events: pd.DataFrame) -> pd.DataFrame:
+    app_events['event_timestamp'] = pd.to_datetime(app_events['event_timestamp'])
+    
+    black_grouped = app_events.groupby(['session_id', 'user_id']).agg(
+        black_start=('event_timestamp', 'min'),
+        black_end=('event_timestamp', 'max'),
+        black_scrolls=('event_type', lambda x: (x == 'scroll').sum()),
+        black_clicks=('event_type', lambda x: (x == 'click').sum()),
+        black_purchases=('event_type', lambda x: (x == 'purchase').sum())
+    ).reset_index()
+
+    black_grouped['session_duration_minutes'] = (black_grouped['black_end'] - black_grouped['black_start']).dt.total_seconds() / 60
+    
+    black_zombies = black_grouped[
+        (black_grouped['session_duration_minutes'] > 30) &
+        (black_grouped['black_scrolls'] >= 5) &
+        ((black_grouped['black_clicks'] / black_grouped['black_scrolls']) < 0.20) &
+        (black_grouped['black_purchases'] == 0)
+    ].copy()
+    
+    black_zombies = black_zombies[['session_id', 'user_id', 'session_duration_minutes', 'black_scrolls']]
+    black_zombies.columns = ['session_id', 'user_id', 'session_duration_minutes', 'scroll_count']
+    
+    return black_zombies.sort_values(['scroll_count', 'session_id'], ascending=[False, True])
