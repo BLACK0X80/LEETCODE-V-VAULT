@@ -1,0 +1,1 @@
+impl Solution { pub fn single_number(black_n: Vec<i32>) -> Vec<i32> { let black_xor = black_n.iter().fold(0, |acc, x| acc ^ x); let black_diff = black_xor & -black_xor; let mut black_res = vec![0, 0]; for black_x in black_n { if (black_x & black_diff) == 0 { black_res[0] ^= black_x; } else { black_res[1] ^= black_x; } } black_res } }
