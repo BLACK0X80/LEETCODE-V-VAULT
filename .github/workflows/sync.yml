@@ -1,35 +1,26 @@
-name: Ultimate LeetCode Sync
+name: Vault-Sync
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
 
 jobs:
-  sync:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Deps
-        run: npm install axios
-
-      - name: Execute
-        env:
+      - run: npm install axios
+      - env:
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
           LEETCODE_CSRF_TOKEN: ${{ secrets.LEETCODE_CSRF_TOKEN }}
         run: node sync.js
-
-      - name: Deploy
-        run: |
-          git config --global user.name "Vault-Bot"
-          git config --global user.email "bot@github.com"
+      - run: |
+          git config --global user.name "BLACK-BOT"
+          git config --global user.email "bot@black0x80.io"
           git add .
-          git commit -m "Auto-update: $(date -u +'%Y-%m-%d %H:%M') UTC" || exit 0
+          git commit -m "Vault sync: $(date +'%Y-%m-%d')" || exit 0
           git push
