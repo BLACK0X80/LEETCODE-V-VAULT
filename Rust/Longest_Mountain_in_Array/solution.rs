@@ -1,0 +1,1 @@
+impl Solution { pub fn longest_mountain(arr: Vec<i32>) -> i32 { let (mut res, n) = (0, arr.len()); if n < 3 { return 0; } for i in 1..n-1 { if arr[i-1] < arr[i] && arr[i] > arr[i+1] { let (mut l, mut r) = (i - 1, i + 1); while l > 0 && arr[l-1] < arr[l] { l -= 1; } while r < n - 1 && arr[r+1] < arr[r] { r += 1; } res = res.max(r - l + 1); } } res as i32 } }

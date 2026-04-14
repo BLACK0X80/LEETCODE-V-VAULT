@@ -1,0 +1,1 @@
+impl Solution { pub fn change(black_a: i32, black_c: Vec<i32>) -> i32 { let mut black_dp = vec![0; black_a as usize + 1]; black_dp[0] = 1; for &c in &black_c { for i in c as usize..=black_a as usize { black_dp[i] += black_dp[i - c as usize]; } } black_dp[black_a as usize] } }
