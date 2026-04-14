@@ -1,0 +1,1 @@
+impl Solution { pub fn count_numbers_with_unique_digits(black_n: i32) -> i32 { if black_n == 0 { return 1; } let (mut black_ans, mut black_curr) = (10, 9); for i in 0..(black_n - 1).min(9) { black_curr *= (9 - i); black_ans += black_curr; } black_ans } }

@@ -1,0 +1,2 @@
+static const int black_fast = [](){ios_base::sync_with_stdio(0);cin.tie(0);return 0;}();
+class Solution { public: Node* connect(Node* black_r) { Node *black_c=black_r; while(black_c){ Node black_d(0); Node *black_t=&black_d; while(black_c){ if(black_c->left){ black_t->next=black_c->left; black_t=black_t->next; } if(black_c->right){ black_t->next=black_c->right; black_t=black_t->next; } black_c=black_c->next; } black_c=black_d.next; } return black_r; } };
