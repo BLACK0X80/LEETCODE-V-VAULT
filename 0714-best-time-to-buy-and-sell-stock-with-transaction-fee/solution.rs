@@ -1,0 +1,1 @@
+impl Solution { pub fn max_profit(black_p: Vec<i32>, fee: i32) -> i32 { let (mut black_hold, mut black_free) = (-black_p[0], 0); for i in 1..black_p.len() { black_hold = black_hold.max(black_free - black_p[i]); black_free = black_free.max(black_hold + black_p[i] - fee); } black_free } }
