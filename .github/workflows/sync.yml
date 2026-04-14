@@ -1,137 +1,35 @@
-(async () => {
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+name: Ultimate LeetCode Sync
 
-  const LANG_META = {
-    python:     { folder: "PYTHON",     ext: "py"    },
-    python3:    { folder: "PYTHON",     ext: "py"    },
-    cpp:        { folder: "CPP",        ext: "cpp"   },
-    c:          { folder: "C",          ext: "c"     },
-    java:       { folder: "JAVA",       ext: "java"  },
-    javascript: { folder: "JAVASCRIPT", ext: "js"    },
-    typescript: { folder: "TYPESCRIPT", ext: "ts"    },
-    csharp:     { folder: "CSHARP",     ext: "cs"    },
-    go:         { folder: "GO",         ext: "go"    },
-    rust:       { folder: "RUST",       ext: "rs"    },
-    kotlin:     { folder: "KOTLIN",     ext: "kt"    },
-    swift:      { folder: "SWIFT",      ext: "swift" },
-    ruby:       { folder: "RUBY",       ext: "rb"    },
-    scala:      { folder: "SCALA",      ext: "scala" },
-    php:        { folder: "PHP",        ext: "php"   },
-    bash:       { folder: "SHELL",      ext: "sh"    },
-    mysql:      { folder: "SQL",        ext: "sql"   },
-    mssql:      { folder: "SQL",        ext: "sql"   },
-    oraclesql:  { folder: "SQL",        ext: "sql"   },
-    dart:       { folder: "DART",       ext: "dart"  },
-    r:          { folder: "R",          ext: "r"     },
-    elixir:     { folder: "ELIXIR",     ext: "ex"    },
-    erlang:     { folder: "ERLANG",     ext: "erl"   },
-    racket:     { folder: "RACKET",     ext: "rkt"   },
-  };
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
-  function sanitize(title) {
-    return title.replace(/[^a-zA-Z0-9\-_ ]/g, "").trim().replace(/\s+/g, "_");
-  }
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  const log = (msg) => console.log(`%c[VAULT] ${msg}`, "color:#00ff88;font-weight:bold");
-  const info = (msg) => console.log(`%c  ${msg}`, "color:#00cc66");
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-  log("Fetching all accepted submissions...");
+      - name: Deps
+        run: npm install axios
 
-  const all = [];
-  let offset = 0;
-  let page = 1;
+      - name: Execute
+        env:
+          LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
+          LEETCODE_CSRF_TOKEN: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+        run: node sync.js
 
-  while (true) {
-    const res = await fetch(
-      `https://leetcode.com/api/submissions/?offset=${offset}&limit=20&lastkey=`,
-      { credentials: "include" }
-    );
-    if (!res.ok) { log(`HTTP ${res.status} — stopped.`); break; }
-
-    const data = await res.json();
-    const batch = (data.submissions_dump || []).filter(
-      (s) => s.status_display === "Accepted" && s.code
-    );
-    all.push(...batch);
-    info(`page ${page} — collected: ${all.length}`);
-    if (!data.has_next) break;
-    offset += 20;
-    page++;
-    await sleep(600);
-  }
-
-  log(`Total accepted: ${all.length} — deduplicating...`);
-
-  const seen = new Map();
-  for (const s of all) {
-    const key = `${s.title_slug}_${s.lang}`;
-    if (!seen.has(key)) seen.set(key, s);
-  }
-  const unique = [...seen.values()];
-  log(`Unique solutions: ${unique.length} — building files...`);
-
-  const folders = {};
-  const fileMap = {};
-
-  for (const s of unique) {
-    const meta = LANG_META[s.lang] || { folder: s.lang.toUpperCase(), ext: "txt" };
-    const safe = sanitize(s.title);
-    const filename = `${safe}.${meta.ext}`;
-
-    if (!folders[meta.folder]) folders[meta.folder] = {};
-    folders[meta.folder][filename] = s.code;
-
-    if (!fileMap[meta.folder]) fileMap[meta.folder] = [];
-    fileMap[meta.folder].push({ filename, title: s.title, slug: s.title_slug });
-  }
-
-  const total = unique.length;
-  const sorted = Object.entries(fileMap).sort((a, b) => b[1].length - a[1].length);
-
-  let readme = `# LEETCODE-V-VAULT\n\n`;
-  readme += `![Solved](https://img.shields.io/badge/Solved-${total}-00ff88?style=for-the-badge&labelColor=0d1117) `;
-  readme += `![Languages](https://img.shields.io/badge/Languages-${sorted.length}-00ccff?style=for-the-badge&labelColor=0d1117)\n\n`;
-  readme += `---\n\n## Structure\n\n\`\`\`\nLEETCODE-V-VAULT/\n`;
-  for (const [lang, files] of sorted) {
-    readme += `├── ${lang}/  (${files.length} solutions)\n`;
-  }
-  readme += `\`\`\`\n\n---\n\n## Solutions by Language\n\n`;
-  for (const [lang, files] of sorted) {
-    readme += `<details>\n<summary><strong>${lang}</strong> — ${files.length} solutions</summary>\n\n`;
-    readme += `| # | Problem | File |\n|---|---------|------|\n`;
-    files.forEach((f, i) => {
-      readme += `| ${i+1} | [${f.title}](https://leetcode.com/problems/${f.slug}/) | [View](./${lang}/${f.filename}) |\n`;
-    });
-    readme += `\n</details>\n\n`;
-  }
-  readme += `---\n\n*Auto-generated export*\n`;
-
-  const zip = {};
-  zip["README.md"] = readme;
-  for (const [folder, files] of Object.entries(folders)) {
-    for (const [filename, code] of Object.entries(files)) {
-      zip[`${folder}/${filename}`] = code;
-    }
-  }
-
-  log(`Building ZIP with ${Object.keys(zip).length} files...`);
-
-  const { default: JSZip } = await import("https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm");
-
-  const z = new JSZip();
-  for (const [filepath, content] of Object.entries(zip)) {
-    z.file(filepath, content);
-  }
-
-  const blob = await z.generateAsync({ type: "blob" });
-  const a = Object.assign(document.createElement("a"), {
-    href: URL.createObjectURL(blob),
-    download: `LEETCODE-V-VAULT-${new Date().toISOString().slice(0,10)}.zip`,
-  });
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  log(`Done! ${total} solutions exported in ${sorted.length} language folders.`);
-  sorted.forEach(([lang, files]) => info(`${lang}: ${files.length} solutions`));
-})();
+      - name: Deploy
+        run: |
+          git config --global user.name "Vault-Bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "Auto-update: $(date -u +'%Y-%m-%d %H:%M') UTC" || exit 0
+          git push
