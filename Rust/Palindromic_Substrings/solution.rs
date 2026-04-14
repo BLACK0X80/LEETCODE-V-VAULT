@@ -1,1 +1,0 @@
-impl Solution { pub fn count_substrings(black_s: String) -> i32 { let black_b = black_s.as_bytes(); let mut black_ans = 0; for i in 0..black_b.len() { for (mut l, mut r) in [(i, i), (i, i + 1)] { while r < black_b.len() && black_b[l] == black_b[r] { black_ans += 1; if l == 0 { break; } l -= 1; r += 1; } } } black_ans } }

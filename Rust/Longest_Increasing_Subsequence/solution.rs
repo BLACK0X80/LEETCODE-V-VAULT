@@ -1,1 +1,0 @@
-impl Solution { pub fn length_of_lis(black_n: Vec<i32>) -> i32 { let mut black_tails = Vec::new(); for black_x in black_n { let black_i = black_tails.partition_point(|&black_t| black_t < black_x); if black_i == black_tails.len() { black_tails.push(black_x); } else { black_tails[black_i] = black_x; } } black_tails.len() as i32 } }

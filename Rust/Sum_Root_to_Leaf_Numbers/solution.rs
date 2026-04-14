@@ -1,2 +1,0 @@
-use std::{rc::Rc, cell::RefCell};
-impl Solution { pub fn sum_numbers(black_r: Option<Rc<RefCell<TreeNode>>>) -> i32 { fn black_f(black_n: &Option<Rc<RefCell<TreeNode>>>, mut black_s: i32) -> i32 { if let Some(black_node) = black_n { black_s = black_s * 10 + black_node.borrow().val; if black_node.borrow().left.is_none() && black_node.borrow().right.is_none() { black_s } else { black_f(&black_node.borrow().left, black_s) + black_f(&black_node.borrow().right, black_s) } } else { 0 } } black_f(&black_r, 0) } }

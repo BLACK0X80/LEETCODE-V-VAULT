@@ -1,1 +1,0 @@
-impl Solution { pub fn integer_break(black_n: i32) -> i32 { if black_n <= 3 { return black_n - 1; } let (black_q, black_r) = (black_n / 3, black_n % 3); match black_r { 0 => 3i32.pow(black_q as u32), 1 => 3i32.pow(black_q as u32 - 1) * 4, _ => 3i32.pow(black_q as u32) * 2 } } }

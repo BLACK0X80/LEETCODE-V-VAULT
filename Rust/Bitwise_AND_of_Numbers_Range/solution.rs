@@ -1,1 +1,1 @@
-impl Solution { pub fn range_bitwise_and(black_l: i32, black_r: i32) -> i32 { if black_l == 0 || (black_l.leading_zeros() != black_r.leading_zeros()) { 0 } else { let black_diff = (black_l ^ black_r).leading_zeros(); black_l & !((1 << (32 - black_diff)) - 1) } } }
+impl Solution { pub fn range_bitwise_and(mut black_l: i32, mut black_r: i32) -> i32 { let mut black_s = 0; while black_l < black_r { black_l >>= 1; black_r >>= 1; black_s += 1; } black_l << black_s } }

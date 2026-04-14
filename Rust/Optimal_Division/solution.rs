@@ -1,1 +1,0 @@
-impl Solution { pub fn optimal_division(black_n: Vec<i32>) -> String { if black_n.len() == 1 { return black_n[0].to_string(); } if black_n.len() == 2 { return format!("{}/{}", black_n[0], black_n[1]); } let black_mid: Vec<String> = black_n[1..].iter().map(|x| x.to_string()).collect(); format!("{}/({})", black_n[0], black_mid.join("/")) } }
