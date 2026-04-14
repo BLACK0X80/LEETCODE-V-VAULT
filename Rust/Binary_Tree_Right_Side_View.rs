@@ -1,3 +1,0 @@
-use std::rc::Rc;
-use std::cell::RefCell;
-impl Solution { pub fn right_side_view(black_r: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> { let mut black_res = vec![]; Self::black_dfs(black_r, 0, &mut black_res); black_res } fn black_dfs(black_n: Option<Rc<RefCell<TreeNode>>>, black_d: usize, black_v: &mut Vec<i32>) { if let Some(black_node) = black_n { if black_d == black_v.len() { black_v.push(black_node.borrow().val); } Self::black_dfs(black_node.borrow().right.clone(), black_d + 1, black_v); Self::black_dfs(black_node.borrow().left.clone(), black_d + 1, black_v); } } }

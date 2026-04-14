@@ -1,1 +1,0 @@
-impl Solution { pub fn check_valid_string(black_s: String) -> bool { let (mut black_min, mut black_max) = (0, 0); for b in black_s.bytes() { if b == b'(' { black_min += 1; black_max += 1; } else if b == b')' { black_min = (black_min - 1).max(0); black_max -= 1; } else { black_min = (black_min - 1).max(0); black_max += 1; } if black_max < 0 { return false; } } black_min == 0 } }

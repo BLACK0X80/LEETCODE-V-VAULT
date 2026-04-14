@@ -1,1 +1,0 @@
-impl Solution { pub fn find_longest_chain(mut black_p: Vec<Vec<i32>>) -> i32 { black_p.sort_unstable_by_key(|v| v[1]); let (mut black_ans, mut black_curr) = (0, i32::MIN); for v in black_p { if v[0] > black_curr { black_ans += 1; black_curr = v[1]; } } black_ans } }
