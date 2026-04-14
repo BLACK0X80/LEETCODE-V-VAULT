@@ -1,1 +1,0 @@
-class Solution { public: unordered_map<Node*, Node*> black_m; Node* cloneGraph(Node* black_n) { if (!black_n) return NULL; black_m.reserve(100); if (black_m.count(black_n)) return black_m[black_n]; Node* black_c = new Node(black_n->val); black_m[black_n] = black_c; for (auto black_a : black_n->neighbors) black_c->neighbors.push_back(cloneGraph(black_a)); return black_c; } };

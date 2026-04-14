@@ -1,8 +1,0 @@
-import pandas as pd
-
-def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, examinations: pd.DataFrame) -> pd.DataFrame:
-    black = students.merge(subjects, how='cross')
-    black2 = examinations.groupby(['student_id', 'subject_name']).size().reset_index(name='attended_exams')
-    black = black.merge(black2, on=['student_id', 'subject_name'], how='left')
-    black['attended_exams'] = black['attended_exams'].fillna(0).astype(int)
-    return black.sort_values(['student_id', 'subject_name'])[['student_id', 'student_name', 'subject_name', 'attended_exams']]

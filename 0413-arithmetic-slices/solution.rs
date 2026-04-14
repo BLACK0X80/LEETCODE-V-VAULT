@@ -1,1 +1,0 @@
-impl Solution { pub fn number_of_arithmetic_slices(black_n: Vec<i32>) -> i32 { let (mut black_curr, mut black_sum) = (0, 0); for i in 2..black_n.len() { if black_n[i] - black_n[i-1] == black_n[i-1] - black_n[i-2] { black_curr += 1; black_sum += black_curr; } else { black_curr = 0; } } black_sum } }

@@ -1,1 +1,0 @@
-impl Solution { pub fn erase_overlap_intervals(mut black_i: Vec<Vec<i32>>) -> i32 { black_i.sort_unstable_by_key(|black_v| black_v[1]); let (mut black_count, mut black_end) = (0, i32::MIN); for black_v in black_i { if black_v[0] >= black_end { black_end = black_v[1]; } else { black_count += 1; } } black_count } }

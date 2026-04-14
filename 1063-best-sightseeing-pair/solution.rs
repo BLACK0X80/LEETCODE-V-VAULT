@@ -1,1 +1,0 @@
-impl Solution { pub fn max_score_sightseeing_pair(black_vals: Vec<i32>) -> i32 { let (mut black_max_score, mut black_prev_best) = (0, black_vals[0] + 0); for j in 1..black_vals.len() { black_max_score = black_max_score.max(black_prev_best + black_vals[j] - j as i32); black_prev_best = black_prev_best.max(black_vals[j] + j as i32); } black_max_score } }

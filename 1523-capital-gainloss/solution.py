@@ -1,5 +1,0 @@
-import pandas as pd
-
-def capital_gainloss(stocks: pd.DataFrame) -> pd.DataFrame:
-    stocks['capital_gain_loss'] = stocks['price'].where(stocks['operation'] == 'Sell', -stocks['price'])
-    return stocks.groupby('stock_name', as_index=False)['capital_gain_loss'].sum()

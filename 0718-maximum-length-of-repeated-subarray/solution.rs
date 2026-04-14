@@ -1,1 +1,0 @@
-impl Solution { pub fn find_length(black_n1: Vec<i32>, black_n2: Vec<i32>) -> i32 { let mut black_dp = vec![0; black_n2.len() + 1]; let mut black_max = 0; for &x in &black_n1 { for j in (1..=black_n2.len()).rev() { if x == black_n2[j - 1] { black_dp[j] = black_dp[j - 1] + 1; black_max = black_max.max(black_dp[j]); } else { black_dp[j] = 0; } } } black_max } }

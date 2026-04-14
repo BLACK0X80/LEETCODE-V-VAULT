@@ -1,7 +1,0 @@
-import pandas as pd
-
-def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
-    black = logs['num']
-    mask = (black == black.shift(1)) & (black == black.shift(2))
-    return pd.DataFrame({'ConsecutiveNums': black[mask].unique()})
-    
