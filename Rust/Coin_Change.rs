@@ -1,0 +1,1 @@
+impl Solution { pub fn coin_change(black_c: Vec<i32>, black_a: i32) -> i32 { let mut black_dp = vec![black_a + 1; black_a as usize + 1]; black_dp[0] = 0; for i in 1..=black_a as usize { for &c in &black_c { if c as usize <= i { black_dp[i] = black_dp[i].min(black_dp[i - c as usize] + 1); } } } if black_dp[black_a as usize] > black_a { -1 } else { black_dp[black_a as usize] } } }
