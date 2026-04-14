@@ -1,5 +1,0 @@
-import pandas as pd
-
-def nth_highest_salary(black_df: pd.DataFrame, black_n: int) -> pd.DataFrame:
-    black_u = black_df['salary'].drop_duplicates().sort_values(ascending=False)
-    return pd.DataFrame({f'getNthHighestSalary({black_n})': [black_u.iloc[black_n-1] if 0 < black_n <= len(black_u) else None]})
