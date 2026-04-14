@@ -1,0 +1,28 @@
+name: Clean Repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Delete all files except workflows
+        run: |
+          find . -not -path './.git/*' \
+                 -not -path './.github/*' \
+                 -not -name '.' \
+                 -delete 2>/dev/null || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Clean repo"
+          git push
