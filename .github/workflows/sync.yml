@@ -132,18 +132,9 @@ jobs:
               const filename = `${safe}.${meta.ext}`;
               const filepath = path.join(meta.folder, filename);
 
-              if (fs.existsSync(filepath)) {
-                if (!newFiles[meta.folder]) newFiles[meta.folder] = [];
-                newFiles[meta.folder].push({ filename, title: s.title, slug: s.title_slug });
-                continue;
-              }
-
-              let code = s.code || "";
-              if (!code) {
-                const detail = await get(`https://leetcode.com/api/submissions/${s.id}/`);
-                code = (detail && detail.code) ? detail.code : "";
-                await sleep(500);
-              }
+              const detail = await get(`https://leetcode.com/api/submissions/${s.id}/`);
+              const code = (detail && detail.code) ? detail.code : (s.code || "");
+              await sleep(600);
 
               fs.writeFileSync(filepath, code, "utf8");
 
