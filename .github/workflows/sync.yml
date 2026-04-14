@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,4 +23,5 @@ jobs:
           git config --global user.email "bot@black0x80.io"
           git add .
           git commit -m "Vault sync: $(date +'%Y-%m-%d')" || exit 0
-          git push
+          git pull --rebase origin main
+          git push origin main
