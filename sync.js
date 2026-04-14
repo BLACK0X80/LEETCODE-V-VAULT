@@ -6,6 +6,7 @@ const SESSION = process.env.LEETCODE_SESSION;
 const CSRF_TOKEN = process.env.LEETCODE_CSRF_TOKEN;
 
 const LANG_CONFIG = {
+    'rust': { folder: 'Rust', ext: 'rs' },
     'python': { folder: 'Python', ext: 'py' },
     'python3': { folder: 'Python', ext: 'py' },
     'cpp': { folder: 'C++', ext: 'cpp' },
@@ -15,7 +16,6 @@ const LANG_CONFIG = {
     'typescript': { folder: 'TypeScript', ext: 'ts' },
     'csharp': { folder: 'C#', ext: 'cs' },
     'go': { folder: 'Go', ext: 'go' },
-    'rust': { folder: 'Rust', ext: 'rs' },
     'kotlin': { folder: 'Kotlin', ext: 'kt' },
     'swift': { folder: 'Swift', ext: 'swift' },
     'ruby': { folder: 'Ruby', ext: 'rb' },
@@ -23,19 +23,20 @@ const LANG_CONFIG = {
     'mysql': { folder: 'SQL', ext: 'sql' },
     'mssql': { folder: 'SQL', ext: 'sql' },
     'oraclesql': { folder: 'SQL', ext: 'sql' },
+    'pandas': { folder: 'Pandas', ext: 'py' },
     'bash': { folder: 'Shell', ext: 'sh' }
 };
 
-const sanitize = (str) => str.replace(/[^a-zA-Z0-9\-_ ]/g, "").trim().replace(/\s+/g, "_");
+const sanitize = (s) => s.replace(/[^a-zA-Z0-9 ]/g, "").trim().replace(/\s+/g, "_");
 
-async function getSubmissions() {
-    let allSubmissions = [];
+async function fetchSubmissions() {
+    let all = [];
     let offset = 0;
     let hasNext = true;
 
     while (hasNext) {
         try {
-            const response = await axios.get(`https://leetcode.com/api/submissions/?offset=${offset}&limit=20`, {
+            const { data } = await axios.get(`https://leetcode.com/api/submissions/?offset=${offset}&limit=20`, {
                 headers: {
                     'Cookie': `LEETCODE_SESSION=${SESSION}; csrftoken=${CSRF_TOKEN};`,
                     'X-CSRFToken': CSRF_TOKEN,
@@ -43,61 +44,60 @@ async function getSubmissions() {
                 }
             });
 
-            const data = response.data;
             const accepted = (data.submissions_dump || []).filter(s => s.status_display === "Accepted");
-            allSubmissions.push(...accepted);
-            
+            all.push(...accepted);
             hasNext = data.has_next;
             offset += 20;
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(r => setTimeout(r, 1200));
         } catch (e) {
             break;
         }
     }
-    return allSubmissions;
+    return all;
 }
 
-async function main() {
-    const submissions = await getSubmissions();
-    const uniqueSolutions = new Map();
+async function run() {
+    const raw = await fetchSubmissions();
+    const store = new Map();
 
-    for (const s of submissions) {
-        const id = `${s.title_slug}_${s.lang}`;
-        if (!uniqueSolutions.has(id)) uniqueSolutions.set(id, s);
+    for (const s of raw) {
+        const key = `${s.title_slug}_${s.lang}`;
+        if (!store.has(key)) store.set(key, s);
     }
 
     const stats = {};
 
-    for (const [key, s] of uniqueSolutions) {
-        const config = LANG_CONFIG[s.lang] || { folder: s.lang.toUpperCase(), ext: 'txt' };
-        const dir = path.join(__dirname, config.folder);
+    for (const [_, s] of store) {
+        const conf = LANG_CONFIG[s.lang] || { folder: s.lang.toUpperCase(), ext: 'txt' };
+        const dir = path.join(__dirname, conf.folder);
         
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-        const filename = `${sanitize(s.title)}.${config.ext}`;
-        const filePath = path.join(dir, filename);
+        const filename = `${sanitize(s.title)}.${conf.ext}`;
+        const file = path.join(dir, filename);
 
-        if (!fs.existsSync(filePath)) {
-            fs.writeFileSync(filePath, s.code);
+        if (!fs.existsSync(file)) {
+            fs.writeFileSync(file, s.code);
         }
 
-        if (!stats[config.folder]) stats[config.folder] = [];
-        stats[config.folder].push({ title: s.title, slug: s.title_slug, file: filename });
+        if (!stats[conf.folder]) stats[conf.folder] = [];
+        stats[conf.folder].push({ title: s.title, slug: s.title_slug, file: filename });
     }
 
-    let readme = `# LeetCode V-Vault\n\n`;
-    readme += `![Solved](https://img.shields.io/badge/Solved-${uniqueSolutions.size}-00ff88?style=for-the-badge) `;
-    readme += `![Languages](https://img.shields.io/badge/Languages-${Object.keys(stats).length}-00ccff?style=for-the-badge)\n\n---\n`;
-
+    let readme = `# LEETCODE ARCHIVE | BLACK0X80\n\n`;
+    readme += `![Solutions](https://img.shields.io/badge/Solutions-${store.size}-00ff88?style=for-the-badge) `;
+    readme += `![Hard](https://img.shields.io/badge/Level-Hard_Focused-red?style=for-the-badge)\n\n---\n\n`;
+    
     for (const lang in stats) {
-        readme += `\n### ${lang}\n`;
-        readme += `| # | Problem | Solution |\n|---|---|---|\n`;
-        stats[lang].forEach((prob, i) => {
-            readme += `| ${i + 1} | [${prob.title}](https://leetcode.com/problems/${prob.slug}/) | [View](./${lang}/${prob.file}) |\n`;
+        readme += `### ${lang} (${stats[lang].length})\n`;
+        readme += `| # | Problem | Source |\n|---|---|---|\n`;
+        stats[lang].forEach((p, i) => {
+            readme += `| ${i+1} | [${p.title}](https://leetcode.com/problems/${p.slug}/) | [View](./${lang}/${p.file}) |\n`;
         });
+        readme += `\n`;
     }
 
     fs.writeFileSync('README.md', readme);
 }
 
-main();
+run();
