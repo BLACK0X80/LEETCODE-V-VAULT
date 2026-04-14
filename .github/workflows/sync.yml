@@ -23,5 +23,4 @@ jobs:
           git config --global user.email "bot@black0x80.io"
           git add .
           git commit -m "Vault sync: $(date +'%Y-%m-%d')" || exit 0
-          git pull --rebase origin main
-          git push origin main
+          git push origin main --force
