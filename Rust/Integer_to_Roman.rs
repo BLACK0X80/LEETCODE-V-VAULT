@@ -1,1 +1,0 @@
-impl Solution { pub fn int_to_roman(black: i32) -> String { format!("{}{}{}{}", ["","M","MM","MMM"][(black/1000) as usize], ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"][(black%1000/100) as usize], ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"][(black%100/10) as usize], ["","I","II","III","IV","V","VI","VII","VIII","IX"][(black%10) as usize]) } }

@@ -1,1 +1,0 @@
-impl Solution { pub fn combination_sum4(black_n: Vec<i32>, black_t: i32) -> i32 { let mut black_dp = vec![0; black_t as usize + 1]; black_dp[0] = 1; for i in 1..=black_t as usize { for &num in &black_n { if num as usize <= i { black_dp[i] += black_dp[i - num as usize]; } } } black_dp[black_t as usize] } }

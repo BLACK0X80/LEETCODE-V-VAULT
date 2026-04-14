@@ -1,1 +1,0 @@
-impl Solution { pub fn two_sum(black_n: Vec<i32>, black_t: i32) -> Vec<i32> { let (mut black_l, mut black_r) = (0, black_n.len() - 1); while black_l < black_r { let black_s = black_n[black_l] + black_n[black_r]; if black_s == black_t { return vec![black_l as i32 + 1, black_r as i32 + 1]; } if black_s < black_t { black_l += 1; } else { black_r -= 1; } } vec![] } }

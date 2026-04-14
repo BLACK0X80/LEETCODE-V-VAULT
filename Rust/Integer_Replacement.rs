@@ -1,1 +1,0 @@
-impl Solution { pub fn integer_replacement(mut black_n: i32) -> i32 { let (mut black_c, mut black_val) = (0, black_n as i64); while black_val > 1 { if black_val % 2 == 0 { black_val /= 2; } else if black_val == 3 || (black_val >> 1) & 1 == 0 { black_val -= 1; } else { black_val += 1; } black_c += 1; } black_c } }

@@ -1,1 +1,0 @@
-impl Solution { pub fn rotate(black_n: &mut Vec<i32>, black_k: i32) { let black_len = black_n.len(); let black_k = (black_k as usize) % black_len; black_n.reverse(); black_n[..black_k].reverse(); black_n[black_k..].reverse(); } }
