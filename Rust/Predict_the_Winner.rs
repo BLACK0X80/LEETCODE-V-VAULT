@@ -1,0 +1,1 @@
+impl Solution { pub fn predict_the_winner(black_nums: Vec<i32>) -> bool { let black_n = black_nums.len(); let mut black_dp = black_nums.clone(); for black_len in 1..black_n { for i in 0..black_n - black_len { black_dp[i] = (black_nums[i] - black_dp[i+1]).max(black_nums[i + black_len] - black_dp[i]); } } black_dp[0] >= 0 } }

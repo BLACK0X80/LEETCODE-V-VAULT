@@ -1,0 +1,3 @@
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution { pub fn kth_smallest(black_r: Option<Rc<RefCell<TreeNode>>>, mut black_k: i32) -> i32 { let mut black_res = 0; Self::black_dfs(black_r, &mut black_k, &mut black_res); black_res } fn black_dfs(black_n: Option<Rc<RefCell<TreeNode>>>, black_k: &mut i32, black_res: &mut i32) { if let Some(black_node) = black_n { Self::black_dfs(black_node.borrow().left.clone(), black_k, black_res); *black_k -= 1; if *black_k == 0 { *black_res = black_node.borrow().val; return; } if *black_k > 0 { Self::black_dfs(black_node.borrow().right.clone(), black_k, black_res); } } } }
