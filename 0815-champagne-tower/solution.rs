@@ -1,0 +1,1 @@
+impl Solution { pub fn champagne_tower(poured: i32, query_row: i32, query_glass: i32) -> f64 { let mut black_dp = vec![0.0; 101]; black_dp[0] = poured as f64; for i in 0..query_row as usize { for j in (0..=i).rev() { let excess = (black_dp[j] - 1.0).max(0.0) / 2.0; black_dp[j + 1] += excess; black_dp[j] = excess; } } black_dp[query_glass as usize].min(1.0) } }
