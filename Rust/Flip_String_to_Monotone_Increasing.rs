@@ -1,1 +1,0 @@
-impl Solution { pub fn min_flips_mono_incr(black_s: String) -> i32 { let (mut black_ones, mut black_flips) = (0, 0); for c in black_s.chars() { if c == '1' { black_ones += 1; } else { black_flips = (black_flips + 1).min(black_ones); } } black_flips } }
