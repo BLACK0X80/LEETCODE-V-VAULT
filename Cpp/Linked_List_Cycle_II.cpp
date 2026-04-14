@@ -1,2 +1,0 @@
-static const int black_io = [](){ios::sync_with_stdio(0);cin.tie(0);return 0;}();
-class Solution { public: ListNode *detectCycle(ListNode *black_h) { ListNode *black_s=black_h, *black_f=black_h; while(black_f && black_f->next){ black_s=black_s->next; black_f=black_f->next->next; if(black_s==black_f){ black_s=black_h; while(black_s!=black_f){ black_s=black_s->next; black_f=black_f->next; } return black_s; } } return 0; } };
