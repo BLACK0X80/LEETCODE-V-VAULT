@@ -1,0 +1,19 @@
+import pandas as pd
+
+def capitalize_content(user_content: pd.DataFrame) -> pd.DataFrame:
+    def cap_part(p):
+        if p and p[0].isalpha():
+            return p[0].upper() + p[1:].lower()
+        return p
+
+    def transform(text):
+        def cap_word(word):
+            parts = word.split('-')
+            if len(parts) == 2 and parts[0].isalpha() and parts[1].isalpha():
+                return '-'.join(cap_part(p) for p in parts)
+            return cap_part(word)
+        return ' '.join(cap_word(w) for w in text.split(' '))
+
+    user_content['original_text'] = user_content['content_text']
+    user_content['converted_text'] = user_content['content_text'].apply(transform)
+    return user_content[['content_id', 'original_text', 'converted_text']]
