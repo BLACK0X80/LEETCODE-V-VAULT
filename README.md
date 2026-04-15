@@ -1,16 +1,12 @@
-```
-██████╗ ██╗      █████╗  ██████╗██╗  ██╗ ██████╗ ██╗  ██╗ █████╗  ██████╗
-██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝██╔═████╗╚██╗██╔╝██╔══██╗██╔═████╗
-██████╔╝██║     ███████║██║     █████╔╝ ██║██╔██║ ╚███╔╝ ╚█████╔╝██║██╔██║
-██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ████╔╝██║ ██╔██╗ ██╔══██╗████╔╝██║
-██████╔╝███████╗██║  ██║╚██████╗██║  ██╗╚██████╔╝██╔╝ ██╗╚█████╔╝╚██████╔╝
-╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚════╝  ╚═════╝
-```
-
 <div align="center">
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-BLACK0X80-00ff41?style=for-the-badge&logo=leetcode&logoColor=00ff41&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=16&duration=3000&pause=1000&color=00FF41&center=true&vCenter=true&multiline=false&width=600&lines=kernel_programmer+%26%26+ai_engineer+%26%26+full_stack;specialty%3A+grinding+HARD+problems+in+Rust;746+HARD+solved+%E2%80%94+top+0.01%25+worldwide;void+main()+%7B+while(true)+%7B+solve()%3B+%7D+%7D)](https://leetcode.com/u/BLACK0X80/)
+# ░▒▓ B L A C K 0 X 8 0 ▓▒░
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=15&duration=3000&pause=1000&color=00FF41&center=true&vCenter=true&width=620&lines=kernel_programmer+%26%26+ai_engineer+%26%26+full_stack;specialty%3A+grinding+HARD+problems+in+Rust;746+HARD+solved+%E2%80%94+top+0.01%25+worldwide;void+main()+%7B+while(true)+%7B+solve()%3B+%7D+%7D)](https://leetcode.com/u/BLACK0X80/)
+
+[![LeetCode](https://img.shields.io/badge/LeetCode-BLACK0X80-FFA116?style=for-the-badge&logo=leetcode&logoColor=FFA116&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
+[![Rank](https://img.shields.io/badge/Global_Rank-%2321%2C218_%2F_3.9M%2B-ff3232?style=for-the-badge&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
+[![Solved](https://img.shields.io/badge/Solved-1100%2B_Problems-00b32c?style=for-the-badge&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
 
 </div>
 
@@ -25,19 +21,19 @@ black@vault:~$ cat /proc/rank
 > Global Rank: #21,218 / 3,900,000+
 
 black@vault:~$ ls -la ./vault/solved/
-drwxr-xr-x  Rust/          1049 problems
+drwxr-xr-x  Rust/          1049 problems   ██ PRIMARY
 drwxr-xr-x  PYTHONDATA/      32 problems
 drwxr-xr-x  C++/              7 problems
 drwxr-xr-x  C/                ? problems
 drwxr-xr-x  BASH/             ? problems
-drwxr-xr-x  GOLANG/           1 problems
-drwxr-xr-x  Java/             1 problems
+drwxr-xr-x  GOLANG/           1 problem
+drwxr-xr-x  Java/             1 problem
 drwxr-xr-x  TypeScript/       2 problems
 drwxr-xr-x  Python/           2 problems
 total: 1100+ accepted solutions
 
 black@vault:~$ ./run --status
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░ 82.41% acceptance
+[████████████████████████████░░░░] 82.41% acceptance rate
 SYSTEM ONLINE. ALL SYSTEMS GO.
 ```
 
@@ -48,14 +44,13 @@ SYSTEM ONLINE. ALL SYSTEMS GO.
 <div align="center">
 
 | METRIC | VALUE |
-|--------|-------|
-| 🔗 LeetCode Profile | **[BLACK0X80](https://leetcode.com/u/BLACK0X80/)** |
-| Problems Solved | **1100+** |
-| Global Rank | **#21,218 / 3,900,000+** |
-| Acceptance Rate | **82.41%** |
-| Submissions / Year | **1,400+** |
-| Max Streak | **14 days** |
-| Beats (Hard) | **top 0.01% worldwide** |
+|:------:|:-----:|
+| 🏆 Problems Solved | **1100+** |
+| 🌍 Global Rank | **#21,218 / 3,900,000+** |
+| ✅ Acceptance Rate | **82.41%** |
+| ⚡ Submissions / Year | **1,400+** |
+| 🔥 Max Streak | **14 days** |
+| 💀 Hard Difficulty | **top 0.01% worldwide** |
 
 </div>
 
@@ -70,8 +65,8 @@ SYSTEM ONLINE. ALL SYSTEMS GO.
 ![Hard](https://img.shields.io/badge/HARD-746%2F923-ff3232?style=for-the-badge&labelColor=0a0f0a&color=cc0000)
 
 ```
-[ HARD SPECIALIST — 80.8% of all solved problems are HARD ]
-[ top 0.01% globally in Hard difficulty ]
+  HARD SPECIALIST — 80.8% of all solved problems are HARD
+  top 0.01% globally · beats 99.99% in Hard difficulty
 ```
 
 </div>
@@ -81,15 +76,15 @@ SYSTEM ONLINE. ALL SYSTEMS GO.
 ## `LANGUAGE_ARSENAL.cfg`
 
 ```
-Rust         ████████████████████████████████████████░░  1049  ██████ PRIMARY
-PYTHONDATA   ████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   32
-C++          ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    7
-C            █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    ?
-BASH         █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    ?
-TypeScript   █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    2
-Python3      █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    2
-GOLANG       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    1
-Java         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    1
+Rust         ████████████████████████████████████████  1049  PRIMARY
+PYTHONDATA   ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    32
+C++          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     7
+C            █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ?
+BASH         █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     ?
+TypeScript   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     2
+Python3      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     2
+GOLANG       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     1
+Java         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     1
 ```
 
 <div align="center">
@@ -149,14 +144,14 @@ LEETCODE-V-VAULT/
 │   │   ├── solution.rs
 │   │   └── README.md            ← difficulty + tags + solution
 │   └── ... ×1048 more
-├── PYTHONDATA/                  [ 32 solutions ]
-├── C++/                         [ 7 solutions ]
-├── C/                           [ solutions ]
-├── BASH/                        [ solutions ]
-├── GOLANG/                      [ 1 solution ]
-├── Java/                        [ 1 solution ]
-├── TypeScript/                  [ 2 solutions ]
-└── Python/                      [ 2 solutions ]
+├── PYTHONDATA/                  [  32 solutions  ]
+├── C++/                         [   7 solutions  ]
+├── C/                           [   ? solutions  ]
+├── BASH/                        [   ? solutions  ]
+├── GOLANG/                      [   1 solution   ]
+├── Java/                        [   1 solution   ]
+├── TypeScript/                  [   2 solutions  ]
+└── Python/                      [   2 solutions  ]
 ```
 
 > Each folder = one problem. Each problem = `solution.{ext}` + `README.md` with full description, difficulty, tags, and solution embedded. Auto-synced daily via GitHub Actions.
@@ -170,7 +165,7 @@ LEETCODE-V-VAULT/
 ![Badge](https://img.shields.io/badge/%F0%9F%8F%86_Algorithm_Deconstructor-UNLOCKED-00ff41?style=for-the-badge&labelColor=0a0f0a)
 ![Badge](https://img.shields.io/badge/%E2%9A%94%EF%B8%8F_Hard_Slayer-746_HARD_SOLVED-ff3232?style=for-the-badge&labelColor=0a0f0a)
 ![Badge](https://img.shields.io/badge/%F0%9F%A6%80_Rust_Native-1049_PROBLEMS-b7410e?style=for-the-badge&labelColor=0a0f0a)
-![Badge](https://img.shields.io/badge/%F0%9F%A7%A0_DP_Grandmaster-×388_PROBLEMS-8b00ff?style=for-the-badge&labelColor=0a0f0a)
+![Badge](https://img.shields.io/badge/%F0%9F%A7%A0_DP_Grandmaster-%C3%97388_PROBLEMS-8b00ff?style=for-the-badge&labelColor=0a0f0a)
 ![Badge](https://img.shields.io/badge/%F0%9F%8C%8D_Polyglot-9_LANGUAGES-0057b7?style=for-the-badge&labelColor=0a0f0a)
 
 </div>
@@ -181,7 +176,7 @@ LEETCODE-V-VAULT/
 
 <div align="center">
 
-[![LeetCode Stats](https://leetcard.jacoblin.cool/BLACK0X80?theme=dark&font=Share%20Tech%20Mono&ext=heatmap&border=0&radius=0)](https://leetcode.com/u/BLACK0X80/)
+[![LeetCode Stats](https://leetcode-stats-six.vercel.app/api?username=BLACK0X80&theme=dark)](https://leetcode.com/u/BLACK0X80/)
 
 ```
 1,395 submissions in the past year  |  MAX STREAK: 14  |  ACTIVE DAYS: 15
@@ -211,7 +206,8 @@ status: ACTIVE ✓
 [ BLACK0X80 · EGYPT · THE VAULT NEVER SLEEPS · 2026 ]
 ```
 
-[![LeetCode](https://img.shields.io/badge/Visit_Profile-BLACK0X80-00ff41?style=for-the-badge&logo=leetcode&logoColor=00ff41&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
+[![Visit Profile](https://img.shields.io/badge/→_LeetCode_Profile-BLACK0X80-FFA116?style=for-the-badge&logo=leetcode&labelColor=0a0f0a)](https://leetcode.com/u/BLACK0X80/)
+&nbsp;
 ![Profile Views](https://komarev.com/ghpvc/?username=BLACK0X80&color=00ff41&style=flat-square&label=VAULT_VISITORS)
 
 </div>
