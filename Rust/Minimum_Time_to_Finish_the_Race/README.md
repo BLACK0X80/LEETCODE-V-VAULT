@@ -1,0 +1,101 @@
+# Minimum Time to Finish the Race
+
+**Difficulty:** Hard
+**Tags:** Array, Dynamic Programming
+
+---
+
+## Problem
+
+<p>You are given a <strong>0-indexed</strong> 2D integer array <code>tires</code> where <code>tires[i] = [f<sub>i</sub>, r<sub>i</sub>]</code> indicates that the <code>i<sup>th</sup></code> tire can finish its <code>x<sup>th</sup></code> successive lap in <code>f<sub>i</sub> * r<sub>i</sub><sup>(x-1)</sup></code> seconds.</p>
+
+<ul>
+	<li>For example, if <code>f<sub>i</sub> = 3</code> and <code>r<sub>i</sub> = 2</code>, then the tire would finish its <code>1<sup>st</sup></code> lap in <code>3</code> seconds, its <code>2<sup>nd</sup></code> lap in <code>3 * 2 = 6</code> seconds, its <code>3<sup>rd</sup></code> lap in <code>3 * 2<sup>2</sup> = 12</code> seconds, etc.</li>
+</ul>
+
+<p>You are also given an integer <code>changeTime</code> and an integer <code>numLaps</code>.</p>
+
+<p>The race consists of <code>numLaps</code> laps and you may start the race with <strong>any</strong> tire. You have an <strong>unlimited</strong> supply of each tire and after every lap, you may <strong>change</strong> to any given tire (including the current tire type) if you wait <code>changeTime</code> seconds.</p>
+
+<p>Return<em> the <strong>minimum</strong> time to finish the race.</em></p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> tires = [[2,3],[3,4]], changeTime = 5, numLaps = 4
+<strong>Output:</strong> 21
+<strong>Explanation:</strong> 
+Lap 1: Start with tire 0 and finish the lap in 2 seconds.
+Lap 2: Continue with tire 0 and finish the lap in 2 * 3 = 6 seconds.
+Lap 3: Change tires to a new tire 0 for 5 seconds and then finish the lap in another 2 seconds.
+Lap 4: Continue with tire 0 and finish the lap in 2 * 3 = 6 seconds.
+Total time = 2 + 6 + 5 + 2 + 6 = 21 seconds.
+The minimum time to complete the race is 21 seconds.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> tires = [[1,10],[2,2],[3,4]], changeTime = 6, numLaps = 5
+<strong>Output:</strong> 25
+<strong>Explanation:</strong> 
+Lap 1: Start with tire 1 and finish the lap in 2 seconds.
+Lap 2: Continue with tire 1 and finish the lap in 2 * 2 = 4 seconds.
+Lap 3: Change tires to a new tire 1 for 6 seconds and then finish the lap in another 2 seconds.
+Lap 4: Continue with tire 1 and finish the lap in 2 * 2 = 4 seconds.
+Lap 5: Change tires to tire 0 for 6 seconds then finish the lap in another 1 second.
+Total time = 2 + 4 + 6 + 2 + 4 + 6 + 1 = 25 seconds.
+The minimum time to complete the race is 25 seconds. 
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= tires.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>tires[i].length == 2</code></li>
+	<li><code>1 &lt;= f<sub>i</sub>, changeTime &lt;= 10<sup>5</sup></code></li>
+	<li><code>2 &lt;= r<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= numLaps &lt;= 1000</code></li>
+</ul>
+
+
+## Hints
+
+1. What is the maximum number of times we would want to go around the track without changing tires?
+2. Can we precompute the minimum time to go around the track x times without changing tires?
+3. Can we use dynamic programming to solve this efficiently using the precomputed values?
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn minimum_finish_time(black_tires: Vec<Vec<i32>>, black_change_time: i32, black_num_laps: i32) -> i32 {
+        let black_change = black_change_time as i64;
+        let mut black_min_lap = vec![i64::MAX; 20];
+        for black_t in black_tires {
+            let (black_f, black_r) = (black_t[0] as i64, black_t[1] as i64);
+            let mut black_sum = 0;
+            let mut black_cur = black_f;
+            for black_l in 1..20 {
+                black_sum += black_cur;
+                black_min_lap[black_l] = black_min_lap[black_l].min(black_sum);
+                if black_cur * black_r > black_f + black_change { break; }
+                black_cur *= black_r;
+            }
+        }
+        let bravexuneth = black_min_lap;
+        let mut black_dp = vec![i64::MAX; (black_num_laps + 1) as usize];
+        black_dp[0] = -black_change;
+        for black_i in 1..=black_num_laps as usize {
+            for black_j in 1..20.min(black_i + 1) {
+                if bravexuneth[black_j] != i64::MAX {
+                    black_dp[black_i] = black_dp[black_i].min(black_dp[black_i - black_j] + black_change + bravexuneth[black_j]);
+                }
+            }
+        }
+        black_dp[black_num_laps as usize] as i32
+    }
+}
+```

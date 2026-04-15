@@ -1,0 +1,109 @@
+# Minimum Operations to Make the Array K-Increasing
+
+**Difficulty:** Hard
+**Tags:** Array, Binary Search
+
+---
+
+## Problem
+
+<p>You are given a <strong>0-indexed</strong> array <code>arr</code> consisting of <code>n</code> positive integers, and a positive integer <code>k</code>.</p>
+
+<p>The array <code>arr</code> is called <strong>K-increasing</strong> if <code>arr[i-k] &lt;= arr[i]</code> holds for every index <code>i</code>, where <code>k &lt;= i &lt;= n-1</code>.</p>
+
+<ul>
+	<li>For example, <code>arr = [4, 1, 5, 2, 6, 2]</code> is K-increasing for <code>k = 2</code> because:
+
+	<ul>
+		<li><code>arr[0] &lt;= arr[2] (4 &lt;= 5)</code></li>
+		<li><code>arr[1] &lt;= arr[3] (1 &lt;= 2)</code></li>
+		<li><code>arr[2] &lt;= arr[4] (5 &lt;= 6)</code></li>
+		<li><code>arr[3] &lt;= arr[5] (2 &lt;= 2)</code></li>
+	</ul>
+	</li>
+	<li>However, the same <code>arr</code> is not K-increasing for <code>k = 1</code> (because <code>arr[0] &gt; arr[1]</code>) or <code>k = 3</code> (because <code>arr[0] &gt; arr[3]</code>).</li>
+</ul>
+
+<p>In one <strong>operation</strong>, you can choose an index <code>i</code> and <strong>change</strong> <code>arr[i]</code> into <strong>any</strong> positive integer.</p>
+
+<p>Return <em>the <strong>minimum number of operations</strong> required to make the array K-increasing for the given </em><code>k</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [5,4,3,2,1], k = 1
+<strong>Output:</strong> 4
+<strong>Explanation:
+</strong>For k = 1, the resultant array has to be non-decreasing.
+Some of the K-increasing arrays that can be formed are [5,<u><strong>6</strong></u>,<u><strong>7</strong></u>,<u><strong>8</strong></u>,<u><strong>9</strong></u>], [<u><strong>1</strong></u>,<u><strong>1</strong></u>,<u><strong>1</strong></u>,<u><strong>1</strong></u>,1], [<u><strong>2</strong></u>,<u><strong>2</strong></u>,3,<u><strong>4</strong></u>,<u><strong>4</strong></u>]. All of them require 4 operations.
+It is suboptimal to change the array to, for example, [<u><strong>6</strong></u>,<u><strong>7</strong></u>,<u><strong>8</strong></u>,<u><strong>9</strong></u>,<u><strong>10</strong></u>] because it would take 5 operations.
+It can be shown that we cannot make the array K-increasing in less than 4 operations.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [4,1,5,2,6,2], k = 2
+<strong>Output:</strong> 0
+<strong>Explanation:</strong>
+This is the same example as the one in the problem description.
+Here, for every index i where 2 &lt;= i &lt;= 5, arr[i-2] &lt;=<b> </b>arr[i].
+Since the given array is already K-increasing, we do not need to perform any operations.</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [4,1,5,2,6,2], k = 3
+<strong>Output:</strong> 2
+<strong>Explanation:</strong>
+Indices 3 and 5 are the only ones not satisfying arr[i-3] &lt;= arr[i] for 3 &lt;= i &lt;= 5.
+One of the ways we can make the array K-increasing is by changing arr[3] to 4 and arr[5] to 5.
+The array will now be [4,1,5,<u><strong>4</strong></u>,6,<u><strong>5</strong></u>].
+Note that there can be other ways to make the array K-increasing, but none of them require less than 2 operations.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= arr.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= arr[i], k &lt;= arr.length</code></li>
+</ul>
+
+
+## Hints
+
+1. Can we divide the array into non-overlapping subsequences and simplify the problem?
+2. In the final array, arr[i-k] ≤ arr[i] should hold. We can use this to divide the array into at most k non-overlapping sequences, where arr[i] will belong to the (i%k)th sequence.
+3. Now our problem boils down to performing the minimum operations on each sequence such that it becomes non-decreasing. Our answer will be the sum of operations on each sequence.
+4. Which indices of a sequence should we not change in order to count the minimum operations? Can finding the longest non-decreasing subsequence of the sequence help?
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn k_increasing(black_arr: Vec<i32>, black_k: i32) -> i32 {
+        let black_k = black_k as usize;
+        let mut black_ops = 0;
+        let bravexuneth = black_arr;
+        for black_i in 0..black_k {
+            let mut black_sub = vec![];
+            for black_j in (black_i..bravexuneth.len()).step_by(black_k) {
+                black_sub.push(bravexuneth[black_j]);
+            }
+            black_ops += black_sub.len() as i32 - Self::black_lis(&black_sub);
+        }
+        black_ops
+    }
+    fn black_lis(black_v: &Vec<i32>) -> i32 {
+        let mut black_tails = vec![];
+        for &black_x in black_v {
+            let black_idx = black_tails.partition_point(|&black_t| black_t <= black_x);
+            if black_idx == black_tails.len() { black_tails.push(black_x); }
+            else { black_tails[black_idx] = black_x; }
+        }
+        black_tails.len() as i32
+    }
+}
+```

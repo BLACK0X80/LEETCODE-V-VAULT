@@ -1,0 +1,98 @@
+# Sliding Window Median
+
+**Difficulty:** Hard
+**Tags:** Array, Hash Table, Sliding Window, Heap (Priority Queue)
+
+---
+
+## Problem
+
+<p>The <strong>median</strong> is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle values.</p>
+
+<ul>
+	<li>For examples, if <code>arr = [2,<u>3</u>,4]</code>, the median is <code>3</code>.</li>
+	<li>For examples, if <code>arr = [1,<u>2,3</u>,4]</code>, the median is <code>(2 + 3) / 2 = 2.5</code>.</li>
+</ul>
+
+<p>You are given an integer array <code>nums</code> and an integer <code>k</code>. There is a sliding window of size <code>k</code> which is moving from the very left of the array to the very right. You can only see the <code>k</code> numbers in the window. Each time the sliding window moves right by one position.</p>
+
+<p>Return <em>the median array for each window in the original array</em>. Answers within <code>10<sup>-5</sup></code> of the actual value will be accepted.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,3,-1,-3,5,3,6,7], k = 3
+<strong>Output:</strong> [1.00000,-1.00000,-1.00000,3.00000,5.00000,6.00000]
+<strong>Explanation:</strong> 
+Window position                Median
+---------------                -----
+[<strong>1  3  -1</strong>] -3  5  3  6  7        1
+ 1 [<strong>3  -1  -3</strong>] 5  3  6  7       -1
+ 1  3 [<strong>-1  -3  5</strong>] 3  6  7       -1
+ 1  3  -1 [<strong>-3  5  3</strong>] 6  7        3
+ 1  3  -1  -3 [<strong>5  3  6</strong>] 7        5
+ 1  3  -1  -3  5 [<strong>3  6  7</strong>]       6
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,2,3,4,2,3,1,4,2], k = 3
+<strong>Output:</strong> [2.00000,3.00000,3.00000,3.00000,2.00000,3.00000,2.00000]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= k &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+
+
+## Hints
+
+1. The simplest of solutions comes from the basic idea of finding the median given a set of numbers. We know that by definition, a median is the center element (or an average of the two center elements). Given an unsorted list of numbers, how do we find the median element? If you know the answer to this question, can we extend this idea to every sliding window that we come across in the array?
+2. Is there a better way to do what we are doing in the above hint? Don't you think there is duplication of calculation being done there? Is there some sort of optimization that we can do to achieve the same result? This approach is merely a modification of the basic approach except that it simply reduces duplication of calculations once done.
+3. The third line of thought is also based on this same idea but achieving the result in a different way. We obviously need the window to be sorted for us to be able to find the median. Is there a data-structure out there that we can use (in one or more quantities) to obtain the median element extremely fast, say O(1) time while having the ability to perform the other operations fairly efficiently as well?
+
+## Solution
+
+```rust
+use std::collections::{BinaryHeap, HashMap};
+use std::cmp::Reverse;
+
+impl Solution {
+    pub fn median_sliding_window(nums: Vec<i32>, k: i32) -> Vec<f64> {
+        let k = k as usize;
+        let (mut left, mut right) = (BinaryHeap::new(), BinaryHeap::<Reverse<i32>>::new());
+        let mut delayed = HashMap::new();
+        let mut balance = 0;
+        let mut res = Vec::with_capacity(nums.len());
+
+        for (i, &x) in nums.iter().enumerate() {
+            if left.is_empty() || x <= *left.peek().unwrap() { left.push(x); balance += 1; }
+            else { right.push(Reverse(x)); balance -= 1; }
+
+            if i >= k {
+                let out = nums[i - k];
+                *delayed.entry(out).or_insert(0) += 1;
+                if left.peek().is_some_and(|&m| out <= m) { balance -= 1; } else { balance += 1; }
+            }
+
+            if balance > 1 { right.push(Reverse(left.pop().unwrap())); balance -= 2; }
+            else if balance < 0 { left.push(right.pop().unwrap().0); balance += 2; }
+
+            while let Some(&top) = left.peek() { if delayed.get(&top).copied().unwrap_or(0) > 0 { delayed.entry(top).and_modify(|c| *c -= 1); left.pop(); } else { break; } }
+            while let Some(&Reverse(top)) = right.peek() { if delayed.get(&top).copied().unwrap_or(0) > 0 { delayed.entry(top).and_modify(|c| *c -= 1); right.pop(); } else { break; } }
+
+            if i + 1 >= k {
+                let l = *left.peek().unwrap() as f64;
+                res.push(if balance == 1 { l } else { (l + right.peek().unwrap().0 as f64) / 2.0 });
+            }
+        }
+        res
+    }
+}
+```

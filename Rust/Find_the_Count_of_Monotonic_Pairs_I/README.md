@@ -1,0 +1,98 @@
+# Find the Count of Monotonic Pairs I
+
+**Difficulty:** Hard
+**Tags:** Array, Math, Dynamic Programming, Combinatorics, Prefix Sum
+
+---
+
+## Problem
+
+<p>You are given an array of <strong>positive</strong> integers <code>nums</code> of length <code>n</code>.</p>
+
+<p>We call a pair of <strong>non-negative</strong> integer arrays <code>(arr1, arr2)</code> <strong>monotonic</strong> if:</p>
+
+<ul>
+	<li>The lengths of both arrays are <code>n</code>.</li>
+	<li><code>arr1</code> is monotonically <strong>non-decreasing</strong>, in other words, <code>arr1[0] &lt;= arr1[1] &lt;= ... &lt;= arr1[n - 1]</code>.</li>
+	<li><code>arr2</code> is monotonically <strong>non-increasing</strong>, in other words, <code>arr2[0] &gt;= arr2[1] &gt;= ... &gt;= arr2[n - 1]</code>.</li>
+	<li><code>arr1[i] + arr2[i] == nums[i]</code> for all <code>0 &lt;= i &lt;= n - 1</code>.</li>
+</ul>
+
+<p>Return the count of <strong>monotonic</strong> pairs.</p>
+
+<p>Since the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [2,3,2]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">4</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The good pairs are:</p>
+
+<ol>
+	<li><code>([0, 1, 1], [2, 2, 1])</code></li>
+	<li><code>([0, 1, 2], [2, 2, 0])</code></li>
+	<li><code>([0, 2, 2], [2, 1, 0])</code></li>
+	<li><code>([1, 2, 2], [1, 1, 0])</code></li>
+</ol>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [5,5,5,5]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">126</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n == nums.length &lt;= 2000</code></li>
+	<li><code>1 &lt;= nums[i] &lt;= 50</code></li>
+</ul>
+
+
+## Hints
+
+1. Let <code>dp[i][s]</code> is the number of monotonic pairs of length <code>i</code> with the <code>arr1[i - 1] = s</code>.
+2. If <code>arr1[i - 1] = s</code>, <code>arr2[i - 1] = nums[i - 1] - s</code>.
+3. Check if the state in recurrence is valid.
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn count_of_pairs(nums: Vec<i32>) -> i32 {
+        let black_mod = 1_000_000_007i64;
+        let black_n = nums.len();
+        let black_max = *nums.iter().max().unwrap() as usize;
+        let mut black_dp = vec![1i64; nums[0] as usize + 1];
+        black_dp.resize(black_max + 1, 1); 
+
+        for i in 1..black_n {
+            let mut black_next_dp = vec![0i64; black_max + 1];
+            let mut black_pref = vec![0i64; black_max + 2];
+            for j in 0..=black_max {
+                black_pref[j + 1] = (black_pref[j] + black_dp[j]) % black_mod;
+            }
+
+            for j in 0..=nums[i] as usize {
+                let black_k = j as i32 - (nums[i] - nums[i - 1]).max(0);
+                if black_k >= 0 {
+                    black_next_dp[j] = black_pref[black_k as usize + 1];
+                }
+            }
+            black_dp = black_next_dp;
+        }
+
+        (black_dp.iter().sum::<i64>() % black_mod) as i32
+    }
+}
+```
