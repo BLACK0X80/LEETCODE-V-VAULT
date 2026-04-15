@@ -1,26 +1,41 @@
 name: Vault-Sync
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
+
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install axios
-      - env:
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install axios
+
+      - name: Run sync
+        env:
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
           LEETCODE_CSRF_TOKEN: ${{ secrets.LEETCODE_CSRF_TOKEN }}
         run: node sync.js
-      - run: |
+
+      - name: Commit and push
+        run: |
           git config --global user.name "BLACK-BOT"
           git config --global user.email "bot@black0x80.io"
-          git add .
-          git commit -m "Fresh Vault Sync: $(date +'%Y-%m-%d')" || exit 0
-          git push origin main --force
+          git add -A
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "Fresh Vault Sync: $(date +'%Y-%m-%d')"
+          git pull --rebase origin main
+          git push origin main
