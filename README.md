@@ -211,3 +211,15 @@ status: ACTIVE ✓
 ![Profile Views](https://komarev.com/ghpvc/?username=BLACK0X80&color=00ff41&style=flat-square&label=VAULT_VISITORS)
 
 </div>
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+|  |
+| ------- |
+| [2515-shortest-distance-to-target-string-in-a-circular-array](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/2515-shortest-distance-to-target-string-in-a-circular-array) |
+## String
+|  |
+| ------- |
+| [2515-shortest-distance-to-target-string-in-a-circular-array](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/2515-shortest-distance-to-target-string-in-a-circular-array) |
+<!---LeetCode Topics End-->
