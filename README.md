@@ -211,3 +211,15 @@ status: ACTIVE ✓
 ![Profile Views](https://komarev.com/ghpvc/?username=BLACK0X80&color=00ff41&style=flat-square&label=VAULT_VISITORS)
 
 </div>
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+|  |
+| ------- |
+| [0624-maximum-distance-in-arrays](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0624-maximum-distance-in-arrays) |
+## Greedy
+|  |
+| ------- |
+| [0624-maximum-distance-in-arrays](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0624-maximum-distance-in-arrays) |
+<!---LeetCode Topics End-->
