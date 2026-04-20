@@ -106,7 +106,7 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 | **JavaScript** | [`/JavaScript`](./JavaScript) |
 | **TypeScript** | [`/TypeScript`](./TypeScript) |
 | **Java** | [`/Java`](./Java) |
-| **SQL** | [`/SQL`](./SQL) |
+
 
 > When any language exceeds **1,000 solutions**, the vault automatically overflows into a sequenced folder (`Rust_2`, `Rust_3`, ...).
 
@@ -158,7 +158,6 @@ LEETCODE-V-VAULT/
 ├── Java/
 ├── JavaScript/
 ├── TypeScript/
-├── SQL/
 ├── sync.js                ← sync engine
 ├── .github/workflows/     ← daily cron pipeline
 └── README.md              ← auto-regenerated index
