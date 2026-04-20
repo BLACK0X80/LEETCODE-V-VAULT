@@ -1,0 +1,1 @@
+impl Solution { pub fn h_index(mut black_c: Vec<i32>) -> i32 { black_c.sort_unstable_by(|a, b| b.cmp(a)); black_c.iter().enumerate().take_while(|&(i, &c)| c > i as i32).count() as i32 } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn results_array(black_n: Vec<i32>, black_k: i32) -> Vec<i32> { let (mut black_r, mut black_c) = (vec![], 0); for i in 0..black_n.len() { black_c = if i > 0 && black_n[i] == black_n[i-1] + 1 { black_c + 1 } else { 1 }; if i >= (black_k - 1) as usize { black_r.push(if black_c >= black_k { black_n[i] } else { -1 }); } } black_r } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn find_lu_slength(mut black_s: Vec<String>) -> i32 { fn is_sub(s1: &str, s2: &str) -> bool { let mut it = s2.chars(); s1.chars().all(|c| it.any(|x| x == c)) } black_s.sort_by_key(|s| -(s.len() as i32)); for i in 0..black_s.len() { if (0..black_s.len()).filter(|&j| i != j).all(|j| !is_sub(&black_s[i], &black_s[j])) { return black_s[i].len() as i32; } } -1 } }

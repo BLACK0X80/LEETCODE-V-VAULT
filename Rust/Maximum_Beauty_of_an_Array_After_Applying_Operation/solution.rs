@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_beauty(mut black_n: Vec<i32>, black_k: i32) -> i32 { black_n.sort_unstable(); let (mut black_i, mut black_res) = (0, 0); for black_j in 0..black_n.len() { while black_n[black_j] - black_n[black_i] > 2 * black_k { black_i += 1; } black_res = black_res.max(black_j - black_i + 1); } black_res as i32 } }

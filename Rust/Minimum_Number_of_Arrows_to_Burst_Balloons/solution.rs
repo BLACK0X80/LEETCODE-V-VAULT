@@ -1,0 +1,1 @@
+impl Solution { pub fn find_min_arrow_shots(mut black_p: Vec<Vec<i32>>) -> i32 { black_p.sort_unstable_by_key(|v| v[1]); let (mut black_ans, mut black_last) = (0, i64::MIN); for black_b in black_p { if black_b[0] as i64 > black_last { black_ans += 1; black_last = black_b[1] as i64; } } black_ans } }

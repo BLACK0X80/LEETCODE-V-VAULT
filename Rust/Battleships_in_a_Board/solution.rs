@@ -1,0 +1,1 @@
+impl Solution { pub fn count_battleships(black_b: Vec<Vec<char>>) -> i32 { let mut black_cnt = 0; for black_r in 0..black_b.len() { for black_c in 0..black_b[0].len() { if black_b[black_r][black_c] == 'X' && (black_r == 0 || black_b[black_r-1][black_c] == '.') && (black_c == 0 || black_b[black_r][black_c-1] == '.') { black_cnt += 1; } } } black_cnt } }

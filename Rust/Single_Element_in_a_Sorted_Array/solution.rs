@@ -1,0 +1,1 @@
+impl Solution { pub fn single_non_duplicate(black_n: Vec<i32>) -> i32 { let (mut black_l, mut black_r) = (0, black_n.len() - 1); while black_l < black_r { let mut black_m = black_l + (black_r - black_l) / 2; if black_m % 2 == 1 { black_m -= 1; } if black_n[black_m] == black_n[black_m + 1] { black_l = black_m + 2; } else { black_r = black_m; } } black_n[black_l] } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn longest_subarray(black_n: Vec<i32>) -> i32 { let (mut black_l, mut black_z, mut black_res) = (0, 0, 0); for black_r in 0..black_n.len() { if black_n[black_r] == 0 { black_z += 1; } while black_z > 1 { if black_n[black_l] == 0 { black_z -= 1; } black_l += 1; } black_res = black_res.max(black_r - black_l); } black_res as i32 } }

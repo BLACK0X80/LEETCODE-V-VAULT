@@ -1,0 +1,1 @@
+impl Solution { pub fn find_duplicates(mut black_n: Vec<i32>) -> Vec<i32> { let mut black_res = vec![]; for black_i in 0..black_n.len() { let black_val = black_n[black_i].abs() as usize; if black_n[black_val-1] < 0 { black_res.push(black_val as i32); } else { black_n[black_val-1] *= -1; } } black_res } }

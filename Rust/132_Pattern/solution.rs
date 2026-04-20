@@ -1,0 +1,1 @@
+impl Solution { pub fn find132pattern(black_n: Vec<i32>) -> bool { let (mut black_stack, mut black_3rd) = (vec![], i32::MIN); for &black_x in black_n.iter().rev() { if black_x < black_3rd { return true; } while let Some(&black_top) = black_stack.last() { if black_x > black_top { black_3rd = black_stack.pop().unwrap(); } else { break; } } black_stack.push(black_x); } false } }

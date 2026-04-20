@@ -1,0 +1,1 @@
+impl Solution { pub fn max_distance(black_c: Vec<i32>) -> i32 { let (black_n, mut black_i, mut black_j) = (black_c.len(), 0, black_c.len() - 1); while black_c[black_i] == black_c[black_n - 1] { black_i += 1; } while black_c[black_j] == black_c[0] { black_j -= 1; } ((black_n - 1 - black_i) as i32).max(black_j as i32) } }

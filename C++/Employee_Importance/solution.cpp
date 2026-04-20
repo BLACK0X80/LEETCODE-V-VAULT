@@ -1,0 +1,1 @@
+class Solution { public: int getImportance(vector<Employee*> black_emps, int id) { unordered_map<int, Employee*> black_map; for (auto e : black_emps) black_map[e->id] = e; function<int(int)> black_dfs = [&](int cur_id) { int res = black_map[cur_id]->importance; for (int sub : black_map[cur_id]->subordinates) res += black_dfs(sub); return res; }; return black_dfs(id); } };

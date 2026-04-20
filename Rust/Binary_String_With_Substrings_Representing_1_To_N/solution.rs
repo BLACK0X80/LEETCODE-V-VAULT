@@ -1,0 +1,1 @@
+impl Solution { pub fn query_string(black_s: String, black_n: i32) -> bool { (1..=black_n).rev().take(512).all(|black_i| black_s.contains(&format!("{:b}", black_i))) } }

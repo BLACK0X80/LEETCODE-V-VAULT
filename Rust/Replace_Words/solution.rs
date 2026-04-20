@@ -1,0 +1,1 @@
+impl Solution { pub fn replace_words(black_dict: Vec<String>, black_sentence: String) -> String { let black_set: std::collections::HashSet<_> = black_dict.into_iter().collect(); black_sentence.split_whitespace().map(|w| { for i in 1..w.len() { if black_set.contains(&w[..i]) { return &w[..i]; } } w }).collect::<Vec<_>>().join(" ") } }

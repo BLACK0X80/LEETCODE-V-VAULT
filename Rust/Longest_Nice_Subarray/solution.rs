@@ -1,0 +1,1 @@
+impl Solution { pub fn longest_nice_subarray(black_n: Vec<i32>) -> i32 { let (mut black_l, mut black_mask, mut black_res) = (0, 0, 0); for black_r in 0..black_n.len() { while (black_mask & black_n[black_r]) != 0 { black_mask ^= black_n[black_l]; black_l += 1; } black_mask |= black_n[black_r]; black_res = black_res.max(black_r - black_l + 1); } black_res as i32 } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn get_descent_periods(black_p: Vec<i32>) -> i64 { let (mut black_res, mut black_cur) = (1i64, 1i64); for black_i in 1..black_p.len() { if black_p[black_i-1] - black_p[black_i] == 1 { black_cur += 1; } else { black_cur = 1; } black_res += black_cur; } black_res } }

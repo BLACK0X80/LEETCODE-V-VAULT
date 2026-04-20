@@ -1,0 +1,1 @@
+impl Solution { pub fn total_hamming_distance(black_n: Vec<i32>) -> i32 { (0..30).map(|black_b| { let black_ones = black_n.iter().filter(|&&x| (x >> black_b) & 1 == 1).count() as i32; black_ones * (black_n.len() as i32 - black_ones) }).sum() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn find_pairs(black_n: Vec<i32>, black_k: i32) -> i32 { let mut black_m = std::collections::HashMap::new(); for v in black_n { *black_m.entry(v).or_insert(0) += 1; } black_m.iter().filter(|&(&v, &c)| if black_k > 0 { black_m.contains_key(&(v + black_k)) } else { c > 1 }).count() as i32 } }

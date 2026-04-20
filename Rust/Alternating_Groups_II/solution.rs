@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_alternating_groups(black_c: Vec<i32>, black_k: i32) -> i32 { let (black_n, mut black_res, mut black_cnt) = (black_c.len(), 0, 1); for i in 1..black_n + (black_k as usize) - 1 { if black_c[i % black_n] != black_c[(i - 1) % black_n] { black_cnt += 1; } else { black_cnt = 1; } if black_cnt >= black_k { black_res += 1; } } black_res } }

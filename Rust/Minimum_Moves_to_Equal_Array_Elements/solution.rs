@@ -1,0 +1,1 @@
+impl Solution { pub fn min_moves(black_n: Vec<i32>) -> i32 { let black_min = *black_n.iter().min().unwrap(); black_n.iter().map(|&x| x - black_min).sum() } }

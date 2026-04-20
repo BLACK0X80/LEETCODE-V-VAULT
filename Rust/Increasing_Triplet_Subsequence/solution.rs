@@ -1,0 +1,1 @@
+impl Solution { pub fn increasing_triplet(black_n: Vec<i32>) -> bool { let (mut black_1, mut black_2) = (i32::MAX, i32::MAX); for black_x in black_n { if black_x <= black_1 { black_1 = black_x; } else if black_x <= black_2 { black_2 = black_x; } else { return true; } } false } }

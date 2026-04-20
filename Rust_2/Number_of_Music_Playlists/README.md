@@ -1,0 +1,72 @@
+# Number of Music Playlists
+
+**Difficulty:** Hard
+**Tags:** Math, Dynamic Programming, Combinatorics
+
+---
+
+## Problem
+
+<p>Your music player contains <code>n</code> different songs. You want to listen to <code>goal</code> songs (not necessarily different) during your trip. To avoid boredom, you will create a playlist so that:</p>
+
+<ul>
+	<li>Every song is played <strong>at least once</strong>.</li>
+	<li>A song can only be played again only if <code>k</code> other songs have been played.</li>
+</ul>
+
+<p>Given <code>n</code>, <code>goal</code>, and <code>k</code>, return <em>the number of possible playlists that you can create</em>. Since the answer can be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.</p>
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = 3, goal = 3, k = 1
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> There are 6 possible playlists: [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], and [3, 2, 1].
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = 2, goal = 3, k = 0
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> There are 6 possible playlists: [1, 1, 2], [1, 2, 1], [2, 1, 1], [2, 2, 1], [2, 1, 2], and [1, 2, 2].
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = 2, goal = 3, k = 1
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> There are 2 possible playlists: [1, 2, 1] and [2, 1, 2].
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= k &lt; n &lt;= goal &lt;= 100</code></li>
+</ul>
+
+
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn num_music_playlists(n: i32, goal: i32, k: i32) -> i32 {
+        const MOD: u64 = 1_000_000_007;
+        let (n, g, k) = (n as usize, goal as usize, k as usize);
+        let mut dp = vec![vec![0u64; n + 1]; g + 1];
+        dp[0][0] = 1;
+
+        for i in 1..=g {
+            for j in 1..=n {
+                dp[i][j] = (dp[i-1][j-1] * (n - j + 1) as u64
+                    + dp[i-1][j] * (j.saturating_sub(k)) as u64) % MOD;
+            }
+        }
+
+        dp[g][n] as i32
+    }
+}
+```
