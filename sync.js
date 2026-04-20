@@ -26,6 +26,8 @@ const LANG_CONFIG = {
     'pandas':     { folder: 'PYTHONDATA', ext: 'py'   }
 };
 
+const OVERFLOW_THRESHOLD = 1000;
+
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 const sanitize = (s) => s.replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/\s+/g, '_');
 
@@ -72,14 +74,16 @@ async function fetchAllAccepted() {
         const list = data?.submissionList;
         if (!list) { await sleep(5000); continue; }
 
-        for (const s of list.submissions) {
+        const submissions = list.submissions ?? [];
+
+        for (const s of submissions) {
             if (s.statusDisplay === 'Accepted' && !accepted.has(s.titleSlug)) {
                 accepted.set(s.titleSlug, s);
             }
         }
 
-        hasNext = list.hasNext;
-        lastKey = list.lastKey;
+        hasNext = list.hasNext ?? false;
+        lastKey = list.lastKey ?? null;
         offset += 20;
 
         process.stdout.write(`\rFetched ${accepted.size} unique accepted...`);
@@ -142,22 +146,35 @@ function buildReadme(q, code, lang, ext) {
     ].filter(l => l !== null).join('\n');
 }
 
+function getFolderForLang(folder, langCount) {
+    if (langCount <= OVERFLOW_THRESHOLD) return folder;
+    const part = Math.ceil(langCount / OVERFLOW_THRESHOLD);
+    return `${folder}_${part}`;
+}
+
 async function run() {
     const accepted = await fetchAllAccepted();
     const stats = {};
+    const langCounters = {};
     let processed = 0;
     const total = accepted.size;
 
     for (const [slug, sub] of accepted) {
         processed++;
         const conf = LANG_CONFIG[sub.lang] || { folder: sub.lang.toUpperCase(), ext: 'txt' };
+        const baseFolder = conf.folder;
+
+        if (!langCounters[baseFolder]) langCounters[baseFolder] = 0;
+        langCounters[baseFolder]++;
+
+        const activeFolder = getFolderForLang(baseFolder, langCounters[baseFolder]);
         const safeTitle = sanitize(sub.title);
-        const probDir = path.join(__dirname, conf.folder, safeTitle);
+        const probDir = path.join(__dirname, activeFolder, safeTitle);
         const codePath = path.join(probDir, `solution.${conf.ext}`);
         const descPath = path.join(probDir, 'README.md');
 
-        if (!stats[conf.folder]) stats[conf.folder] = [];
-        stats[conf.folder].push({ title: sub.title, path: `./${conf.folder}/${safeTitle}` });
+        if (!stats[activeFolder]) stats[activeFolder] = [];
+        stats[activeFolder].push({ title: sub.title, path: `./${activeFolder}/${safeTitle}` });
 
         if (fs.existsSync(codePath) && fs.existsSync(descPath)) {
             console.log(`[${processed}/${total}] SKIP  ${sub.title}`);
@@ -183,13 +200,13 @@ async function run() {
             fs.writeFileSync(descPath, md, 'utf8');
         }
 
-        console.log(`[${processed}/${total}] DONE  ${sub.title} (${conf.folder})`);
+        console.log(`[${processed}/${total}] DONE  ${sub.title} (${activeFolder})`);
     }
 
     let readme = `# LEETCODE ARCHIVE\n\nTotal Solved: ${total}\n\n`;
-    for (const lang of Object.keys(stats).sort()) {
-        readme += `## ${lang}\n| # | Problem |\n|---|---|\n`;
-        stats[lang].forEach((p, i) => {
+    for (const folder of Object.keys(stats).sort()) {
+        readme += `## ${folder}\n| # | Problem |\n|---|---|\n`;
+        stats[folder].forEach((p, i) => {
             readme += `| ${i + 1} | [${p.title}](${p.path}) |\n`;
         });
         readme += '\n';
