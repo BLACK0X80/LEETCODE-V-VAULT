@@ -1,0 +1,2 @@
+struct MagicDictionary { black_dict: Vec<String> }
+impl MagicDictionary { fn new() -> Self { Self { black_dict: vec![] } } fn build_dict(&mut self, black_dictionary: Vec<String>) { self.black_dict = black_dictionary; } fn search(&self, black_word: String) -> bool { self.black_dict.iter().any(|black_d| black_d.len() == black_word.len() && black_d.chars().zip(black_word.chars()).filter(|(a, b)| a != b).count() == 1) } }
