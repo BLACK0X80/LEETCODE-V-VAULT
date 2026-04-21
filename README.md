@@ -1267,3 +1267,27 @@ Total Solved: 1225
 | 1 | [Memoize II](./TypeScript/Memoize_II) |
 | 2 | [Design Cancellable Function](./TypeScript/Design_Cancellable_Function) |
 
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Hash Table
+|  |
+| ------- |
+| [0676-implement-magic-dictionary](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0676-implement-magic-dictionary) |
+## String
+|  |
+| ------- |
+| [0676-implement-magic-dictionary](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0676-implement-magic-dictionary) |
+## Depth-First Search
+|  |
+| ------- |
+| [0676-implement-magic-dictionary](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0676-implement-magic-dictionary) |
+## Design
+|  |
+| ------- |
+| [0676-implement-magic-dictionary](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0676-implement-magic-dictionary) |
+## Trie
+|  |
+| ------- |
+| [0676-implement-magic-dictionary](https://github.com/BLACK0X80/LeetCode-V-Vault/tree/master/0676-implement-magic-dictionary) |
+<!---LeetCode Topics End-->
