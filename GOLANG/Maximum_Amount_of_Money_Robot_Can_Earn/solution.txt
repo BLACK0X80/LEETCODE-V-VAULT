@@ -1,0 +1,43 @@
+func maximumAmount(coins [][]int) int {
+    m, n := len(coins), len(coins[0])
+    const NEG_INF = -1 << 30
+
+    dp := [501][501][3]int{}
+    for i := 0; i < m; i++ {
+        for j := 0; j < n; j++ {
+            dp[i][j] = [3]int{NEG_INF, NEG_INF, NEG_INF}
+        }
+    }
+
+    for i := 0; i < m; i++ {
+        for j := 0; j < n; j++ {
+            c := coins[i][j]
+            for k := 2; k >= 0; k-- {
+                prev := NEG_INF
+                if i > 0 && dp[i-1][j][k] != NEG_INF {
+                    prev = max(prev, dp[i-1][j][k])
+                }
+                if j > 0 && dp[i][j-1][k] != NEG_INF {
+                    prev = max(prev, dp[i][j-1][k])
+                }
+                if i == 0 && j == 0 {
+                    prev = 0
+                }
+                if prev == NEG_INF {
+                    continue
+                }
+                dp[i][j][k] = max(dp[i][j][k], prev+c)
+                if c < 0 && k > 0 {
+                    dp[i][j][k-1] = max(dp[i][j][k-1], prev)
+                }
+            }
+        }
+    }
+
+    return max(dp[m-1][n-1][0], max(dp[m-1][n-1][1], dp[m-1][n-1][2]))
+}
+
+func max(a, b int) int {
+    if a > b { return a }
+    return b
+}
