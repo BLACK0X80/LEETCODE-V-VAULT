@@ -1,0 +1,1 @@
+impl Solution { pub fn two_edit_words(black_queries: Vec<String>, black_dictionary: Vec<String>) -> Vec<String> { black_queries.into_iter().filter(|black_q| { let black_q_b = black_q.as_bytes(); black_dictionary.iter().any(|black_d| { let black_d_b = black_d.as_bytes(); black_q_b.iter().zip(black_d_b).filter(|(a, b)| a != b).count() <= 2 }) }).collect() } }

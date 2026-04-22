@@ -1,0 +1,1 @@
+impl Solution { pub fn reach_number(black_target: i32) -> i32 { let black_t = black_target.abs() as i64; let (mut black_n, mut black_sum) = (0i64, 0i64); while black_sum < black_t || (black_sum - black_t) % 2 != 0 { black_n += 1; black_sum += black_n; } black_n as i32 } }

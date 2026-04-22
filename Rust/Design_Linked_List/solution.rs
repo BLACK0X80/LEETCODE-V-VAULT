@@ -1,0 +1,2 @@
+struct MyLinkedList { black_list: Vec<i32> }
+impl MyLinkedList { fn new() -> Self { Self { black_list: vec![] } } fn get(&self, i: i32) -> i32 { *self.black_list.get(i as usize).unwrap_or(&-1) } fn add_at_head(&mut self, v: i32) { self.black_list.insert(0, v); } fn add_at_tail(&mut self, v: i32) { self.black_list.push(v); } fn add_at_index(&mut self, i: i32, v: i32) { if i as usize <= self.black_list.len() { self.black_list.insert(i as usize, v); } } fn delete_at_index(&mut self, i: i32) { if (i as usize) < self.black_list.len() { self.black_list.remove(i as usize); } } }
