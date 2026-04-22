@@ -19,11 +19,11 @@
 
 <br/>
 
-**Automated • Structured • Battle-Tested**
+**Automated - Structured - Battle-Tested**
 
 A self-syncing archive of every accepted LeetCode solution — automatically fetched, organized by language, and pushed daily via GitHub Actions. No manual uploads. No missing solutions. Absolute coverage.
 
-[**Browse Solutions**](#language-breakdown) • [**How It Works**](#how-it-works) • [**Stats**](#competitive-stats)
+[**Browse Solutions**](#language-breakdown) - [**How It Works**](#how-it-works) - [**Stats**](#competitive-stats)
 
 </div>
 
@@ -43,11 +43,11 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Metric | Value |
 |:------:|:-----:|
-|  **Global Rank** | **#12,965** |
-|  **Problems Solved** | **1,300 / 3,906** |
-|  **Easy** | 68 / 938 |
-|  **Medium** | 406 / 2,044 |
-|  **Hard** | **746 / 924** |
+| Global Rank | **#12,965** |
+| Problems Solved | **1,300 / 3,906** |
+| Easy | 68 / 938 |
+| Medium | 406 / 2,044 |
+| Hard | **746 / 924** |
 
 </div>
 
@@ -82,14 +82,14 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Language | Problems | Share |
 |:--------:|:--------:|:-----:|
-| **Rust** 🦀 | 1,244 | ~95.7% |
+| **Rust** | 1,244 | ~95.7% |
 | Python / Pandas | 34 | ~2.6% |
 | C++ | 12 | ~0.9% |
 | BASH | 4 | ~0.3% |
 | TypeScript | 2 | ~0.2% |
 | Go / Java / C | 3 | ~0.3% |
 
-> Solving **1,244 Hard-heavy problems in Rust** — a language with zero runtime safety nets — places this vault in a category of its own.
+> Solving 1,244 Hard-heavy problems in Rust — a language with zero runtime safety nets — places this vault in a category of its own.
 
 </div>
 
@@ -101,7 +101,7 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Language | Folder |
 |:--------:|:------:|
-| **Rust** (1–1000) | [`/Rust`](./Rust) |
+| **Rust** (1-1000) | [`/Rust`](./Rust) |
 | **Rust** (1001+) | [`/Rust_2`](./Rust_2) |
 | **Python 3** | [`/Python`](./Python) |
 | **Pandas** | [`/PYTHONDATA`](./PYTHONDATA) |
@@ -112,7 +112,7 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 | **Go** | [`/GOLANG`](./GOLANG) |
 | **BASH** | [`/BASH`](./BASH) |
 
-> When any language exceeds **1,000 solutions**, the vault automatically overflows into a sequenced folder (`Rust_2`, `Rust_3`, ...).
+> When any language exceeds 1,000 solutions, the vault automatically overflows into a sequenced folder (`Rust_2`, `Rust_3`, ...).
 
 </div>
 
@@ -124,28 +124,28 @@ The vault runs on a custom `sync.js` engine backed by GitHub Actions. Every day 
 
 ```
 LeetCode GraphQL API
-        │
-        ▼
+        |
+        v
   Fetch all accepted submissions
-  (paginated · deduplicated by slug)
-        │
-        ▼
+  (paginated - deduplicated by slug)
+        |
+        v
   For each new solution:
-  ├── fetchCode()      → submissionDetails query
-  ├── fetchQuestion()  → questionData query
-  └── Write:
-       ├── solution.<ext>   ← accepted code
-       └── README.md        ← problem + difficulty + tags + hints + solution
-        │
-        ▼
+  |-- fetchCode()      -> submissionDetails query
+  |-- fetchQuestion()  -> questionData query
+  +-- Write:
+       |-- solution.<ext>   <- accepted code
+       +-- README.md        <- problem + difficulty + tags + hints + solution
+        |
+        v
   Organize by language folder
-  (overflow at 1,000 → new sequenced folder)
-        │
-        ▼
+  (overflow at 1,000 -> new sequenced folder)
+        |
+        v
   Regenerate root README.md with full index
-        │
-        ▼
-  git commit → git push
+        |
+        v
+  git commit -> git push
 ```
 
 ---
@@ -154,27 +154,27 @@ LeetCode GraphQL API
 
 ```
 LEETCODE-V-VAULT/
-├── Rust/                  ← solutions 1–1000
-├── Rust_2/                ← solutions 1001+
-├── Python/
-├── PYTHONDATA/
-├── C++/
-├── C/
-├── Java/
-├── TypeScript/
-├── GOLANG/
-├── BASH/
-├── sync.js                ← sync engine
-├── .github/workflows/     ← daily cron pipeline
-└── README.md              ← auto-regenerated index
+|-- Rust/                  <- solutions 1-1000
+|-- Rust_2/                <- solutions 1001+
+|-- Python/
+|-- PYTHONDATA/
+|-- C++/
+|-- C/
+|-- Java/
+|-- TypeScript/
+|-- GOLANG/
+|-- BASH/
+|-- sync.js                <- sync engine
+|-- .github/workflows/     <- daily cron pipeline
++-- README.md              <- auto-regenerated index
 ```
 
 Each problem lives in its own folder with exactly two files:
 
 ```
 Rust/Two_Sum/
-├── solution.rs     ← accepted code
-└── README.md       ← full problem + hints + solution
+|-- solution.rs     <- accepted code
++-- README.md       <- full problem + hints + solution
 ```
 
 ---
@@ -185,9 +185,9 @@ Rust/Two_Sum/
 
 | Advanced | Intermediate | Fundamental |
 |:--------:|:------------:|:-----------:|
-| Dynamic Programming × 394 | Math × 236 | Array × 743 |
-| Segment Tree × 57 | Hash Table × 226 | String × 260 |
-| Backtracking × 54 | Binary Search × 153 | Sorting × 152 |
+| Dynamic Programming x 394 | Math x 236 | Array x 743 |
+| Segment Tree x 57 | Hash Table x 226 | String x 260 |
+| Backtracking x 54 | Binary Search x 153 | Sorting x 152 |
 
 </div>
 
@@ -195,8 +195,57 @@ Rust/Two_Sum/
 
 ## License
 
-```text
-MIT License — Copyright (c) 2026 BLACK
+```
+MIT License
+
+Copyright (c) 2026 BLACK (BLACK0X80)
+https://github.com/BLACK0X80
+https://black0x80.vercel.app
+
+All rights reserved under the terms of this license.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software, source code, solution files, documentation, and associated
+materials (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following
+conditions:
+
+  1. ATTRIBUTION REQUIRED
+     The above copyright notice, this permission notice, and the name "BLACK"
+     or "BLACK0X80" must be included in all copies, distributions, forks, or
+     substantial portions of the Software. Removing or obscuring credit to the
+     original author is strictly prohibited.
+
+  2. NO MISREPRESENTATION
+     You may not represent this work, or any derivative of it, as your own
+     original work in any academic, professional, or competitive context.
+     This includes but is not limited to submitting solutions from this
+     repository as personal submissions on LeetCode or any similar platform.
+
+  3. NO COMMERCIAL EXPLOITATION WITHOUT CONSENT
+     You may not sell, license, or monetize this Software or any substantial
+     portion of it without explicit written permission from BLACK (BLACK0X80).
+
+  4. DERIVATIVE WORKS
+     Any derivative work, fork, or adaptation of this Software must carry this
+     same license, must visibly credit BLACK (BLACK0X80) as the original author,
+     and must clearly indicate what changes were made.
+
+  5. INTEGRITY OF AUTHORSHIP
+     The intellectual effort, problem-solving approaches, and implementations
+     contained within this repository are the exclusive creative output of
+     BLACK (BLACK0X80). Any use that undermines or erases this authorship
+     is a violation of the spirit and terms of this license.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+BLACK (BLACK0X80) BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
 
 ---
@@ -205,7 +254,7 @@ MIT License — Copyright (c) 2026 BLACK
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer" width="100%"/>
 
-**Engineered by BLACK • 2026**
+**Engineered by BLACK - 2026**
 
 *#12,965 worldwide. 746 Hards. All in Rust.*
 
