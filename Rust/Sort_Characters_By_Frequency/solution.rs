@@ -1,0 +1,1 @@
+impl Solution { pub fn frequency_sort(black_s: String) -> String { let mut black_map = std::collections::HashMap::new(); for c in black_s.chars() { *black_map.entry(c).or_insert(0) += 1; } let mut black_vec: Vec<_> = black_map.into_iter().collect(); black_vec.sort_by(|a, b| b.1.cmp(&a.1)); black_vec.into_iter().map(|(c, f)| c.to_string().repeat(f)).collect() } }
