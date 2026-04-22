@@ -43,11 +43,11 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Metric | Value |
 |:------:|:-----:|
-| 🌍 **Global Rank** | **#12,965** |
-| ✅ **Problems Solved** | **1,300 / 3,906** |
-| 🟢 **Easy** | 68 / 938 |
-| 🟡 **Medium** | 406 / 2,044 |
-| 🔴 **Hard** | **746 / 924** |
+|  **Global Rank** | **#12,965** |
+|  **Problems Solved** | **1,300 / 3,906** |
+|  **Easy** | 68 / 938 |
+|  **Medium** | 406 / 2,044 |
+|  **Hard** | **746 / 924** |
 
 </div>
 
