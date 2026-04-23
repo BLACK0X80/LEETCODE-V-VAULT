@@ -1,0 +1,1 @@
+impl Solution { pub fn equal_pairs(black_g: Vec<Vec<i32>>) -> i32 { let mut black_m = std::collections::HashMap::new(); black_g.iter().for_each(|black_r| *black_m.entry(black_r).or_insert(0) += 1); (0..black_g.len()).map(|black_c| { let black_col: Vec<i32> = (0..black_g.len()).map(|black_r| black_g[black_r][black_c]).collect(); *black_m.get(&black_col).unwrap_or(&0) }).sum() } }

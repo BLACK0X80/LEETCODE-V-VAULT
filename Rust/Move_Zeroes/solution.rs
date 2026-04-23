@@ -1,0 +1,1 @@
+impl Solution { pub fn move_zeroes(black_nums: &mut Vec<i32>) { let mut black_p = 0; for i in 0..black_nums.len() { if black_nums[i] != 0 { black_nums.swap(black_p, i); black_p += 1; } } } }

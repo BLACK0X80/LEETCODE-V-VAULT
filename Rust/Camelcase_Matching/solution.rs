@@ -1,0 +1,1 @@
+impl Solution { pub fn camel_match(queries: Vec<String>, pattern: String) -> Vec<bool> { let black_p_bytes = pattern.as_bytes(); queries.into_iter().map(|black_q| { let mut i = 0; for &b in black_q.as_bytes() { if i < black_p_bytes.len() && b == black_p_bytes[i] { i += 1; } else if b.is_ascii_uppercase() { return false; } } i == black_p_bytes.len() }).collect() } }

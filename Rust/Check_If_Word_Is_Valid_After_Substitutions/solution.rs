@@ -1,0 +1,1 @@
+impl Solution { pub fn is_valid(black_s: String) -> bool { let mut black_stk = Vec::with_capacity(black_s.len()); for black_b in black_s.bytes() { black_stk.push(black_b); if black_stk.len() >= 3 && &black_stk[black_stk.len()-3..] == [b'a', b'b', b'c'] { black_stk.truncate(black_stk.len() - 3); } } black_stk.is_empty() } }

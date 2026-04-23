@@ -1,0 +1,1 @@
+impl Solution { pub fn find_max_average(black_n: Vec<i32>, black_k: i32) -> f64 { let mut black_curr: i32 = black_n.iter().take(black_k as usize).sum(); let mut black_max = black_curr; for i in (black_k as usize)..black_n.len() { black_curr += black_n[i] - black_n[i - black_k as usize]; black_max = black_max.max(black_curr); } black_max as f64 / black_k as f64 } }

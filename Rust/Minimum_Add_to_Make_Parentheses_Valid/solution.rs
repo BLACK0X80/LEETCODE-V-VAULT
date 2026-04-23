@@ -1,0 +1,1 @@
+impl Solution { pub fn min_add_to_make_valid(black_s: String) -> i32 { let (mut black_open, mut black_add) = (0, 0); for black_c in black_s.chars() { if black_c == '(' { black_open += 1; } else if black_open > 0 { black_open -= 1; } else { black_add += 1; } } black_add + black_open } }

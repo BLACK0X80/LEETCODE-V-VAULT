@@ -1,0 +1,1 @@
+impl Solution { pub fn is_subsequence(black_s: String, black_t: String) -> bool { let mut black_it = black_t.chars(); black_s.chars().all(|black_c| black_it.any(|x| x == black_c)) } }

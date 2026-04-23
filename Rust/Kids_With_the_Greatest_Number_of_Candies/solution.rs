@@ -1,0 +1,1 @@
+impl Solution { pub fn kids_with_candies(black_c: Vec<i32>, black_e: i32) -> Vec<bool> { let black_m = *black_c.iter().max().unwrap_or(&0); black_c.iter().map(|&x| x + black_e >= black_m).collect() } }

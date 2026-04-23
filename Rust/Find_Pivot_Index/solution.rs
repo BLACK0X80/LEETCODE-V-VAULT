@@ -1,0 +1,1 @@
+impl Solution { pub fn pivot_index(black_n: Vec<i32>) -> i32 { let black_sum: i32 = black_n.iter().sum(); let mut black_left = 0; for (i, &x) in black_n.iter().enumerate() { if black_left * 2 == black_sum - x { return i as i32; } black_left += x; } -1 } }

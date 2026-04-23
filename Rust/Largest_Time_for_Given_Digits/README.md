@@ -1,0 +1,47 @@
+# Largest Time for Given Digits
+
+**Difficulty:** Medium
+**Tags:** Array, String, Backtracking, Enumeration
+
+---
+
+## Problem
+
+<p>Given an array <code>arr</code> of 4 digits, find the latest 24-hour time that can be made using each digit <strong>exactly once</strong>.</p>
+
+<p>24-hour times are formatted as <code>&quot;HH:MM&quot;</code>, where <code>HH</code> is between <code>00</code> and <code>23</code>, and <code>MM</code> is between <code>00</code> and <code>59</code>. The earliest 24-hour time is <code>00:00</code>, and the latest is <code>23:59</code>.</p>
+
+<p>Return <em>the latest 24-hour time in <code>&quot;HH:MM&quot;</code> format</em>. If no valid time can be made, return an empty string.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [1,2,3,4]
+<strong>Output:</strong> &quot;23:41&quot;
+<strong>Explanation:</strong> The valid 24-hour times are &quot;12:34&quot;, &quot;12:43&quot;, &quot;13:24&quot;, &quot;13:42&quot;, &quot;14:23&quot;, &quot;14:32&quot;, &quot;21:34&quot;, &quot;21:43&quot;, &quot;23:14&quot;, and &quot;23:41&quot;. Of these times, &quot;23:41&quot; is the latest.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [5,5,5,5]
+<strong>Output:</strong> &quot;&quot;
+<strong>Explanation:</strong> There are no valid 24-hour times as &quot;55:55&quot; is not valid.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>arr.length == 4</code></li>
+	<li><code>0 &lt;= arr[i] &lt;= 9</code></li>
+</ul>
+
+
+
+## Solution
+
+```rust
+impl Solution { pub fn largest_time_from_digits(mut black_a: Vec<i32>) -> String { let mut black_max = -1; black_a.sort(); loop { let (black_h, black_m) = (black_a[0]*10 + black_a[1], black_a[2]*10 + black_a[3]); if black_h < 24 && black_m < 60 { black_max = black_max.max(black_h * 60 + black_m); } if !Self::black_next(&mut black_a) { break; } } if black_max == -1 { return "".to_string(); } format!("{:02}:{:02}", black_max / 60, black_max % 60) } fn black_next(black_n: &mut [i32]) -> bool { let black_i = match (0..black_n.len()-1).rev().find(|&i| black_n[i] < black_n[i+1]) { Some(i) => i, None => return false }; let black_j = (black_i+1..black_n.len()).rev().find(|&j| black_n[black_i] < black_n[j]).unwrap(); black_n.swap(black_i, black_j); black_n[black_i+1..].reverse(); true } }
+```

@@ -1,0 +1,1 @@
+impl Solution { pub fn remove_stars(black_s: String) -> String { black_s.chars().fold(String::new(), |mut black_acc, black_c| { if black_c == '*' { black_acc.pop(); } else { black_acc.push(black_c); } black_acc }) } }
