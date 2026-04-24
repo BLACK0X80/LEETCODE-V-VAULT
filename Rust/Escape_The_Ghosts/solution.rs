@@ -1,0 +1,1 @@
+impl Solution { pub fn escape_ghosts(black_g: Vec<Vec<i32>>, black_t: Vec<i32>) -> bool { let black_dist = black_t[0].abs() + black_t[1].abs(); black_g.iter().all(|black_gh| (black_gh[0] - black_t[0]).abs() + (black_gh[1] - black_t[1]).abs() > black_dist) } }
