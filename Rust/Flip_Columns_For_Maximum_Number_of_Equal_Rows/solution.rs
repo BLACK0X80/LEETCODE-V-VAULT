@@ -1,0 +1,2 @@
+use std::collections::HashMap;
+impl Solution { pub fn max_equal_rows_after_flips(black_matrix: Vec<Vec<i32>>) -> i32 { let mut black_counts = HashMap::new(); for black_row in black_matrix { let black_first = black_row[0]; let black_pattern: Vec<i32> = black_row.into_iter().map(|x| x ^ black_first).collect(); *black_counts.entry(black_pattern).or_insert(0) += 1; } *black_counts.values().max().unwrap_or(&0) } }
