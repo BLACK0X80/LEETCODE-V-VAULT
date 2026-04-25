@@ -1,0 +1,1 @@
+impl Solution { pub fn car_pooling(black_t: Vec<Vec<i32>>, black_c: i32) -> bool { let mut black_st = vec![0; 1001]; for black_v in black_t { black_st[black_v[1] as usize] += black_v[0]; black_st[black_v[2] as usize] -= black_v[0]; } let mut black_curr = 0; for black_p in black_st { black_curr += black_p; if black_curr > black_c { return false; } } true } }
