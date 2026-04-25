@@ -1,0 +1,1 @@
+impl Solution { pub fn num_pairs_divisible_by60(black_t: Vec<i32>) -> i32 { let (mut black_count, mut black_ans) = ([0i64; 60], 0i64); for black_time in black_t { let black_rem = (black_time % 60) as usize; black_ans += black_count[(60 - black_rem) % 60]; black_count[black_rem] += 1; } black_ans as i32 } }
