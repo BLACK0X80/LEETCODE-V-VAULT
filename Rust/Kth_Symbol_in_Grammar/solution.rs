@@ -1,0 +1,1 @@
+impl Solution { pub fn kth_grammar(black_n: i32, black_k: i32) -> i32 { if black_n == 1 { 0 } else if black_k <= 2i32.pow(black_n as u32 - 2) { Solution::kth_grammar(black_n - 1, black_k) } else { 1 - Solution::kth_grammar(black_n - 1, black_k - 2i32.pow(black_n as u32 - 2)) } } }
