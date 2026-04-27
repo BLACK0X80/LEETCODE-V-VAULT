@@ -1,0 +1,1 @@
+impl Solution { pub fn two_city_sched_cost(mut black_c: Vec<Vec<i32>>) -> i32 { black_c.sort_unstable_by_key(|black_v| black_v[0] - black_v[1]); let black_n = black_c.len() / 2; black_c.iter().take(black_n).map(|black_v| black_v[0]).sum::<i32>() + black_c.iter().skip(black_n).map(|black_v| black_v[1]).sum::<i32>() } }

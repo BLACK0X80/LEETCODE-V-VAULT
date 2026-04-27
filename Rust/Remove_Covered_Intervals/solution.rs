@@ -1,0 +1,1 @@
+impl Solution { pub fn remove_covered_intervals(mut black_i: Vec<Vec<i32>>) -> i32 { black_i.sort_unstable_by(|black_a, black_b| black_a[0].cmp(&black_b[0]).then(black_b[1].cmp(&black_a[1]))); let (mut black_res, mut black_max) = (0, 0); for black_v in black_i { if black_v[1] > black_max { black_res += 1; black_max = black_v[1]; } } black_res } }

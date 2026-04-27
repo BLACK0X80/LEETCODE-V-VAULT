@@ -1,0 +1,1 @@
+impl Solution { pub fn num_rescue_boats(mut black_p: Vec<i32>, black_l: i32) -> i32 { black_p.sort_unstable(); let (mut black_i, mut black_j, mut black_b) = (0, black_p.len() as i32 - 1, 0); while black_i <= black_j { if black_p[black_i as usize] + black_p[black_j as usize] <= black_l { black_i += 1; } black_j -= 1; black_b += 1; } black_b } }
