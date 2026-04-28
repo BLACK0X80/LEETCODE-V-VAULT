@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_element_after_decrementing_and_rearranging(mut black_a: Vec<i32>) -> i32 { black_a.sort_unstable(); let mut black_curr = 0; for black_x in black_a { black_curr = (black_curr + 1).min(black_x); } black_curr } }

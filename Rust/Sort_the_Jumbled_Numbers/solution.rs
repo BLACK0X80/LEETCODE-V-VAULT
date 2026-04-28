@@ -1,0 +1,1 @@
+impl Solution { pub fn sort_jumbled(black_m: Vec<i32>, mut black_n: Vec<i32>) -> Vec<i32> { black_n.sort_by_key(|&black_x| { if black_x == 0 { black_m[0] } else { let (mut black_val, mut black_res, mut black_p) = (black_x, 0, 1); while black_val > 0 { black_res += black_m[(black_val % 10) as usize] * black_p; black_val /= 10; black_p *= 10; } black_res } }); black_n } }

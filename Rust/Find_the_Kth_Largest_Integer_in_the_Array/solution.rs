@@ -1,0 +1,1 @@
+impl Solution { pub fn kth_largest_number(mut black_n: Vec<String>, black_k: i32) -> String { black_n.sort_unstable_by(|black_a, black_b| black_b.len().cmp(&black_a.len()).then_with(|| black_b.cmp(black_a))); black_n[black_k as usize - 1].clone() } }

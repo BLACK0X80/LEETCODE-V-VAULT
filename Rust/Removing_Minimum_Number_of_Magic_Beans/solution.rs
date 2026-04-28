@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_removal(mut black_b: Vec<i32>) -> i64 { black_b.sort_unstable(); let (black_n, black_sum) = (black_b.len() as i64, black_b.iter().map(|&black_x| black_x as i64).sum::<i64>()); black_sum - black_b.iter().enumerate().map(|(black_i, &black_v)| black_v as i64 * (black_n - black_i as i64)).max().unwrap_or(0) } }

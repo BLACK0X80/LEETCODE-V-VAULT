@@ -1,0 +1,1 @@
+impl Solution { pub fn min_pair_sum(mut black_n: Vec<i32>) -> i32 { black_n.sort_unstable(); let black_len = black_n.len(); (0..black_len / 2).map(|black_i| black_n[black_i] + black_n[black_len - 1 - black_i]).max().unwrap() } }
