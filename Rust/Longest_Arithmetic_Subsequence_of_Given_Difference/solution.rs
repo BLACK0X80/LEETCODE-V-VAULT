@@ -1,0 +1,1 @@
+use std::collections::HashMap;impl Solution { pub fn longest_subsequence(black_a: Vec<i32>, black_d: i32) -> i32 { let mut black_dp = HashMap::new(); black_a.into_iter().map(|black_x| { let black_v = *black_dp.get(&(black_x - black_d)).unwrap_or(&0) + 1; black_dp.insert(black_x, black_v); black_v }).max().unwrap_or(0) } }

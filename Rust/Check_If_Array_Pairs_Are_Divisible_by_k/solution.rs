@@ -1,0 +1,1 @@
+impl Solution { pub fn can_arrange(arr: Vec<i32>, k: i32) -> bool { let mut black_freq = vec![0; k as usize]; for black_x in arr { black_freq[(((black_x % k) + k) % k) as usize] += 1; } (1..(k as usize + 1) / 2).all(|black_i| black_freq[black_i] == black_freq[k as usize - black_i]) && black_freq[0] % 2 == 0 } }

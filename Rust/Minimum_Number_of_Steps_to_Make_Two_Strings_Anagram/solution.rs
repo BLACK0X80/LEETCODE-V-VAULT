@@ -1,0 +1,1 @@
+impl Solution { pub fn min_steps(black_s: String, black_t: String) -> i32 { let mut black_cnt = [0; 26]; black_s.bytes().for_each(|black_b| black_cnt[(black_b - b'a') as usize] += 1); black_t.bytes().for_each(|black_b| black_cnt[(black_b - b'a') as usize] -= 1); black_cnt.iter().filter(|&&black_c| black_c > 0).sum() } }

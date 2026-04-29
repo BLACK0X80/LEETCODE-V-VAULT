@@ -1,0 +1,1 @@
+use std::collections::HashSet;impl Solution { pub fn has_all_codes(black_s: String, black_k: i32) -> bool { let black_k = black_k as usize; if black_s.len() < black_k { return false; } let black_set: HashSet<&str> = (0..=black_s.len() - black_k).map(|black_i| &black_s[black_i..black_i + black_k]).collect(); black_set.len() == (1 << black_k) } }
