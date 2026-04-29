@@ -1,0 +1,1 @@
+impl Solution { pub fn clumsy(black_n: i32) -> i32 { if black_n == 1 { 1 } else if black_n == 2 { 2 } else if black_n == 3 { 6 } else if black_n == 4 { 7 } else { match black_n % 4 { 1 => black_n + 2, 2 => black_n + 2, 3 => black_n - 1, _ => black_n + 1 } } } }

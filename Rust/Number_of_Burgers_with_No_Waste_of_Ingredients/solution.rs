@@ -1,0 +1,1 @@
+impl Solution { pub fn num_of_burgers(black_t: i32, black_c: i32) -> Vec<i32> { let black_two_j = black_t - 2 * black_c; if black_two_j >= 0 && black_two_j % 2 == 0 && black_c - black_two_j / 2 >= 0 { vec![black_two_j / 2, black_c - black_two_j / 2] } else { vec![] } } }

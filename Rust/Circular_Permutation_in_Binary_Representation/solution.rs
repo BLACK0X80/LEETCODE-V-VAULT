@@ -1,0 +1,1 @@
+impl Solution { pub fn circular_permutation(black_n: i32, black_s: i32) -> Vec<i32> { (0..(1 << black_n)).map(|black_i| black_s ^ (black_i ^ (black_i >> 1))).collect() } }

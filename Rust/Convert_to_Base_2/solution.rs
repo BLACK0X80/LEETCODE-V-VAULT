@@ -1,0 +1,1 @@
+impl Solution { pub fn base_neg2(mut black_n: i32) -> String { if black_n == 0 { return "0".to_string(); } let mut black_res = String::new(); while black_n != 0 { black_res.push_str(&(black_n.rem_euclid(2)).to_string()); black_n = -(black_n >> 1); } black_res.chars().rev().collect() } }

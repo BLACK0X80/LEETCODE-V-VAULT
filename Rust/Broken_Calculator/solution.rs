@@ -1,0 +1,1 @@
+impl Solution { pub fn broken_calc(black_s: i32, mut black_t: i32) -> i32 { let mut black_a = 0; while black_t > black_s { black_a += 1; if black_t % 2 == 1 { black_t += 1; } else { black_t /= 2; } } black_a + black_s - black_t } }

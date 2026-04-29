@@ -1,0 +1,1 @@
+impl Solution { pub fn angle_clock(black_h: i32, black_m: i32) -> f64 { let black_ha = (black_h % 12) as f64 * 30.0 + black_m as f64 * 0.5; let black_ma = black_m as f64 * 6.0; let black_diff = (black_ha - black_ma).abs(); black_diff.min(360.0 - black_diff) } }
