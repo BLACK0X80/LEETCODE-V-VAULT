@@ -3,14 +3,14 @@
 <img src="https://capsule-render.vercel.app/api?type=transparent&color=gradient&customColorList=6,11,20&height=120&section=header&text=LEETCODE-V-VAULT&fontSize=70&fontColor=ffffff&fontAlignY=50" width="100%"/>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=22&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&multiline=true&width=800&height=100&lines=1%2C700+Problems+Solved+%7C+Global+Rank+%235%2C099;Rust+%7C+Python+%7C+C%2B%2B+%7C+Auto-Synced+Daily" alt="Typing Animation" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=22&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&multiline=true&width=800&height=100&lines=1%2C755+Problems+Solved+%7C+Global+Rank+%233%2C887;Rust+%7C+Python+%7C+C%2B%2B+%7C+Auto-Synced+Daily" alt="Typing Animation" />
 </p>
 
 <br/>
 
 [![LeetCode](https://img.shields.io/badge/LeetCode-BBLACK0X80-FFFFFF?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/BBLACK0X80/)
-[![Rank](https://img.shields.io/badge/Global_Rank-%235%2C099-333333?style=for-the-badge&logo=trophy&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
-[![Solved](https://img.shields.io/badge/Solved-1%2C700%2F3%2C907-111111?style=for-the-badge&logo=checkmarx&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
+[![Rank](https://img.shields.io/badge/Global_Rank-%233%2C887-333333?style=for-the-badge&logo=trophy&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
+[![Solved](https://img.shields.io/badge/Solved-1%2C755%2F3%2C907-111111?style=for-the-badge&logo=checkmarx&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
 [![Hard](https://img.shields.io/badge/Hard-746%2F924-CC0000?style=for-the-badge&logo=target&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
 
 [![Rust](https://img.shields.io/badge/Rust-Primary_Language-000000?style=for-the-badge&logo=rust&logoColor=white)](./Rust)
@@ -43,8 +43,8 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Metric | Value |
 |:------:|:-----:|
-| Global Rank | **#5,099** |
-| Problems Solved | **1,700 / 3,907** |
+| Global Rank | **#3,887** |
+| Problems Solved | **1,755 / 3,907** |
 | Easy | 79 / 938 |
 | Medium | 538 / 2,045 |
 | Hard | **746 / 924** |
@@ -72,7 +72,7 @@ A self-syncing archive of every accepted LeetCode solution — automatically fet
 
 | Metric | Value | Standing |
 |:------:|:-----:|:--------:|
-| Global Rank | **#5,099** | Top 0.25% worldwide |
+| Global Rank | **#3,887** | Top 0.25% worldwide |
 | Hard Solved | **746 / 924** | 80.7% completion |
 | Acceptance Rate | **86.48%** | Precision over volume |
 
@@ -256,7 +256,7 @@ SOFTWARE.
 
 **Engineered by BLACK - 2026**
 
-#5,099 worldwide. 746 Hards. All in Rust.*
+#3,887 worldwide. 746 Hards. All in Rust.*
 
 [![Profile](https://img.shields.io/badge/LeetCode_Profile-BBLACK0X80-000000?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/BBLACK0X80/)
 
