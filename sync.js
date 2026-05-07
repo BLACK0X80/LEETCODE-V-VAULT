@@ -87,52 +87,18 @@ function blackUpdateReadme(blackRank, blackTotal) {
     let blackContent = fs.readFileSync(blackReadmePath, 'utf8');
     const blackOriginal = blackContent;
 
-    const blackRankStr   = blackRank.toLocaleString('en-US');
-    const blackTotalStr  = blackTotal.toLocaleString('en-US');
-    const blackRankEnc   = blackRankStr.replace(/,/g, '%2C');
-    const blackTotalEnc  = blackTotalStr.replace(/,/g, '%2C');
+    const blackRankStr  = blackRank.toLocaleString('en-US');
+    const blackTotalStr = blackTotal.toLocaleString('en-US');
+    const blackRankEnc  = blackRankStr.replace(/,/g, '%2C');
+    const blackTotalEnc = blackTotalStr.replace(/,/g, '%2C');
 
-    // badge: Global_Rank-%239%2C645-
-    blackContent = blackContent.replace(
-        /(Global_Rank-%23)[\d%2C]+(-)/g,
-        `$1${blackRankEnc}$2`
-    );
-
-    // badge: Solved-1%2C363%2F  or  Solved-1%2C363/
-    blackContent = blackContent.replace(
-        /(Solved-)[\d%2C]+(%2F|\/)/g,
-        `$1${blackTotalEnc}$2`
-    );
-
-    // typing svg: lines=1%2C363+Problems+Solved+%7C+Global+Rank+%239%2C645
-    blackContent = blackContent.replace(
-        /(lines=)[\d%2C]+(\+Problems[^;]*%23)[\d%2C]+/g,
-        `$1${blackTotalEnc}$2${blackRankEnc}`
-    );
-
-    // stats table: | Global Rank | **#9,645** |
-    blackContent = blackContent.replace(
-        /(\| Global Rank \| )\*\*#[\d,]+\*\*/g,
-        `$1**#${blackRankStr}**`
-    );
-
-    // stats table: | Problems Solved | **1,363 / 3,907** |
-    blackContent = blackContent.replace(
-        /(\| Problems Solved \| )\*\*[\d,]+ \/ [\d,]+\*\*/g,
-        `$1**${blackTotalStr} / 3,907**`
-    );
-
-    // global standing table: | **#9,645** | Top ...
-    blackContent = blackContent.replace(
-        /(\| \*\*#)[\d,]+(\*\* \| Top)/g,
-        `$1${blackRankStr}$2`
-    );
-
-    // footer: #9,645 worldwide
-    blackContent = blackContent.replace(
-        /(#)[\d,]+( worldwide)/g,
-        `$1${blackRankStr}$2`
-    );
+    blackContent = blackContent.replace(/(Global_Rank-%23)[\d%2C]+(-)/g, `$1${blackRankEnc}$2`);
+    blackContent = blackContent.replace(/(Solved-)[\d%2C]+(%2F|\/)/g, `$1${blackTotalEnc}$2`);
+    blackContent = blackContent.replace(/(lines=)[\d%2C]+(\+Problems[^;]*%23)[\d%2C]+/g, `$1${blackTotalEnc}$2${blackRankEnc}`);
+    blackContent = blackContent.replace(/(\| Global Rank \| )\*\*#[\d,]+\*\*/g, `$1**#${blackRankStr}**`);
+    blackContent = blackContent.replace(/(\| Problems Solved \| )\*\*[\d,]+ \/ [\d,]+\*\*/g, `$1**${blackTotalStr} / 3,907**`);
+    blackContent = blackContent.replace(/(\| \*\*#)[\d,]+(\*\* \| Top)/g, `$1${blackRankStr}$2`);
+    blackContent = blackContent.replace(/(#)[\d,]+( worldwide)/g, `$1${blackRankStr}$2`);
 
     if (blackContent === blackOriginal) {
         console.log('README.md: nothing changed (rank/solved patterns not found).');
@@ -241,10 +207,16 @@ function blackBuildReadme(blackQuestion, blackCode, blackLang) {
     ].filter(l => l !== null).join('\n');
 }
 
-function blackGetFolder(blackBaseFolder, blackCount) {
-    if (blackCount <= BLACK_OVERFLOW_LIMIT) return blackBaseFolder;
-    const blackPart = Math.ceil(blackCount / BLACK_OVERFLOW_LIMIT);
-    return `${blackBaseFolder}_${blackPart}`;
+function blackGetFolder(blackBaseFolder) {
+    let blackPart = 1;
+    while (true) {
+        const blackFolderName = blackPart === 1 ? blackBaseFolder : `${blackBaseFolder}_${blackPart}`;
+        const blackFolderPath = path.join(__dirname, blackFolderName);
+        if (!fs.existsSync(blackFolderPath)) return blackFolderName;
+        const blackCount = fs.readdirSync(blackFolderPath).length;
+        if (blackCount < BLACK_OVERFLOW_LIMIT) return blackFolderName;
+        blackPart++;
+    }
 }
 
 function blackVerifyFile(blackFilePath) {
@@ -270,19 +242,14 @@ async function blackRun() {
     }
 
     const blackAccepted = await blackFetchAllAccepted();
-    const blackLangCounters = {};
     let blackProcessed = 0;
     const blackTotalProblems = blackAccepted.size;
 
     for (const [blackSlug, blackSub] of blackAccepted) {
         blackProcessed++;
         const blackConf = BLACK_LANG_CONFIG[blackSub.lang] || { folder: blackSub.lang.toUpperCase(), ext: 'txt' };
-        const blackBaseFolder = blackConf.folder;
 
-        if (!blackLangCounters[blackBaseFolder]) blackLangCounters[blackBaseFolder] = 0;
-        blackLangCounters[blackBaseFolder]++;
-
-        const blackActiveFolder = blackGetFolder(blackBaseFolder, blackLangCounters[blackBaseFolder]);
+        const blackActiveFolder = blackGetFolder(blackConf.folder);
         const blackSafeTitle = blackSanitize(blackSub.title);
         const blackProbDir = path.join(__dirname, blackActiveFolder, blackSafeTitle);
         const blackCodePath = path.join(blackProbDir, `solution.${blackConf.ext}`);
