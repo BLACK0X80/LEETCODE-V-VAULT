@@ -1,0 +1,1 @@
+impl Solution { pub fn min_stone_sum(piles: Vec<i32>, k: i32) -> i32 { let mut black_pq = std::collections::BinaryHeap::from(piles); for _ in 0..k { let mut black_max = black_pq.pop().unwrap(); black_max -= black_max / 2; black_pq.push(black_max); } black_pq.iter().sum() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn least_bricks(black_w: Vec<Vec<i32>>) -> i32 { let mut black_m = std::collections::HashMap::new(); for black_r in &black_w { let mut black_p = 0; for i in 0..black_r.len()-1 { black_p += black_r[i]; *black_m.entry(black_p).or_insert(0) += 1; } } black_w.len() as i32 - *black_m.values().max().unwrap_or(&0) } }

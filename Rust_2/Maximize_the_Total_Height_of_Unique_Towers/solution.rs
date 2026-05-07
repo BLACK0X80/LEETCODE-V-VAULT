@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_total_sum(mut black_h: Vec<i32>) -> i64 { black_h.sort_unstable_by(|a, b| b.cmp(a)); let (mut black_curr, mut black_sum) = (i32::MAX, 0i64); for h in black_h { black_curr = black_curr.min(h); if black_curr <= 0 { return -1; } black_sum += black_curr as i64; black_curr -= 1; } black_sum } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn max_product(mut nums: Vec<i32>) -> i64 { nums.sort_unstable(); let black_n = nums.len(); let black_p1 = (nums[0] as i64 * nums[1] as i64).abs(); let black_p2 = (nums[black_n - 1] as i64 * nums[black_n - 2] as i64).abs(); let black_p3 = (nums[0] as i64 * nums[black_n - 1] as i64).abs(); black_p1.max(black_p2).max(black_p3) * 100000i64 } }

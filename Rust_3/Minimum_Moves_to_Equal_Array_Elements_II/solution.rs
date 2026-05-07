@@ -1,0 +1,1 @@
+impl Solution { pub fn min_moves2(mut black: Vec<i32>) -> i32 { let black_m = { let black_l = black.len(); *black.select_nth_unstable(black_l / 2).1 }; black.iter().map(|&black_x| (black_x - black_m).abs()).sum() } }

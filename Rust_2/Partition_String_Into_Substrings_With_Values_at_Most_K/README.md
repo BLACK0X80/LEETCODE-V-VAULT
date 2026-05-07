@@ -1,0 +1,70 @@
+# Partition String Into Substrings With Values at Most K
+
+**Difficulty:** Medium
+**Tags:** String, Dynamic Programming, Greedy
+
+---
+
+## Problem
+
+<p>You are given a string <code>s</code> consisting of digits from <code>1</code> to <code>9</code> and an integer <code>k</code>.</p>
+
+<p>A partition of a string <code>s</code> is called <strong>good</strong> if:</p>
+
+<ul>
+	<li>Each digit of <code>s</code> is part of <strong>exactly</strong> one substring.</li>
+	<li>The value of each substring is less than or equal to <code>k</code>.</li>
+</ul>
+
+<p>Return <em>the <strong>minimum</strong> number of substrings in a <strong>good</strong> partition of</em> <code>s</code>. If no <strong>good</strong> partition of <code>s</code> exists, return <code>-1</code>.</p>
+
+<p><b>Note</b> that:</p>
+
+<ul>
+	<li>The <strong>value</strong> of a string is its result when interpreted as an integer. For example, the value of <code>&quot;123&quot;</code> is <code>123</code> and the value of <code>&quot;1&quot;</code> is <code>1</code>.</li>
+	<li>A <strong>substring</strong> is a contiguous sequence of characters within a string.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;165462&quot;, k = 60
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> We can partition the string into substrings &quot;16&quot;, &quot;54&quot;, &quot;6&quot;, and &quot;2&quot;. Each substring has a value less than or equal to k = 60.
+It can be shown that we cannot partition the string into less than 4 substrings.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;238182&quot;, k = 5
+<strong>Output:</strong> -1
+<strong>Explanation:</strong> There is no good partition for this string.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s[i]</code> is a digit from <code>&#39;1&#39;</code> to <code>&#39;9&#39;</code>.</li>
+	<li><code>1 &lt;= k &lt;= 10<sup>9</sup></code></li>
+</ul>
+
+<p>&nbsp;</p>
+<style type="text/css">.spoilerbutton {display:block; border:dashed; padding: 0px 0px; margin:10px 0px; font-size:150%; font-weight: bold; color:#000000; background-color:cyan; outline:0; 
+}
+.spoiler {overflow:hidden;}
+.spoiler > div {-webkit-transition: all 0s ease;-moz-transition: margin 0s ease;-o-transition: all 0s ease;transition: margin 0s ease;}
+.spoilerbutton[value="Show Message"] + .spoiler > div {margin-top:-500%;}
+.spoilerbutton[value="Hide Message"] + .spoiler {padding:5px;}
+</style>
+
+
+
+## Solution
+
+```rust
+impl Solution { pub fn minimum_partition(s: String, k: i32) -> i32 { let (mut black_cnt, mut black_val, black_k) = (1, 0i64, k as i64); for &black_b in s.as_bytes() { let black_digit = (black_b - b'0') as i64; if black_digit > black_k { return -1; } if black_val * 10 + black_digit <= black_k { black_val = black_val * 10 + black_digit; } else { black_cnt += 1; black_val = black_digit; } } black_cnt } }
+```

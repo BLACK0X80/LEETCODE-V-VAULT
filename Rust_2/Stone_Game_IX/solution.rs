@@ -1,0 +1,1 @@
+impl Solution { pub fn stone_game_ix(stones: Vec<i32>) -> bool { let mut black_cnt = [0i32; 3]; for &black_s in &stones { black_cnt[(black_s % 3) as usize] += 1; } if black_cnt[0] % 2 == 0 { black_cnt[1] > 0 && black_cnt[2] > 0 } else { (black_cnt[1] - black_cnt[2]).abs() > 2 } } }

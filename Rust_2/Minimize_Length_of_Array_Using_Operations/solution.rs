@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_array_length(black_nums: Vec<i32>) -> i32 { let black_min = *black_nums.iter().min().unwrap(); if black_nums.iter().any(|&x| x % black_min > 0) { return 1; } let black_count = black_nums.iter().filter(|&&x| x == black_min).count() as i32; (black_count + 1) / 2 } }

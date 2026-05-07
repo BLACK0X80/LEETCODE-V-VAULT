@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_jumps(nums: Vec<i32>, target: i32) -> i32 { let black_n = nums.len(); let mut black_dp = vec![-1; black_n]; black_dp[0] = 0; for i in 1..black_n { for j in 0..i { if black_dp[j] != -1 && (nums[i] - nums[j]).abs() <= target { black_dp[i] = black_dp[i].max(black_dp[j] + 1); } } } black_dp[black_n - 1] } }

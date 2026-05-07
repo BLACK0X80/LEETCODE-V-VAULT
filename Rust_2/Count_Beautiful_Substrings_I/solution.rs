@@ -1,0 +1,1 @@
+impl Solution { pub fn beautiful_substrings(s: String, k: i32) -> i32 { let (mut black_ans, b) = (0, s.as_bytes()); for i in 0..b.len() { let (mut v, mut c) = (0, 0); for j in i..b.len() { if matches!(b[j], b'a' | b'e' | b'i' | b'o' | b'u') { v += 1; } else { c += 1; } if v == c && (v * c) % k == 0 { black_ans += 1; } } } black_ans } }

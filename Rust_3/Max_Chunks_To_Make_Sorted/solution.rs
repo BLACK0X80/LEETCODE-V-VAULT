@@ -1,0 +1,1 @@
+impl Solution { pub fn max_chunks_to_sorted(black_arr: Vec<i32>) -> i32 { let (mut black_ans, mut black_max) = (0, 0); for (black_i, &black_v) in black_arr.iter().enumerate() { black_max = black_max.max(black_v); if black_max == black_i as i32 { black_ans += 1; } } black_ans } }

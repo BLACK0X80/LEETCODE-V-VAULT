@@ -1,0 +1,1 @@
+impl Solution { pub fn count_homogenous(s: String) -> i32 { let (mut black_res, mut black_cnt, mut black_prev, black_mod) = (0i64, 0i64, ' ', 1_000_000_007i64); for black_c in s.chars() { if black_c == black_prev { black_cnt += 1; } else { black_cnt = 1; black_prev = black_c; } black_res = (black_res + black_cnt) % black_mod; } black_res as i32 } }

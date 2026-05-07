@@ -1,0 +1,1 @@
+impl Solution { pub fn mice_and_cheese(r1: Vec<i32>, r2: Vec<i32>, k: i32) -> i32 { let mut black_diff: Vec<i32> = r1.iter().zip(&r2).map(|(black_a, black_b)| black_a - black_b).collect(); black_diff.sort_unstable_by(|black_a, black_b| black_b.cmp(black_a)); r2.iter().sum::<i32>() + black_diff.into_iter().take(k as usize).sum::<i32>() } }

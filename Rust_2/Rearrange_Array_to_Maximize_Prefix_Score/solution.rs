@@ -1,0 +1,1 @@
+impl Solution { pub fn max_score(mut black_n: Vec<i32>) -> i32 { black_n.sort_unstable_by(|black_a, black_b| black_b.cmp(black_a)); let mut black_s = 0i64; black_n.into_iter().take_while(|&black_x| { black_s += black_x as i64; black_s > 0 }).count() as i32 } }

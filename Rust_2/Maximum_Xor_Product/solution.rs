@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_xor_product(mut a: i64, mut b: i64, n: i32) -> i32 { let black_m = 1_000_000_007i64; for i in (0..n).rev() { let bit = 1i64 << i; if (a & bit) == (b & bit) { a |= bit; b |= bit; } else if a > b { b |= bit; a &= !bit; } else { a |= bit; b &= !bit; } } ((a % black_m) * (b % black_m) % black_m) as i32 } }

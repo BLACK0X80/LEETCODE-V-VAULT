@@ -1,0 +1,78 @@
+# Maximum Palindromes After Operations
+
+**Difficulty:** Medium
+**Tags:** Array, Hash Table, String, Greedy, Sorting, Counting
+
+---
+
+## Problem
+
+<p>You are given a <strong>0-indexed</strong> string array <code>words</code> having length <code>n</code> and containing <strong>0-indexed</strong> strings.</p>
+
+<p>You are allowed to perform the following operation <strong>any</strong> number of times (<strong>including</strong> <strong>zero</strong>):</p>
+
+<ul>
+	<li>Choose integers <code>i</code>, <code>j</code>, <code>x</code>, and <code>y</code> such that <code>0 &lt;= i, j &lt; n</code>, <code>0 &lt;= x &lt; words[i].length</code>, <code>0 &lt;= y &lt; words[j].length</code>, and <strong>swap</strong> the characters <code>words[i][x]</code> and <code>words[j][y]</code>.</li>
+</ul>
+
+<p>Return <em>an integer denoting the <strong>maximum</strong> number of <span data-keyword="palindrome-string">palindromes</span> </em><code>words</code><em> can contain, after performing some operations.</em></p>
+
+<p><strong>Note:</strong> <code>i</code> and <code>j</code> may be equal during an operation.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;abbb&quot;,&quot;ba&quot;,&quot;aa&quot;]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> In this example, one way to get the maximum number of palindromes is:
+Choose i = 0, j = 1, x = 0, y = 0, so we swap words[0][0] and words[1][0]. words becomes [&quot;bbbb&quot;,&quot;aa&quot;,&quot;aa&quot;].
+All strings in words are now palindromes.
+Hence, the maximum number of palindromes achievable is 3.</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;abc&quot;,&quot;ab&quot;]
+<strong>Output:</strong> 2
+<strong>Explanation: </strong>In this example, one way to get the maximum number of palindromes is: 
+Choose i = 0, j = 1, x = 1, y = 0, so we swap words[0][1] and words[1][0]. words becomes [&quot;aac&quot;,&quot;bb&quot;].
+Choose i = 0, j = 0, x = 1, y = 2, so we swap words[0][1] and words[0][2]. words becomes [&quot;aca&quot;,&quot;bb&quot;].
+Both strings are now palindromes.
+Hence, the maximum number of palindromes achievable is 2.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;cd&quot;,&quot;ef&quot;,&quot;a&quot;]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong> In this example, there is no need to perform any operation.
+There is one palindrome in words &quot;a&quot;.
+It can be shown that it is not possible to get more than one palindrome after any number of operations.
+Hence, the answer is 1.</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= words.length &lt;= 1000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 100</code></li>
+	<li><code>words[i]</code> consists only of lowercase English letters.</li>
+</ul>
+
+
+## Hints
+
+1. We can redistribute all the letters freely among the words.
+2. Calculate the frequency of each letter and total the number of matching letter pairs that can be formed from the letters, i.e., <code>total = sum(freq[ch] / 2)</code> for all <code>'a' <= ch <= 'z'</code>.
+3. We can greedily try making palindromes from <code>words[i]</code> with the smallest length to <code>words[i]</code> with the longest length.
+4. For the current index, <code>i</code>, we try to make <code>words[i]</code> a palindrome. We need <code>len(words[i]) / 2</code> matching character pairs, and the letter in the middle (if it exists) can be freely chosen afterward.
+5. We can check if we have enough pairs for index <code>i</code>; if we do, we increase the number of palindromes we can make and decrease the number of pairs we have. Otherwise, we end the loop at this index.
+6. The answer is the number of palindromes we were able to make in the end.
+
+## Solution
+
+```rust
+impl Solution { pub fn max_palindromes_after_operations(black_w: Vec<String>) -> i32 { let mut black_f = vec![0; 26]; black_w.iter().for_each(|w| w.bytes().for_each(|b| black_f[(b - b'a') as usize] += 1)); let (mut black_p, mut black_ans) = (black_f.into_iter().map(|f| f / 2).sum::<i32>(), 0); let mut black_l: Vec<usize> = black_w.iter().map(|w| w.len()).collect(); black_l.sort_unstable(); for l in black_l { let black_req = (l as i32) / 2; if black_p >= black_req { black_p -= black_req; black_ans += 1; } } black_ans } }
+```

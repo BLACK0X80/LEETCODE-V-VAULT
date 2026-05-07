@@ -1,0 +1,77 @@
+# Eat Pizzas!
+
+**Difficulty:** Medium
+**Tags:** Array, Greedy, Sorting
+
+---
+
+## Problem
+
+<p>You are given an integer array <code>pizzas</code> of size <code>n</code>, where <code>pizzas[i]</code> represents the weight of the <code>i<sup>th</sup></code> pizza. Every day, you eat <strong>exactly</strong> 4 pizzas. Due to your incredible metabolism, when you eat pizzas of weights <code>W</code>, <code>X</code>, <code>Y</code>, and <code>Z</code>, where <code>W &lt;= X &lt;= Y &lt;= Z</code>, you gain the weight of only 1 pizza!</p>
+
+<ul>
+	<li>On <strong><span style="box-sizing: border-box; margin: 0px; padding: 0px;">odd-numbered</span></strong> days <strong>(1-indexed)</strong>, you gain a weight of <code>Z</code>.</li>
+	<li>On <strong>even-numbered</strong> days, you gain a weight of <code>Y</code>.</li>
+</ul>
+
+<p>Find the <strong>maximum</strong> total weight you can gain by eating <strong>all</strong> pizzas optimally.</p>
+
+<p><strong>Note</strong>: It is guaranteed that <code>n</code> is a multiple of 4, and each pizza can be eaten only once.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pizzas = [1,2,3,4,5,6,7,8]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">14</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+	<li>On day 1, you eat pizzas at indices <code>[1, 2, 4, 7] = [2, 3, 5, 8]</code>. You gain a weight of 8.</li>
+	<li>On day 2, you eat pizzas at indices <code>[0, 3, 5, 6] = [1, 4, 6, 7]</code>. You gain a weight of 6.</li>
+</ul>
+
+<p>The total weight gained after eating all the pizzas is <code>8 + 6 = 14</code>.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pizzas = [2,1,1,1,1,1,1,1]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">3</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+	<li>On day 1, you eat pizzas at indices <code>[4, 5, 6, 0] = [1, 1, 1, 2]</code>. You gain a weight of 2.</li>
+	<li>On day 2, you eat pizzas at indices <code>[1, 2, 3, 7] = [1, 1, 1, 1]</code>. You gain a weight of 1.</li>
+</ul>
+
+<p>The total weight gained after eating all the pizzas is <code>2 + 1 = 3.</code></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>4 &lt;= n == pizzas.length &lt;= 2 * 10<sup><span style="font-size: 10.8333px;">5</span></sup></code></li>
+	<li><code>1 &lt;= pizzas[i] &lt;= 10<sup>5</sup></code></li>
+	<li><code>n</code> is a multiple of 4.</li>
+</ul>
+
+
+## Hints
+
+1. On odd-numbered days, it is optimal to pair the smallest three and the largest one.
+2. On even-numbered days, it is optimal to pair the smallest two and the largest two.
+3. There will be ceil((n / 4) / 2) odd-numbered days. Select pizzas for all odd-numbered days first.
+4. Select the remaining pizzas for the even-numbered days.
+
+## Solution
+
+```rust
+impl Solution { pub fn max_weight(mut black_p: Vec<i32>) -> i64 { black_p.sort_unstable(); let (n, mut black_ans) = (black_p.len(), 0i64); let (odd, even) = ((n / 4 + 1) / 2, (n / 4) / 2); for i in 0..odd { black_ans += black_p[n - 1 - i] as i64; } for i in 0..even { black_ans += black_p[n - 1 - odd - 2 * i - 1] as i64; } black_ans } }
+```

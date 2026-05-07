@@ -1,0 +1,1 @@
+impl Solution { pub fn count_points(points: Vec<Vec<i32>>, queries: Vec<Vec<i32>>) -> Vec<i32> { queries.iter().map(|black_q| points.iter().filter(|&black_p| (black_p[0] - black_q[0]).pow(2) + (black_p[1] - black_q[1]).pow(2) <= black_q[2].pow(2)).count() as i32).collect() } }

@@ -1,0 +1,2 @@
+use std::rc::Rc; use std::cell::RefCell;
+impl Solution { pub fn distribute_coins(root: Option<Rc<RefCell<TreeNode>>>) -> i32 { let mut black_ans = 0; Self::black_dfs(&root, &mut black_ans); black_ans } fn black_dfs(node: &Option<Rc<RefCell<TreeNode>>>, black_ans: &mut i32) -> i32 { if let Some(black_n) = node { let (black_l, black_r) = (Self::black_dfs(&black_n.borrow().left, black_ans), Self::black_dfs(&black_n.borrow().right, black_ans)); *black_ans += black_l.abs() + black_r.abs(); return black_n.borrow().val + black_l + black_r - 1; } 0 } }

@@ -1,0 +1,72 @@
+# Design Front Middle Back Queue
+
+**Difficulty:** Medium
+**Tags:** Array, Linked List, Design, Queue, Doubly-Linked List, Data Stream
+
+---
+
+## Problem
+
+<p>Design a queue that supports <code>push</code> and <code>pop</code> operations in the front, middle, and back.</p>
+
+<p>Implement the <code>FrontMiddleBack</code> class:</p>
+
+<ul>
+	<li><code>FrontMiddleBack()</code> Initializes the queue.</li>
+	<li><code>void pushFront(int val)</code> Adds <code>val</code> to the <strong>front</strong> of the queue.</li>
+	<li><code>void pushMiddle(int val)</code> Adds <code>val</code> to the <strong>middle</strong> of the queue.</li>
+	<li><code>void pushBack(int val)</code> Adds <code>val</code> to the <strong>back</strong> of the queue.</li>
+	<li><code>int popFront()</code> Removes the <strong>front</strong> element of the queue and returns it. If the queue is empty, return <code>-1</code>.</li>
+	<li><code>int popMiddle()</code> Removes the <strong>middle</strong> element of the queue and returns it. If the queue is empty, return <code>-1</code>.</li>
+	<li><code>int popBack()</code> Removes the <strong>back</strong> element of the queue and returns it. If the queue is empty, return <code>-1</code>.</li>
+</ul>
+
+<p><strong>Notice</strong> that when there are <b>two</b> middle position choices, the operation is performed on the <strong>frontmost</strong> middle position choice. For example:</p>
+
+<ul>
+	<li>Pushing <code>6</code> into the middle of <code>[1, 2, 3, 4, 5]</code> results in <code>[1, 2, <u>6</u>, 3, 4, 5]</code>.</li>
+	<li>Popping the middle from <code>[1, 2, <u>3</u>, 4, 5, 6]</code> returns <code>3</code> and results in <code>[1, 2, 4, 5, 6]</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong>
+[&quot;FrontMiddleBackQueue&quot;, &quot;pushFront&quot;, &quot;pushBack&quot;, &quot;pushMiddle&quot;, &quot;pushMiddle&quot;, &quot;popFront&quot;, &quot;popMiddle&quot;, &quot;popMiddle&quot;, &quot;popBack&quot;, &quot;popFront&quot;]
+[[], [1], [2], [3], [4], [], [], [], [], []]
+<strong>Output:</strong>
+[null, null, null, null, null, 1, 3, 4, 2, -1]
+
+<strong>Explanation:</strong>
+FrontMiddleBackQueue q = new FrontMiddleBackQueue();
+q.pushFront(1);   // [<u>1</u>]
+q.pushBack(2);    // [1, <u>2</u>]
+q.pushMiddle(3);  // [1, <u>3</u>, 2]
+q.pushMiddle(4);  // [1, <u>4</u>, 3, 2]
+q.popFront();     // return 1 -&gt; [4, 3, 2]
+q.popMiddle();    // return 3 -&gt; [4, 2]
+q.popMiddle();    // return 4 -&gt; [2]
+q.popBack();      // return 2 -&gt; []
+q.popFront();     // return -1 -&gt; [] (The queue is empty)
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= val &lt;= 10<sup>9</sup></code></li>
+	<li>At most&nbsp;<code>1000</code>&nbsp;calls will be made to&nbsp;<code>pushFront</code>,&nbsp;<code>pushMiddle</code>,&nbsp;<code>pushBack</code>, <code>popFront</code>, <code>popMiddle</code>, and <code>popBack</code>.</li>
+</ul>
+
+
+## Hints
+
+1. The constraints are low enough for a brute force, single array approach.
+2. For an O(1) per method approach, use 2 double-ended queues: one for the first half and one for the second half.
+
+## Solution
+
+```rust
+use std::collections::VecDeque; struct FrontMiddleBackQueue { black_a: VecDeque<i32>, black_b: VecDeque<i32> } impl FrontMiddleBackQueue { fn new() -> Self { Self { black_a: VecDeque::new(), black_b: VecDeque::new() } } fn black_bal(&mut self) { if self.black_a.len() > self.black_b.len() { self.black_b.push_front(self.black_a.pop_back().unwrap()); } if self.black_b.len() > self.black_a.len() + 1 { self.black_a.push_back(self.black_b.pop_front().unwrap()); } } fn push_front(&mut self, black_v: i32) { self.black_a.push_front(black_v); self.black_bal(); } fn push_middle(&mut self, black_v: i32) { if self.black_a.len() == self.black_b.len() { self.black_b.push_front(black_v); } else { self.black_a.push_back(black_v); } } fn push_back(&mut self, black_v: i32) { self.black_b.push_back(black_v); self.black_bal(); } fn pop_front(&mut self) -> i32 { let black_v = self.black_a.pop_front().or_else(|| self.black_b.pop_front()).unwrap_or(-1); self.black_bal(); black_v } fn pop_middle(&mut self) -> i32 { let black_v = if self.black_a.len() == self.black_b.len() { self.black_a.pop_back().unwrap_or(-1) } else { self.black_b.pop_front().unwrap_or(-1) }; self.black_bal(); black_v } fn pop_back(&mut self) -> i32 { let black_v = self.black_b.pop_back().unwrap_or(-1); self.black_bal(); black_v } }
+```

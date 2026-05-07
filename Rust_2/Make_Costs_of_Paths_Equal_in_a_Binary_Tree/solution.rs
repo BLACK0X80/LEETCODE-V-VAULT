@@ -1,0 +1,1 @@
+impl Solution { pub fn min_increments(n: i32, mut cost: Vec<i32>) -> i32 { let mut black_ans = 0; for i in (1..n as usize / 2).rev().chain(std::iter::once(0)) { let (l, r) = (2 * i + 1, 2 * i + 2); black_ans += (cost[l] - cost[r]).abs(); cost[i] += cost[l].max(cost[r]); } black_ans } }

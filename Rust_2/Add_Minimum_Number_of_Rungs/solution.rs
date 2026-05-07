@@ -1,0 +1,1 @@
+impl Solution { pub fn add_rungs(rungs: Vec<i32>, dist: i32) -> i32 { let (mut black_res, mut black_curr) = (0, 0); for &black_r in &rungs { if black_r - black_curr > dist { black_res += (black_r - black_curr - 1) / dist; } black_curr = black_r; } black_res } }

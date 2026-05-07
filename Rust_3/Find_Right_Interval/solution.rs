@@ -1,0 +1,1 @@
+impl Solution { pub fn find_right_interval(black_i: Vec<Vec<i32>>) -> Vec<i32> { let black_map: std::collections::BTreeMap<i32, i32> = black_i.iter().enumerate().map(|(idx, v)| (v[0], idx as i32)).collect(); black_i.iter().map(|v| black_map.range(v[1]..).next().map_or(-1, |(&_, &idx)| idx)).collect() } }

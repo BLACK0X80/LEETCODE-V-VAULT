@@ -1,0 +1,1 @@
+impl Solution { pub fn first_day_been_in_all_rooms(next_visit: Vec<i32>) -> i32 { let (black_n, black_mod) = (next_visit.len(), 1_000_000_007i64); let mut black_dp = vec![0i64; black_n]; for i in 1..black_n { black_dp[i] = (2 * black_dp[i-1] - black_dp[next_visit[i-1] as usize] + 2 + black_mod) % black_mod; } black_dp[black_n-1] as i32 } }
