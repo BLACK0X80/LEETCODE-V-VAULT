@@ -1,0 +1,1 @@
+impl Solution { pub fn matrix_sum(mut black_n: Vec<Vec<i32>>) -> i32 { black_n.iter_mut().for_each(|black_r| black_r.sort_unstable()); (0..black_n[0].len()).map(|black_j| black_n.iter().map(|black_r| black_r[black_j]).max().unwrap()).sum() } }

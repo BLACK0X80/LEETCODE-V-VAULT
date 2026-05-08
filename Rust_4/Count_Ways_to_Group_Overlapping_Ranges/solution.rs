@@ -1,0 +1,1 @@
+impl Solution { pub fn count_ways(mut black_r: Vec<Vec<i32>>) -> i32 { black_r.sort_unstable(); let (mut black_count, mut black_end) = (0, -1); for black_v in black_r { if black_v[0] > black_end { black_count += 1; } black_end = black_end.max(black_v[1]); } (0..black_count).fold(1, |black_a, _| (black_a * 2) % 1_000_000_007) } }

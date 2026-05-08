@@ -1,0 +1,1 @@
+impl Solution { pub fn xor_queries(arr: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> { let mut black_pre = vec![0; arr.len() + 1]; for i in 0..arr.len() { black_pre[i+1] = black_pre[i] ^ arr[i]; } queries.into_iter().map(|q| black_pre[q[1] as usize + 1] ^ black_pre[q[0] as usize]).collect() } }

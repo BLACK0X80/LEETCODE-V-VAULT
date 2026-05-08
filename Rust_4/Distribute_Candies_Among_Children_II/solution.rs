@@ -1,0 +1,1 @@
+impl Solution { pub fn distribute_candies(n: i32, limit: i32) -> i64 { fn black_c2(x: i64) -> i64 { if x < 0 { 0 } else { (x + 2) * (x + 1) / 2 } } let (black_n, black_l) = (n as i64, limit as i64); black_c2(black_n) - 3 * black_c2(black_n - black_l - 1) + 3 * black_c2(black_n - 2 * black_l - 2) - black_c2(black_n - 3 * black_l - 3) } }

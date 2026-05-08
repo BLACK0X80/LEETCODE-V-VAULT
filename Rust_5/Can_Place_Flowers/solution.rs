@@ -1,0 +1,1 @@
+impl Solution { pub fn can_place_flowers(mut black_f: Vec<i32>, mut black_n: i32) -> bool { for i in 0..black_f.len() { if black_n <= 0 { return true; } if black_f[i] == 0 && (i == 0 || black_f[i-1] == 0) && (i == black_f.len() - 1 || black_f[i+1] == 0) { black_f[i] = 1; black_n -= 1; } } black_n <= 0 } }

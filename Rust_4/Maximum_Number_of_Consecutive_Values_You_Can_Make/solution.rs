@@ -1,0 +1,1 @@
+impl Solution { pub fn get_maximum_consecutive(mut black_c: Vec<i32>) -> i32 { black_c.sort_unstable(); let mut black_res = 1; for black_x in black_c { if black_x > black_res { break; } black_res += black_x; } black_res } }

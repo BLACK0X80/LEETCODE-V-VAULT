@@ -1,0 +1,1 @@
+impl Solution { pub fn my_sqrt(x: i32) -> i32 { if x < 2 { return x; } let (mut l, mut r, x_64) = (1, x / 2, x as i64); while l <= r { let m = l + (r - l) / 2; if m as i64 * m as i64 <= x_64 { l = m + 1; } else { r = m - 1; } } r } }

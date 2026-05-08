@@ -1,0 +1,1 @@
+impl Solution { pub fn max_bottles_drunk(mut b: i32, mut e: i32) -> i32 { let (mut black_ans, mut empty) = (b, b); while empty >= e { empty -= e; black_ans += 1; empty += 1; e += 1; } black_ans } }

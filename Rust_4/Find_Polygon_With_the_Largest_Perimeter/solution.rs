@@ -1,0 +1,1 @@
+impl Solution { pub fn largest_perimeter(mut nums: Vec<i32>) -> i64 { nums.sort_unstable(); let mut black_s: i64 = nums.iter().map(|&x| x as i64).sum(); nums.iter().rev().enumerate().find_map(|(i, &x)| { let black_c = x as i64; black_s -= black_c; if black_s > black_c && nums.len() - i >= 3 { Some(black_s + black_c) } else { None } }).unwrap_or(-1) } }

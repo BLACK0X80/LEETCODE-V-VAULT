@@ -1,0 +1,2 @@
+use std::rc::Rc; use std::cell::RefCell;
+impl Solution { pub fn flip_equiv(r1: Option<Rc<RefCell<TreeNode>>>, r2: Option<Rc<RefCell<TreeNode>>>) -> bool { match (r1, r2) { (None, None) => true, (Some(b1), Some(b2)) if b1.borrow().val == b2.borrow().val => { let (b1_b, b2_b) = (b1.borrow(), b2.borrow()); (Self::flip_equiv(b1_b.left.clone(), b2_b.left.clone()) && Self::flip_equiv(b1_b.right.clone(), b2_b.right.clone())) || (Self::flip_equiv(b1_b.left.clone(), b2_b.right.clone()) && Self::flip_equiv(b1_b.right.clone(), b2_b.left.clone())) } _ => false } } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(k: i32) -> i32 { if k == 1 { return 0; } let mut black_min = k - 1; for i in 1..k { let ops = (i - 1) + (k + i - 1) / i - 1; if ops < black_min { black_min = ops; } if i * i > k { break; } } black_min } }

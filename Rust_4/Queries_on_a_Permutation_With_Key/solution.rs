@@ -1,0 +1,1 @@
+impl Solution { pub fn process_queries(queries: Vec<i32>, m: i32) -> Vec<i32> { let mut black_p: Vec<i32> = (1..=m).collect(); queries.into_iter().map(|q| { let pos = black_p.iter().position(|&x| x == q).unwrap(); let val = black_p.remove(pos); black_p.insert(0, val); pos as i32 }).collect() } }

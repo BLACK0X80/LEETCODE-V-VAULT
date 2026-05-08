@@ -1,0 +1,1 @@
+impl Solution { pub fn colored_cells(n: i32) -> i64 { let black_n = n as i64; 2 * black_n * (black_n - 1) + 1 } }

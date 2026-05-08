@@ -1,0 +1,1 @@
+impl Solution { pub fn max_operations(mut black_nums: Vec<i32>, black_k: i32) -> i32 { black_nums.sort(); let (mut i, mut j, mut black_res) = (0, black_nums.len().saturating_sub(1), 0); while i < j { let black_sum = black_nums[i] + black_nums[j]; if black_sum == black_k { black_res += 1; i += 1; j -= 1; } else if black_sum < black_k { i += 1; } else { j -= 1; } } black_res } }

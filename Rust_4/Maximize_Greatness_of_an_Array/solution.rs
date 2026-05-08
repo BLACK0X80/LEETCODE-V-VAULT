@@ -1,0 +1,1 @@
+impl Solution { pub fn maximize_greatness(mut black_n: Vec<i32>) -> i32 { black_n.sort_unstable(); let mut black_i = 0; for &black_x in &black_n { if black_x > black_n[black_i] { black_i += 1; } } black_i as i32 } }

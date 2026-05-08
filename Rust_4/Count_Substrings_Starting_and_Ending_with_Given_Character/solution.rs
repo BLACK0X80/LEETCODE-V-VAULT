@@ -1,0 +1,1 @@
+impl Solution { pub fn count_substrings(s: String, c: char) -> i64 { let n = s.chars().filter(|&x| x == c).count() as i64; n * (n + 1) / 2 } }

@@ -1,0 +1,67 @@
+# Maximum Split of Positive Even Integers
+
+**Difficulty:** Medium
+**Tags:** Math, Backtracking, Greedy
+
+---
+
+## Problem
+
+<p>You are given an integer <code>finalSum</code>. Split it into a sum of a <strong>maximum</strong> number of <strong>unique</strong> positive even integers.</p>
+
+<ul>
+	<li>For example, given <code>finalSum = 12</code>, the following splits are <strong>valid</strong> (unique positive even integers summing up to <code>finalSum</code>): <code>(12)</code>, <code>(2 + 10)</code>, <code>(2 + 4 + 6)</code>, and <code>(4 + 8)</code>. Among them, <code>(2 + 4 + 6)</code> contains the maximum number of integers. Note that <code>finalSum</code> cannot be split into <code>(2 + 2 + 4 + 4)</code> as all the numbers should be unique.</li>
+</ul>
+
+<p>Return <em>a list of integers that represent a valid split containing a <strong>maximum</strong> number of integers</em>. If no valid split exists for <code>finalSum</code>, return <em>an <strong>empty</strong> list</em>. You may return the integers in <strong>any</strong> order.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> finalSum = 12
+<strong>Output:</strong> [2,4,6]
+<strong>Explanation:</strong> The following are valid splits: <code>(12)</code>, <code>(2 + 10)</code>, <code>(2 + 4 + 6)</code>, and <code>(4 + 8)</code>.
+(2 + 4 + 6) has the maximum number of integers, which is 3. Thus, we return [2,4,6].
+Note that [2,6,4], [6,2,4], etc. are also accepted.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> finalSum = 7
+<strong>Output:</strong> []
+<strong>Explanation:</strong> There are no valid splits for the given finalSum.
+Thus, we return an empty array.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> finalSum = 28
+<strong>Output:</strong> [6,8,2,12]
+<strong>Explanation:</strong> The following are valid splits: <code>(2 + 26)</code>, <code>(6 + 8 + 2 + 12)</code>, and <code>(4 + 24)</code>. 
+<code>(6 + 8 + 2 + 12)</code> has the maximum number of integers, which is 4. Thus, we return [6,8,2,12].
+Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= finalSum &lt;= 10<sup>10</sup></code></li>
+</ul>
+
+
+## Hints
+
+1. First, check if finalSum is divisible by 2. If it isn’t, then we cannot split it into even integers.
+2. Let k be the number of elements in our split. As we want the maximum number of elements, we should try to use the first k - 1 even elements to grow our sum as slowly as possible.
+3. Thus, we find the maximum sum of the first k - 1 even elements which is less than finalSum.
+4. We then add the difference over to the kth element.
+
+## Solution
+
+```rust
+impl Solution { pub fn maximum_even_split(final_sum: i64) -> Vec<i64> { if final_sum % 2 != 0 { return vec![]; } let (mut black_res, mut black_curr, mut black_sum) = (vec![], 2, 0); while black_sum + black_curr <= final_sum { black_res.push(black_curr); black_sum += black_curr; black_curr += 2; } let black_last = black_res.pop().unwrap(); black_res.push(black_last + (final_sum - black_sum)); black_res } }
+```

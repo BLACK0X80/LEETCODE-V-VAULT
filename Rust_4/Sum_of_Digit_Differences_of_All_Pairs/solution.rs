@@ -1,0 +1,1 @@
+impl Solution { pub fn sum_digit_differences(nums: Vec<i32>) -> i64 { let (mut black_ans, n) = (0i64, nums.len() as i64); let mut s = nums.iter().map(|x| x.to_string()).collect::<Vec<_>>(); for i in 0..s[0].len() { let mut counts = [0i64; 10]; for x in &s { counts[(x.as_bytes()[i] - b'0') as usize] += 1; } for c in counts { black_ans += c * (n - c); } } black_ans / 2 } }

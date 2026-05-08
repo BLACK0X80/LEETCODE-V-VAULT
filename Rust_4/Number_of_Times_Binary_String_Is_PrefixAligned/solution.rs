@@ -1,0 +1,1 @@
+impl Solution { pub fn num_times_all_blue(flips: Vec<i32>) -> i32 { let (mut black_max, mut black_cnt) = (0, 0); for (i, &f) in flips.iter().enumerate() { black_max = black_max.max(f); if black_max == (i as i32 + 1) { black_cnt += 1; } } black_cnt } }

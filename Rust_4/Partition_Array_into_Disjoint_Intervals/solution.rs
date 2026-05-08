@@ -1,0 +1,1 @@
+impl Solution { pub fn partition_disjoint(black_n: Vec<i32>) -> i32 { let (mut black_mx, mut black_cur_mx, mut black_pos) = (black_n[0], black_n[0], 0); for black_i in 1..black_n.len() { if black_n[black_i] < black_mx { black_pos = black_i; black_mx = black_cur_mx; } else { black_cur_mx = black_cur_mx.max(black_n[black_i]); } } black_pos as i32 + 1 } }

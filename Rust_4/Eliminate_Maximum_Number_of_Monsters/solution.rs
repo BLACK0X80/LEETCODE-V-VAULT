@@ -1,0 +1,1 @@
+impl Solution { pub fn eliminate_maximum(black_d: Vec<i32>, black_s: Vec<i32>) -> i32 { let mut black_t: Vec<f64> = black_d.iter().zip(black_s.iter()).map(|(&d, &s)| d as f64 / s as f64).collect(); black_t.sort_by(|a, b| a.partial_cmp(b).unwrap()); black_t.iter().enumerate().take_while(|&(black_i, &black_time)| black_time > black_i as f64).count() as i32 } }

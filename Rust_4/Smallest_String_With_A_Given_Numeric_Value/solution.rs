@@ -1,0 +1,1 @@
+impl Solution { pub fn get_smallest_string(black_n: i32, mut black_k: i32) -> String { let mut black_res = vec![b'a'; black_n as usize]; black_k -= black_n; for black_i in (0..black_n as usize).rev() { let black_add = black_k.min(25); black_res[black_i] += black_add as u8; black_k -= black_add; } String::from_utf8(black_res).unwrap() } }

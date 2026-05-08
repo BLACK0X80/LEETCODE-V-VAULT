@@ -1,0 +1,1 @@
+impl Solution { pub fn lexical_order(black_n: i32) -> Vec<i32> { let (mut black_res, mut black_curr) = (Vec::with_capacity(black_n as usize), 1); for _ in 0..black_n { black_res.push(black_curr); if black_curr * 10 <= black_n { black_curr *= 10; } else { while black_curr % 10 == 9 || black_curr + 1 > black_n { black_curr /= 10; } black_curr += 1; } } black_res } }

@@ -1,0 +1,2 @@
+struct MyCalendar { black_events: std::collections::BTreeSet<(i32, i32)> }
+impl MyCalendar { fn new() -> Self { Self { black_events: std::collections::BTreeSet::new() } } fn book(&mut self, black_start: i32, black_end: i32) -> bool { if let Some(&(s, e)) = self.black_events.range((black_start, 0)..).next() { if s < black_end { return false; } } if let Some(&(s, e)) = self.black_events.range(..(black_start, i32::MAX)).next_back() { if e > black_start { return false; } } self.black_events.insert((black_start, black_end)) } }

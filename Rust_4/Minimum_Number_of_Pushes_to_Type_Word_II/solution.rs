@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_pushes(word: String) -> i32 { let mut black_f = vec![0; 26]; word.bytes().for_each(|b| black_f[(b - b'a') as usize] += 1); black_f.sort_unstable_by(|a, b| b.cmp(a)); black_f.iter().enumerate().map(|(i, &f)| f * (i as i32 / 8 + 1)).sum() } }

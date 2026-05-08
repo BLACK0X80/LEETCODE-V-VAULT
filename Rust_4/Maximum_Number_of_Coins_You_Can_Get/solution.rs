@@ -1,0 +1,1 @@
+impl Solution { pub fn max_coins(mut black_p: Vec<i32>) -> i32 { black_p.sort_unstable(); let (mut black_res, black_n) = (0, black_p.len() / 3); for black_i in 0..black_n { black_res += black_p[black_p.len() - 2 - 2 * black_i]; } black_res } }

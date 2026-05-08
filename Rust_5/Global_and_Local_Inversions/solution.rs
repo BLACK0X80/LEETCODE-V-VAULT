@@ -1,0 +1,1 @@
+impl Solution { pub fn is_ideal_permutation(black_n: Vec<i32>) -> bool { black_n.iter().enumerate().all(|(i, &v)| (i as i32 - v).abs() <= 1) } }

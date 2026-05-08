@@ -1,0 +1,1 @@
+impl Solution { pub fn get_winner(black_arr: Vec<i32>, black_k: i32) -> i32 { let (mut black_w, mut black_c) = (black_arr[0], 0); for &black_x in &black_arr[1..] { if black_x > black_w { black_w = black_x; black_c = 1; } else { black_c += 1; } if black_c == black_k { return black_w; } } black_w } }

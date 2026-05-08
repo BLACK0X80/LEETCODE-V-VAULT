@@ -1,0 +1,1 @@
+impl Solution { pub fn min_difference(mut black_n: Vec<i32>) -> i32 { if black_n.len() <= 4 { return 0; } black_n.sort_unstable(); let black_len = black_n.len(); (0..4).map(|black_i| black_n[black_len - 4 + black_i] - black_n[black_i]).min().unwrap() } }

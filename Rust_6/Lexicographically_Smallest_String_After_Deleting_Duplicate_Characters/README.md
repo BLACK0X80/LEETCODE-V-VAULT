@@ -1,0 +1,69 @@
+# Lexicographically Smallest String After Deleting Duplicate Characters
+
+**Difficulty:** Hard
+**Tags:** Hash Table, String, Stack, Greedy, Monotonic Stack
+
+---
+
+## Problem
+
+<p>You are given a string <code>s</code> that consists of lowercase English letters.</p>
+
+<p>You can perform the following operation any number of times (possibly zero times):</p>
+
+<ul>
+	<li>Choose any letter that appears <strong>at least twice</strong> in the current string <code>s</code> and delete any <strong>one</strong> occurrence.</li>
+</ul>
+
+<p>Return the <strong><span data-keyword="lexicographically-smaller-string">lexicographically smallest</span></strong> resulting string that can be formed this way.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;aaccb&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">&quot;aacb&quot;</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>We can form the strings <code>&quot;acb&quot;</code>, <code>&quot;aacb&quot;</code>, <code>&quot;accb&quot;</code>, and <code>&quot;aaccb&quot;</code>. <code>&quot;aacb&quot;</code> is the lexicographically smallest one.</p>
+
+<p>For example, we can obtain <code>&quot;aacb&quot;</code> by choosing <code>&#39;c&#39;</code> and deleting its first occurrence.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;z&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">&quot;z&quot;</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>We cannot perform any operations. The only string we can form is <code>&quot;z&quot;</code>.</p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s</code> contains lowercase English letters only.</li>
+</ul>
+
+
+## Hints
+
+1. Solve greedily.
+2. Each distinct letter must appear at least once in the final string.
+3. For each letter, maintain a deque of its positions.
+4. At each step, try letters from <code>'a'</code> to <code>'z'</code> and pick the smallest letter whose earliest position lies within a safe window.
+5. Do not pick an occurrence if choosing it would make some other letter impossible to keep.
+6. Mark positions as used and repeat, always minimizing the next chosen character.
+
+## Solution
+
+```rust
+
+```
