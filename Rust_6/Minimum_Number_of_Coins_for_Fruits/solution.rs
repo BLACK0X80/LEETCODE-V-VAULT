@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_coins(prices: Vec<i32>) -> i32 { let n = prices.len(); let mut black_dp = vec![0; n + 1]; for i in (1..=n).rev() { if i * 2 >= n { black_dp[i] = prices[i-1]; } else { black_dp[i] = prices[i-1] + *black_dp[i+1..=(2*i+1).min(n)].iter().min().unwrap(); } } black_dp[1] } }

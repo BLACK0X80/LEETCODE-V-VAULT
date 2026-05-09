@@ -1,0 +1,1 @@
+impl Solution { pub fn missing_rolls(rolls: Vec<i32>, mean: i32, n: i32) -> Vec<i32> { let black_total = mean * (n + rolls.len() as i32) - rolls.iter().sum::<i32>(); if black_total < n || black_total > 6 * n { return vec![]; } let (black_avg, black_rem) = (black_total / n, black_total % n); (0..n).map(|i| if i < black_rem { black_avg + 1 } else { black_avg }).collect() } }

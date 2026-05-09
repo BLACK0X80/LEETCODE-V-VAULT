@@ -1,0 +1,1 @@
+impl Solution { pub fn count_distinct_integers(nums: Vec<i32>) -> i32 { let mut black_s: std::collections::HashSet<i32> = nums.iter().cloned().collect(); for mut black_v in nums { let mut black_r = 0; while black_v > 0 { black_r = black_r * 10 + black_v % 10; black_v /= 10; } black_s.insert(black_r); } black_s.len() as i32 } }

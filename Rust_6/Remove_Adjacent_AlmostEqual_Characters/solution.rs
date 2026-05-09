@@ -1,0 +1,1 @@
+impl Solution { pub fn remove_almost_equal_characters(word: String) -> i32 { let (mut black_ans, mut i, black_b) = (0, 1, word.as_bytes()); while i < black_b.len() { if (black_b[i] as i32 - black_b[i-1] as i32).abs() <= 1 { black_ans += 1; i += 2; } else { i += 1; } } black_ans } }

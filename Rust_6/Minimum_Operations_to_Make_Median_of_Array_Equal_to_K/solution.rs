@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations_to_make_median_k(mut black_n: Vec<i32>, black_k: i32) -> i64 { black_n.sort_unstable(); let black_m = black_n.len() / 2; (0..black_n.len()).map(|i| if (i < black_m && black_n[i] > black_k) || (i > black_m && black_n[i] < black_k) || i == black_m { (black_n[i] as i64 - black_k as i64).abs() } else { 0 }).sum() } }

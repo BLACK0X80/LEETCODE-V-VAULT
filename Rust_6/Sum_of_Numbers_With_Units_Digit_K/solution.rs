@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_numbers(num: i32, k: i32) -> i32 { if num == 0 { return 0; } for black_i in 1..=10 { if (black_i * k) % 10 == num % 10 && black_i * k <= num { return black_i; } } -1 } }

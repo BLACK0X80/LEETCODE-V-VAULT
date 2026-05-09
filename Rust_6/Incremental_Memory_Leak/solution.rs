@@ -1,0 +1,1 @@
+impl Solution { pub fn mem_leak(memory1: i32, memory2: i32) -> Vec<i32> { let (mut black_m1, mut black_m2, mut black_t) = (memory1, memory2, 1); while black_t <= black_m1.max(black_m2) { if black_m1 >= black_m2 { black_m1 -= black_t; } else { black_m2 -= black_t; } black_t += 1; } vec![black_t, black_m1, black_m2] } }

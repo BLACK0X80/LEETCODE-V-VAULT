@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_size(black_nums: Vec<i32>, black_ops: i32) -> i32 { let (mut black_l, mut black_r) = (1, 1_000_000_000); while black_l < black_r { let black_m = (black_l + black_r) / 2; if black_nums.iter().map(|&x| (x - 1) / black_m).sum::<i32>() <= black_ops { black_r = black_m; } else { black_l = black_m + 1; } } black_l } }

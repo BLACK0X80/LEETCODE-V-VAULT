@@ -1,0 +1,1 @@
+impl Solution { pub fn max_distinct_elements(mut black_n: Vec<i32>, k: i32) -> i32 { black_n.sort_unstable(); let (mut black_last, mut black_ans) = (i32::MIN, 0); for x in black_n { let black_v = (black_last as i64 + 1).max(x as i64 - k as i64); if black_v <= x as i64 + k as i64 { black_last = black_v as i32; black_ans += 1; } } black_ans } }

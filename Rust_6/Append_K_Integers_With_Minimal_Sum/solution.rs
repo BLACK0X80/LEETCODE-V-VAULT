@@ -1,0 +1,1 @@
+impl Solution { pub fn minimal_k_sum(nums: Vec<i32>, k: i32) -> i64 { let (mut black_k, mut black_res, mut black_s) = (k as i64, (k as i64 * (k as i64 + 1)) / 2, nums); black_s.sort(); black_s.dedup(); for &black_x in &black_s { if black_x as i64 <= black_k { black_res = black_res - black_x as i64 + black_k + 1; black_k += 1; } } black_res } }

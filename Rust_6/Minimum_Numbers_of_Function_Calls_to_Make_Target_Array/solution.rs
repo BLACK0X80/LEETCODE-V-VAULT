@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(black_n: Vec<i32>) -> i32 { let (mut black_adds, mut black_max_div) = (0, 0); for mut black_x in black_n { let mut black_div = 0; while black_x > 0 { if black_x % 2 == 1 { black_adds += 1; black_x -= 1; } if black_x > 0 { black_x /= 2; black_div += 1; } } black_max_div = black_max_div.max(black_div); } black_adds + black_max_div } }

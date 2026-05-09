@@ -1,0 +1,1 @@
+impl Solution { pub fn make_integer_beautiful(n: i64, target: i32) -> i64 { let (mut black_n, mut black_b) = (n, 1i64); loop { let (mut black_s, mut black_v) = (0, black_n); while black_v > 0 { black_s += (black_v % 10) as i32; black_v /= 10; } if black_s <= target { return black_n * black_b - n; } black_n = black_n / 10 + 1; black_b *= 10; } } }

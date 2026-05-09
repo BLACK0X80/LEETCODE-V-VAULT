@@ -1,0 +1,108 @@
+# Maximum Spending After Buying Items
+
+**Difficulty:** Hard
+**Tags:** Array, Greedy, Sorting, Heap (Priority Queue), Matrix
+
+---
+
+## Problem
+
+<p>You are given a <strong>0-indexed</strong> <code>m * n</code> integer matrix <code>values</code>, representing the values of <code>m * n</code> different items in <code>m</code> different shops. Each shop has <code>n</code> items where the <code>j<sup>th</sup></code> item in the <code>i<sup>th</sup></code> shop has a value of <code>values[i][j]</code>. Additionally, the items in the <code>i<sup>th</sup></code> shop are sorted in non-increasing order of value. That is, <code>values[i][j] &gt;= values[i][j + 1]</code> for all <code>0 &lt;= j &lt; n - 1</code>.</p>
+
+<p>On each day, you would like to buy a single item from one of the shops. Specifically, On the <code>d<sup>th</sup></code> day you can:</p>
+
+<ul>
+	<li>Pick any shop <code>i</code>.</li>
+	<li>Buy the rightmost available item <code>j</code> for the price of <code>values[i][j] * d</code>. That is, find the greatest index <code>j</code> such that item <code>j</code> was never bought before, and buy it for the price of <code>values[i][j] * d</code>.</li>
+</ul>
+
+<p><strong>Note</strong> that all items are pairwise different. For example, if you have bought item <code>0</code> from shop <code>1</code>, you can still buy item <code>0</code> from any other shop.</p>
+
+<p>Return <em>the <strong>maximum amount of money that can be spent</strong> on buying all </em> <code>m * n</code> <em>products</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> values = [[8,5,2],[6,4,1],[9,7,3]]
+<strong>Output:</strong> 285
+<strong>Explanation:</strong> On the first day, we buy product 2 from shop 1 for a price of values[1][2] * 1 = 1.
+On the second day, we buy product 2 from shop 0 for a price of values[0][2] * 2 = 4.
+On the third day, we buy product 2 from shop 2 for a price of values[2][2] * 3 = 9.
+On the fourth day, we buy product 1 from shop 1 for a price of values[1][1] * 4 = 16.
+On the fifth day, we buy product 1 from shop 0 for a price of values[0][1] * 5 = 25.
+On the sixth day, we buy product 0 from shop 1 for a price of values[1][0] * 6 = 36.
+On the seventh day, we buy product 1 from shop 2 for a price of values[2][1] * 7 = 49.
+On the eighth day, we buy product 0 from shop 0 for a price of values[0][0] * 8 = 64.
+On the ninth day, we buy product 0 from shop 2 for a price of values[2][0] * 9 = 81.
+Hence, our total spending is equal to 285.
+It can be shown that 285 is the maximum amount of money that can be spent buying all m * n products. 
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> values = [[10,8,6,4,2],[9,7,5,3,2]]
+<strong>Output:</strong> 386
+<strong>Explanation:</strong> On the first day, we buy product 4 from shop 0 for a price of values[0][4] * 1 = 2.
+On the second day, we buy product 4 from shop 1 for a price of values[1][4] * 2 = 4.
+On the third day, we buy product 3 from shop 1 for a price of values[1][3] * 3 = 9.
+On the fourth day, we buy product 3 from shop 0 for a price of values[0][3] * 4 = 16.
+On the fifth day, we buy product 2 from shop 1 for a price of values[1][2] * 5 = 25.
+On the sixth day, we buy product 2 from shop 0 for a price of values[0][2] * 6 = 36.
+On the seventh day, we buy product 1 from shop 1 for a price of values[1][1] * 7 = 49.
+On the eighth day, we buy product 1 from shop 0 for a price of values[0][1] * 8 = 64
+On the ninth day, we buy product 0 from shop 1 for a price of values[1][0] * 9 = 81.
+On the tenth day, we buy product 0 from shop 0 for a price of values[0][0] * 10 = 100.
+Hence, our total spending is equal to 386.
+It can be shown that 386 is the maximum amount of money that can be spent buying all m * n products.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= m == values.length &lt;= 10</code></li>
+	<li><code>1 &lt;= n == values[i].length &lt;= 10<sup>4</sup></code></li>
+	<li><code>1 &lt;= values[i][j] &lt;= 10<sup>6</sup></code></li>
+	<li><code>values[i]</code> are sorted in non-increasing order.</li>
+</ul>
+
+
+## Hints
+
+1. Iterate on days <code>1</code> to <code>m * n</code>.
+2. On each day, buy the product that minimizes <code>values[i][values[i].length - 1]</code>, and pop it from <code>values[i]</code>.
+
+## Solution
+
+```rust
+use std::collections::BinaryHeap;
+use std::cmp::Reverse;
+
+impl Solution {
+    pub fn max_spending(black_values: Vec<Vec<i32>>) -> i64 {
+        let black_m = black_values.len();
+        let black_n = black_values[0].len();
+        let mut black_pq = BinaryHeap::new();
+
+        for i in 0..black_m {
+            black_pq.push(Reverse((black_values[i][black_n - 1], i, black_n - 1)));
+        }
+
+        let mut black_total_spending = 0i64;
+        let mut black_day = 1i64;
+
+        while let Some(Reverse((black_val, black_shop, black_item_idx))) = black_pq.pop() {
+            black_total_spending += black_val as i64 * black_day;
+            black_day += 1;
+
+            if black_item_idx > 0 {
+                black_pq.push(Reverse((black_values[black_shop][black_item_idx - 1], black_shop, black_item_idx - 1)));
+            }
+        }
+
+        black_total_spending
+    }
+}
+```

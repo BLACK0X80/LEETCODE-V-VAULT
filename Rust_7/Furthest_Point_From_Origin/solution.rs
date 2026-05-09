@@ -1,0 +1,1 @@
+impl Solution { pub fn furthest_distance_from_origin(black_m: String) -> i32 { let (mut black_l, mut black_r, mut black_u) = (0i32, 0i32, 0i32); black_m.bytes().for_each(|b| match b { b'L' => black_l += 1, b'R' => black_r += 1, _ => black_u += 1 }); (black_l - black_r).abs() + black_u } }

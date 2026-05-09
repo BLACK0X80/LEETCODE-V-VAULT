@@ -1,0 +1,1 @@
+impl Solution { pub fn max_score(nums: Vec<i32>, x: i32) -> i64 { let mut black_dp = [-1e16 as i64; 2]; black_dp[(nums[0] % 2) as usize] = nums[0] as i64; for i in 1..nums.len() { let p = (nums[i] % 2) as usize; black_dp[p] = (black_dp[p] + nums[i] as i64).max(black_dp[1 - p] + nums[i] as i64 - x as i64); } *black_dp.iter().max().unwrap() } }

@@ -1,0 +1,67 @@
+# Design Add and Search Words Data Structure
+
+**Difficulty:** Medium
+**Tags:** String, Depth-First Search, Design, Trie
+
+---
+
+## Problem
+
+<p>Design a data structure that supports adding new words and finding if a string matches any previously added string.</p>
+
+<p>Implement the <code>WordDictionary</code> class:</p>
+
+<ul>
+	<li><code>WordDictionary()</code>&nbsp;Initializes the object.</li>
+	<li><code>void addWord(word)</code> Adds <code>word</code> to the data structure, it can be matched later.</li>
+	<li><code>bool search(word)</code>&nbsp;Returns <code>true</code> if there is any string in the data structure that matches <code>word</code>&nbsp;or <code>false</code> otherwise. <code>word</code> may contain dots <code>&#39;.&#39;</code> where dots can be matched with any letter.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;WordDictionary&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;]
+[[],[&quot;bad&quot;],[&quot;dad&quot;],[&quot;mad&quot;],[&quot;pad&quot;],[&quot;bad&quot;],[&quot;.ad&quot;],[&quot;b..&quot;]]
+<strong>Output</strong>
+[null,null,null,null,false,true,true,true]
+
+<strong>Explanation</strong>
+WordDictionary wordDictionary = new WordDictionary();
+wordDictionary.addWord(&quot;bad&quot;);
+wordDictionary.addWord(&quot;dad&quot;);
+wordDictionary.addWord(&quot;mad&quot;);
+wordDictionary.search(&quot;pad&quot;); // return False
+wordDictionary.search(&quot;bad&quot;); // return True
+wordDictionary.search(&quot;.ad&quot;); // return True
+wordDictionary.search(&quot;b..&quot;); // return True
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= word.length &lt;= 25</code></li>
+	<li><code>word</code> in <code>addWord</code> consists of lowercase English letters.</li>
+	<li><code>word</code> in <code>search</code> consist of <code>&#39;.&#39;</code> or lowercase English letters.</li>
+	<li>There will be at most <code>2</code> dots in <code>word</code> for <code>search</code> queries.</li>
+	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>addWord</code> and <code>search</code>.</li>
+</ul>
+
+
+## Hints
+
+1. You should be familiar with how a Trie works. If not, please work on this problem: <a href="https://leetcode.com/problems/implement-trie-prefix-tree/">Implement Trie (Prefix Tree)</a> first.
+
+## Solution
+
+```rust
+#[derive(Default)] struct WordDictionary { black_c: [Option<Box<WordDictionary>>; 26], black_e: bool }
+impl WordDictionary {
+    fn new() -> Self { Default::default() }
+    fn add_word(&mut self, black_w: String) { let mut black_curr = self; for &b in black_w.as_bytes() { black_curr = black_curr.black_c[(b - b'a') as usize].get_or_insert_with(Default::default); } black_curr.black_e = true; }
+    fn search(&self, black_w: String) -> bool { self.black_s(black_w.as_bytes(), self) }
+    fn black_s(&self, black_b: &[u8], black_n: &WordDictionary) -> bool { for (i, &b) in black_b.iter().enumerate() { if b == b'.' { return black_n.black_c.iter().flatten().any(|child| self.black_s(&black_b[i+1..], child)); } match &black_n.black_c[(b - b'a') as usize] { Some(child) => return self.black_s(&black_b[i+1..], child), None => return false } } black_n.black_e }
+}
+```

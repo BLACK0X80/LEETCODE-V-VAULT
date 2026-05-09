@@ -1,0 +1,1 @@
+impl Solution { pub fn sum_of_number_and_reverse(num: i32) -> bool { (0..=num).any(|black_i| { let (mut black_v, mut black_r) = (black_i, 0); while black_v > 0 { black_r = black_r * 10 + black_v % 10; black_v /= 10; } black_i + black_r == num }) } }

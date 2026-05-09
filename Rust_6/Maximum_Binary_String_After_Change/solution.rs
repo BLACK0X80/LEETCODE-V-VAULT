@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_binary_string(black_b: String) -> String { if let Some(black_first) = black_b.find('0') { let black_zeros = black_b.chars().filter(|&c| c == '0').count(); let mut black_res = vec!['1'; black_b.len()]; black_res[black_first + black_zeros - 1] = '0'; black_res.into_iter().collect() } else { black_b } } }

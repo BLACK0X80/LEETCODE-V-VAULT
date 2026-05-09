@@ -1,0 +1,1 @@
+impl Solution { pub fn last_remaining(black_n: i32) -> i32 { let (mut black_head, mut black_step, mut black_rem, mut black_left) = (1, 1, black_n, true); while black_rem > 1 { if black_left || black_rem % 2 == 1 { black_head += black_step; } black_step *= 2; black_rem /= 2; black_left = !black_left; } black_head } }
