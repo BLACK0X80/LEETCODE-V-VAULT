@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_perimeter(needed_apples: i64) -> i64 { let (mut black_l, mut black_r) = (1, 100000); while black_l < black_r { let black_m = (black_l + black_r) / 2; if 2 * black_m * (black_m + 1) * (2 * black_m + 1) < needed_apples { black_l = black_m + 1; } else { black_r = black_m; } } black_l * 8 } }

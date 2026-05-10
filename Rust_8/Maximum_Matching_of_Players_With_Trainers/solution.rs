@@ -1,0 +1,1 @@
+impl Solution { pub fn match_players_and_trainers(mut black_p: Vec<i32>, mut black_t: Vec<i32>) -> i32 { black_p.sort_unstable(); black_t.sort_unstable(); let (mut black_i, mut black_j) = (0, 0); while black_i < black_p.len() && black_j < black_t.len() { if black_p[black_i] <= black_t[black_j] { black_i += 1; } black_j += 1; } black_i as i32 } }

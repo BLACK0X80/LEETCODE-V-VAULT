@@ -1,0 +1,1 @@
+impl Solution { pub fn asteroids_destroyed(black_m: i32, mut black_a: Vec<i32>) -> bool { black_a.sort_unstable(); let mut black_curr = black_m as i64; for black_x in black_a { if black_curr < black_x as i64 { return false; } black_curr += black_x as i64; } true } }

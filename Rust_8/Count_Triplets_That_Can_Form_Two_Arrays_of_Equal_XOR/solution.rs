@@ -1,0 +1,1 @@
+impl Solution { pub fn count_triplets(arr: Vec<i32>) -> i32 { let (mut black_ans, black_n) = (0, arr.len()); for black_i in 0..black_n { let mut black_xor = arr[black_i]; for black_k in black_i + 1..black_n { black_xor ^= arr[black_k]; if black_xor == 0 { black_ans += (black_k - black_i) as i32; } } } black_ans } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn reinitialize_permutation(n: i32) -> i32 { let (mut black_res, mut black_i) = (0, 1); loop { black_i = if black_i % 2 == 0 { black_i / 2 } else { n / 2 + (black_i - 1) / 2 }; black_res += 1; if black_i == 1 { break black_res; } } } }

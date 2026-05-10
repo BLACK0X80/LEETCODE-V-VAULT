@@ -1,0 +1,1 @@
+impl Solution { pub fn partition_array(mut black_nums: Vec<i32>, black_k: i32) -> i32 { black_nums.sort_unstable(); let (mut black_res, mut black_start) = (1, black_nums[0]); for &black_n in &black_nums { if black_n - black_start > black_k { black_res += 1; black_start = black_n; } } black_res } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn sort_the_students(mut black_score: Vec<Vec<i32>>, black_k: i32) -> Vec<Vec<i32>> { black_score.sort_unstable_by_key(|black_row| -black_row[black_k as usize]); black_score } }

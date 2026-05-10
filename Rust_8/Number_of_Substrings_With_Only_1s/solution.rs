@@ -1,0 +1,1 @@
+impl Solution { pub fn num_sub(s: String) -> i32 { s.split('0').fold(0, |black_acc, black_sub| { let black_len = black_sub.len() as i64; (black_acc + (black_len * (black_len + 1) / 2)) % 1_000_000_007 }) as i32 } }

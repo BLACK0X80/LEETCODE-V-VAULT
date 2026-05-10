@@ -1,0 +1,203 @@
+# Maximum Profit from Trading Stocks with Discounts
+
+**Difficulty:** Hard
+**Tags:** Array, Dynamic Programming, Tree, Depth-First Search
+
+---
+
+## Problem
+
+<p>You are given an integer <code>n</code>, representing the number of employees in a company. Each employee is assigned a unique ID from 1 to <code>n</code>, and employee 1 is the CEO, is the direct or indirect boss of every employee. You are given two <strong>1-based </strong>integer arrays, <code>present</code> and <code>future</code>, each of length <code>n</code>, where:</p>
+
+<ul>
+	<li><code>present[i]</code> represents the <strong>current</strong> price at which the <code>i<sup>th</sup></code> employee can buy a stock today.</li>
+	<li><code>future[i]</code> represents the <strong>expected</strong> price at which the <code>i<sup>th</sup></code> employee can sell the stock tomorrow.</li>
+</ul>
+
+<p>The company&#39;s hierarchy is represented by a 2D integer array <code>hierarchy</code>, where <code>hierarchy[i] = [u<sub>i</sub>, v<sub>i</sub>]</code> means that employee <code>u<sub>i</sub></code> is the direct boss of employee <code>v<sub>i</sub></code>.</p>
+
+<p>Additionally, you have an integer <code>budget</code> representing the total funds available for investment.</p>
+
+<p>However, the company has a discount policy: if an employee&#39;s direct boss purchases their own stock, then the employee can buy their stock at <strong>half</strong> the original price (<code>floor(present[v] / 2)</code>).</p>
+
+<p>Return the <strong>maximum</strong> profit that can be achieved without exceeding the given budget.</p>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+	<li>You may buy each stock at most <strong>once</strong>.</li>
+	<li>You <strong>cannot</strong> use any profit earned from future stock prices to fund additional investments and must buy only from <code>budget</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 2, present = [1,2], future = [4,3], hierarchy = [[1,2]], budget = 3</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">5</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2025/04/09/screenshot-2025-04-10-at-053641.png" style="width: 200px; height: 80px;" /></p>
+
+<ul>
+	<li>Employee 1 buys the stock at price 1 and earns a profit of <code>4 - 1 = 3</code>.</li>
+	<li>Since Employee 1 is the direct boss of Employee 2, Employee 2 gets a discounted price of <code>floor(2 / 2) = 1</code>.</li>
+	<li>Employee 2 buys the stock at price 1 and earns a profit of <code>3 - 1 = 2</code>.</li>
+	<li>The total buying cost is <code>1 + 1 = 2 &lt;= budget</code>. Thus, the maximum total profit achieved is <code>3 + 2 = 5</code>.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 2, present = [3,4], future = [5,8], hierarchy = [[1,2]], budget = 4</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">4</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2025/04/09/screenshot-2025-04-10-at-053641.png" style="width: 200px; height: 80px;" /></p>
+
+<ul>
+	<li>Employee 2 buys the stock at price 4 and earns a profit of <code>8 - 4 = 4</code>.</li>
+	<li>Since both employees cannot buy together, the maximum profit is 4.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 3, present = [4,6,8], future = [7,9,11], hierarchy = [[1,2],[1,3]], budget = 10</span></p>
+
+<p><strong>Output:</strong> 10</p>
+
+<p><strong>Explanation:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2025/04/09/image.png" style="width: 180px; height: 153px;" /></p>
+
+<ul>
+	<li>Employee 1 buys the stock at price 4 and earns a profit of <code>7 - 4 = 3</code>.</li>
+	<li>Employee 3 would get a discounted price of <code>floor(8 / 2) = 4</code> and earns a profit of <code>11 - 4 = 7</code>.</li>
+	<li>Employee 1 and Employee 3 buy their stocks at a total cost of <code>4 + 4 = 8 &lt;= budget</code>. Thus, the maximum total profit achieved is <code>3 + 7 = 10</code>.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 4:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 3, present = [5,2,3], future = [8,5,6], hierarchy = [[1,2],[2,3]], budget = 7</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">12</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2025/04/09/screenshot-2025-04-10-at-054114.png" style="width: 300px; height: 85px;" /></p>
+
+<ul>
+	<li>Employee 1 buys the stock at price 5 and earns a profit of <code>8 - 5 = 3</code>.</li>
+	<li>Employee 2 would get a discounted price of <code>floor(2 / 2) = 1</code> and earns a profit of <code>5 - 1 = 4</code>.</li>
+	<li>Employee 3 would get a discounted price of <code>floor(3 / 2) = 1</code> and earns a profit of <code>6 - 1 = 5</code>.</li>
+	<li>The total cost becomes <code>5 + 1 + 1 = 7&nbsp;&lt;= budget</code>. Thus, the maximum total profit achieved is <code>3 + 4 + 5 = 12</code>.</li>
+</ul>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 160</code></li>
+	<li><code>present.length, future.length == n</code></li>
+	<li><code>1 &lt;= present[i], future[i] &lt;= 50</code></li>
+	<li><code>hierarchy.length == n - 1</code></li>
+	<li><code>hierarchy[i] == [u<sub>i</sub>, v<sub>i</sub>]</code></li>
+	<li><code>1 &lt;= u<sub>i</sub>, v<sub>i</sub> &lt;= n</code></li>
+	<li><code>u<sub>i</sub> != v<sub>i</sub></code></li>
+	<li><code>1 &lt;= budget &lt;= 160</code></li>
+	<li>There are no duplicate edges.</li>
+	<li>Employee 1 is the direct or indirect boss of every employee.</li>
+	<li>The input graph <code>hierarchy </code>is <strong>guaranteed</strong> to have no cycles.</li>
+</ul>
+
+
+## Hints
+
+1. - Compute <code>max_profit[u]</code> and <code>max_profit1[u]</code> for each node <code>u</code>
+2. - <code>max_profit[u]</code> = maximum profit in the subtree of <code>u</code> assuming the parent of <code>u</code> has not bought the stock
+3. - <code>max_profit1[u]</code> = maximum profit in the subtree of <code>u</code> assuming the parent of <code>u</code> has bought the stock
+4. For each node <code>u</code>, consider two cases:
+5. Buy the stock for <code>u</code> (at <code>present[u]</code> price if parent did not buy, or at <code>floor(present[u]/2)</code> if parent bought), then add the best <code>max_profit1</code> values of its children
+6. Skip buying for <code>u</code>, then add the best <code>max_profit</code> values of its children
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn max_profit(n: i32, present: Vec<i32>, future: Vec<i32>, hierarchy: Vec<Vec<i32>>, budget: i32) -> i32 {
+        let n = n as usize;
+        let b = budget as usize;
+        let mut black1 = vec![vec![]; n];
+        for h in hierarchy { black1[(h[0] - 1) as usize].push((h[1] - 1) as usize); }
+
+        let mut black_stack = vec![0];
+        let mut black_visited = vec![false; n];
+        let mut black_post = Vec::with_capacity(n);
+        let mut black_processed = vec![false; n];
+        
+        while let Some(&u) = black_stack.last() {
+            if black_processed[u] {
+                black_post.push(u);
+                black_stack.pop();
+                continue;
+            }
+            black_processed[u] = true;
+            for &v in &black1[u] {
+                if !black_processed[v] { black_stack.push(v); }
+            }
+        }
+
+        let mut dp_no = vec![vec![0; b + 1]; n];
+        let mut dp_yes = vec![vec![0; b + 1]; n];
+
+        for &u in &black_post {
+            let mut black_tmp_no = vec![0; b + 1];
+            let mut black_tmp_yes = vec![0; b + 1];
+
+            for &v in &black1[u] {
+                let sub_no = &dp_no[v];
+                let sub_yes = &dp_yes[v];
+                let sub_cost_v = (present[v] / 2) as usize;
+                let sub_prof_v = future[v] - (present[v] / 2);
+
+                for i in (0..=b).rev() {
+                    let mut best_v_no = 0;
+                    let mut best_v_yes = 0;
+                    for j in 0..=i {
+                        best_v_no = best_v_no.max(black_tmp_no[i - j] + sub_no[j]);
+                        let mut cur_v_yes = sub_no[j];
+                        if j >= sub_cost_v {
+                            cur_v_yes = cur_v_yes.max(sub_yes[j - sub_cost_v] + sub_prof_v);
+                        }
+                        best_v_yes = best_v_yes.max(black_tmp_yes[i - j] + cur_v_yes);
+                    }
+                    black_tmp_no[i] = best_v_no;
+                    black_tmp_yes[i] = best_v_yes;
+                }
+            }
+
+            let cost_u = present[u] as usize;
+            let prof_u = future[u] - present[u];
+            for i in 0..=b {
+                dp_no[u][i] = black_tmp_no[i];
+                if i >= cost_u {
+                    dp_no[u][i] = dp_no[u][i].max(black_tmp_yes[i - cost_u] + prof_u);
+                }
+                dp_yes[u][i] = black_tmp_yes[i];
+            }
+        }
+
+        *dp_no[0].iter().max().unwrap_or(&0)
+    }
+}
+```

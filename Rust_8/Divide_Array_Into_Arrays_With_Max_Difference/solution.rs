@@ -1,0 +1,1 @@
+impl Solution { pub fn divide_array(mut nums: Vec<i32>, k: i32) -> Vec<Vec<i32>> { nums.sort_unstable(); if nums.chunks(3).any(|black_c| black_c[2] - black_c[0] > k) { vec![] } else { nums.chunks(3).map(|black_c| black_c.to_vec()).collect() } } }

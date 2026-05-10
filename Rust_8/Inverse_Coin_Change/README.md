@@ -1,0 +1,169 @@
+# Inverse Coin Change
+
+**Difficulty:** Medium
+**Tags:** Array, Dynamic Programming
+
+---
+
+## Problem
+
+<p>You are given a <strong>1-indexed</strong> integer array <code>numWays</code>, where <code>numWays[i]</code> represents the number of ways to select a total amount <code>i</code> using an <strong>infinite</strong> supply of some <em>fixed</em> coin denominations. Each denomination is a <strong>positive</strong> integer with value <strong>at most</strong> <code>numWays.length</code>.</p>
+
+<p>However, the exact coin denominations have been <em>lost</em>. Your task is to recover the set of denominations that could have resulted in the given <code>numWays</code> array.</p>
+
+<p>Return a <strong>sorted</strong> array containing <strong>unique</strong> integers which represents this set of denominations.</p>
+
+<p>If no such set exists, return an <strong>empty</strong> array.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">numWays = [0,1,0,2,0,3,0,4,0,5]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[2,4,6]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<table style="border: 1px solid black;">
+	<tbody>
+		<tr>
+			<th style="border: 1px solid black;">Amount</th>
+			<th style="border: 1px solid black;">Number of ways</th>
+			<th style="border: 1px solid black;">Explanation</th>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">1</td>
+			<td style="border: 1px solid black;">0</td>
+			<td style="border: 1px solid black;">There is no way to select coins with total value 1.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">2</td>
+			<td style="border: 1px solid black;">1</td>
+			<td style="border: 1px solid black;">The only way is <code>[2]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">3</td>
+			<td style="border: 1px solid black;">0</td>
+			<td style="border: 1px solid black;">There is no way to select coins with total value 3.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">4</td>
+			<td style="border: 1px solid black;">2</td>
+			<td style="border: 1px solid black;">The ways are <code>[2, 2]</code> and <code>[4]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">5</td>
+			<td style="border: 1px solid black;">0</td>
+			<td style="border: 1px solid black;">There is no way to select coins with total value 5.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">6</td>
+			<td style="border: 1px solid black;">3</td>
+			<td style="border: 1px solid black;">The ways are <code>[2, 2, 2]</code>, <code>[2, 4]</code>, and <code>[6]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">7</td>
+			<td style="border: 1px solid black;">0</td>
+			<td style="border: 1px solid black;">There is no way to select coins with total value 7.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">8</td>
+			<td style="border: 1px solid black;">4</td>
+			<td style="border: 1px solid black;">The ways are <code>[2, 2, 2, 2]</code>, <code>[2, 2, 4]</code>, <code>[2, 6]</code>, and <code>[4, 4]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">9</td>
+			<td style="border: 1px solid black;">0</td>
+			<td style="border: 1px solid black;">There is no way to select coins with total value 9.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">10</td>
+			<td style="border: 1px solid black;">5</td>
+			<td style="border: 1px solid black;">The ways are <code>[2, 2, 2, 2, 2]</code>, <code>[2, 2, 2, 4]</code>, <code>[2, 4, 4]</code>, <code>[2, 2, 6]</code>, and <code>[4, 6]</code>.</td>
+		</tr>
+	</tbody>
+</table>
+<strong class="example">Example 2:</strong>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">numWays = [1,2,2,3,4]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[1,2,5]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<table style="border: 1px solid black;">
+	<tbody>
+		<tr>
+			<th style="border: 1px solid black;">Amount</th>
+			<th style="border: 1px solid black;">Number of ways</th>
+			<th style="border: 1px solid black;">Explanation</th>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">1</td>
+			<td style="border: 1px solid black;">1</td>
+			<td style="border: 1px solid black;">The only way is <code>[1]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">2</td>
+			<td style="border: 1px solid black;">2</td>
+			<td style="border: 1px solid black;">The ways are <code>[1, 1]</code> and <code>[2]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">3</td>
+			<td style="border: 1px solid black;">2</td>
+			<td style="border: 1px solid black;">The ways are <code>[1, 1, 1]</code> and <code>[1, 2]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">4</td>
+			<td style="border: 1px solid black;">3</td>
+			<td style="border: 1px solid black;">The ways are <code>[1, 1, 1, 1]</code>, <code>[1, 1, 2]</code>, and <code>[2, 2]</code>.</td>
+		</tr>
+		<tr>
+			<td style="border: 1px solid black;">5</td>
+			<td style="border: 1px solid black;">4</td>
+			<td style="border: 1px solid black;">The ways are <code>[1, 1, 1, 1, 1]</code>, <code>[1, 1, 1, 2]</code>, <code>[1, 2, 2]</code>, and <code>[5]</code>.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">numWays = [1,2,3,4,15]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>No set of denomination satisfies this array.</p>
+</div>
+
+<table style="border: 1px solid black;">
+</table>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= numWays.length &lt;= 100</code></li>
+	<li><code>0 &lt;= numWays[i] &lt;= 2 * 10<sup>8</sup></code></li>
+</ul>
+
+
+## Hints
+
+1. Observe that for the smallest denomination <code>c</code>, you must have <code>numWays[c] == 1</code>.
+2. Find the smallest <code>c > 0</code> with <code>numWays[c] == 1</code> and append <code>c</code> to your <code>ans</code> list.
+3. "Remove" that coin’s contribution by doing, for each <code>s</code> from <code>c</code> up to <code>n</code>: numWays[s] -= numWays[s - c]
+4. Repeat: pick the next smallest <code>c</code> with <code>numWays[c] == 1</code>, remove it, and so on.
+5. At the end, if <code>numWays</code> is all zeros, your <code>ans</code> is valid; otherwise, return an empty array.
+
+## Solution
+
+```rust
+impl Solution { pub fn find_coins(black_ways: Vec<i32>) -> Vec<i32> { let black_n = black_ways.len(); let mut black_dp = vec![0i64; black_n + 1]; black_dp[0] = 1; let mut black_res = vec![]; for black_i in 1..=black_n { let black_t = black_ways[black_i - 1] as i64; if black_dp[black_i] == black_t - 1 { black_res.push(black_i as i32); for black_j in black_i..=black_n { black_dp[black_j] = black_dp[black_j].saturating_add(black_dp[black_j - black_i]); } } if black_dp[black_i] != black_t { return vec![]; } } black_res } }
+```

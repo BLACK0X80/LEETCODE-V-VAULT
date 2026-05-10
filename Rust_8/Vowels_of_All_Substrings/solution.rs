@@ -1,0 +1,1 @@
+impl Solution { pub fn count_vowels(word: String) -> i64 { word.chars().enumerate().filter(|&(_, c)| "aeiou".contains(c)).map(|(i, _)| (i + 1) as i64 * (word.len() - i) as i64).sum() } }

@@ -1,0 +1,67 @@
+# Max Chunks To Make Sorted II
+
+**Difficulty:** Hard
+**Tags:** Array, Stack, Greedy, Sorting, Monotonic Stack
+
+---
+
+## Problem
+
+<p>You are given an integer array <code>arr</code>.</p>
+
+<p>We split <code>arr</code> into some number of <strong>chunks</strong> (i.e., partitions), and individually sort each chunk. After concatenating them, the result should equal the sorted array.</p>
+
+<p>Return <em>the largest number of chunks we can make to sort the array</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [5,4,3,2,1]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong>
+Splitting into two or more chunks will not return the required result.
+For example, splitting into [5, 4], [3, 2, 1] will result in [4, 5, 1, 2, 3], which isn&#39;t sorted.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> arr = [2,1,3,4,4]
+<strong>Output:</strong> 4
+<strong>Explanation:</strong>
+We can split into two chunks, such as [2, 1], [3, 4, 4].
+However, splitting into [2, 1], [3], [4], [4] is the highest number of chunks possible.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= arr.length &lt;= 2000</code></li>
+	<li><code>0 &lt;= arr[i] &lt;= 10<sup>8</sup></code></li>
+</ul>
+
+
+## Hints
+
+1. Each k for which some permutation of arr[:k] is equal to sorted(arr)[:k] is where we should cut each chunk.
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn max_chunks_to_sorted(arr: Vec<i32>) -> i32 {
+        let n = arr.len();
+        let mut max_left = vec![0; n];
+        let mut min_right = vec![0; n];
+        max_left[0] = arr[0];
+        for i in 1..n { max_left[i] = max_left[i-1].max(arr[i]); }
+        min_right[n-1] = arr[n-1];
+        for i in (0..n-1).rev() { min_right[i] = min_right[i+1].min(arr[i]); }
+        let mut chunks = 1;
+        for i in 0..n-1 { if max_left[i] <= min_right[i+1] { chunks += 1; } }
+        chunks
+    }
+}
+```

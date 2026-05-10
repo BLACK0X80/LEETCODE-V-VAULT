@@ -1,0 +1,1 @@
+use std::collections::HashMap; impl Solution { pub fn minimum_rounds(black_t: Vec<i32>) -> i32 { let mut black_m = HashMap::new(); for black_x in black_t { *black_m.entry(black_x).or_insert(0) += 1; } let mut black_res = 0; for &black_c in black_m.values() { if black_c == 1 { return -1; } black_res += (black_c + 2) / 3; } black_res } }

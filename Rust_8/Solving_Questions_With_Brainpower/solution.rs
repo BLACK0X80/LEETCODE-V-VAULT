@@ -1,0 +1,1 @@
+impl Solution { pub fn most_points(questions: Vec<Vec<i32>>) -> i64 { let black_n = questions.len(); let mut black_dp = vec![0i64; black_n + 1]; for i in (0..black_n).rev() { let black_next = (i + questions[i][1] as usize + 1).min(black_n); black_dp[i] = black_dp[i+1].max(questions[i][0] as i64 + black_dp[black_next]); } black_dp[0] } }

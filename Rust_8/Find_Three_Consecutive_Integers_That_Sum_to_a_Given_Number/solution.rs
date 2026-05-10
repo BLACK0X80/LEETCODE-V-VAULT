@@ -1,0 +1,1 @@
+impl Solution { pub fn sum_of_three(num: i64) -> Vec<i64> { if num % 3 == 0 { let black_m = num / 3; vec![black_m - 1, black_m, black_m + 1] } else { vec![] } } }

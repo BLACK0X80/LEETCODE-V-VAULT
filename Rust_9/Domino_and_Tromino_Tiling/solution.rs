@@ -1,0 +1,1 @@
+impl Solution { pub fn num_tilings(black_n: i32) -> i32 { let n = black_n as usize; let black_mod = 1_000_000_007; let mut black_dp = vec![0u64; n.max(3) + 1]; black_dp[0] = 1; black_dp[1] = 1; black_dp[2] = 2; black_dp[3] = 5; for i in 4..=n { black_dp[i] = (2 * black_dp[i - 1] + black_dp[i - 3]) % black_mod; } black_dp[n] as i32 } }

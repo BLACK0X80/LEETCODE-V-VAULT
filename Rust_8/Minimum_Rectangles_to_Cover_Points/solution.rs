@@ -1,0 +1,1 @@
+impl Solution { pub fn min_rectangles_to_cover_points(mut black_p: Vec<Vec<i32>>, black_w: i32) -> i32 { black_p.sort_unstable_by_key(|p| p[0]); let (mut black_r, mut black_l) = (0, -1); for p in black_p { if black_l == -1 || p[0] > black_l + black_w { black_r += 1; black_l = p[0]; } } black_r } }

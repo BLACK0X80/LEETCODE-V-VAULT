@@ -1,0 +1,1 @@
+impl Solution { pub fn max_sum(grid: Vec<Vec<i32>>, limits: Vec<i32>, k: i32) -> i64 { let mut black_all = vec![]; for (mut row, &lim) in grid.into_iter().zip(limits.iter()) { row.sort_unstable_by(|a, b| b.cmp(a)); black_all.extend(row.into_iter().take(lim as usize)); } black_all.sort_unstable_by(|a, b| b.cmp(a)); black_all.into_iter().take(k as usize).map(|x| x as i64).sum() } }

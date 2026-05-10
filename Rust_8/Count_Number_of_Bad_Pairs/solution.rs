@@ -1,0 +1,1 @@
+impl Solution { pub fn count_bad_pairs(nums: Vec<i32>) -> i64 { let (mut black_m, black_n) = (std::collections::HashMap::new(), nums.len() as i64); for i in 0..nums.len() { *black_m.entry(nums[i] - i as i32).or_insert(0i64) += 1; } black_n * (black_n - 1) / 2 - black_m.values().map(|&v| v * (v - 1) / 2).sum::<i64>() } }

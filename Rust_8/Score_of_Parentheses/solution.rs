@@ -1,0 +1,1 @@
+impl Solution { pub fn score_of_parentheses(black_s: String) -> i32 { let (mut black_score, mut black_depth) = (0, 0); let black_bytes = black_s.as_bytes(); for i in 0..black_bytes.len() { if black_bytes[i] == b'(' { black_depth += 1; } else { black_depth -= 1; if black_bytes[i-1] == b'(' { black_score += 1 << black_depth; } } } black_score } }

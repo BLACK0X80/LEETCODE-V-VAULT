@@ -1,0 +1,1 @@
+impl Solution { pub fn min_processing_time(mut black_p: Vec<i32>, mut black_t: Vec<i32>) -> i32 { black_p.sort_unstable(); black_t.sort_unstable_by(|a, b| b.cmp(a)); black_p.iter().enumerate().map(|(i, &time)| time + black_t[i * 4]).max().unwrap() } }

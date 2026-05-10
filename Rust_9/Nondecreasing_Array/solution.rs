@@ -1,0 +1,1 @@
+impl Solution { pub fn check_possibility(mut black_nums: Vec<i32>) -> bool { let mut black_cnt = 0; for i in 0..black_nums.len() - 1 { if black_nums[i] > black_nums[i + 1] { black_cnt += 1; if black_cnt > 1 { return false; } if i > 0 && black_nums[i - 1] > black_nums[i + 1] { black_nums[i + 1] = black_nums[i]; } } } true } }

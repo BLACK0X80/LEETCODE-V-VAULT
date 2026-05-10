@@ -1,0 +1,1 @@
+impl Solution { pub fn zero_filled_subarray(nums: Vec<i32>) -> i64 { let (mut black_res, mut black_c) = (0i64, 0i64); for &black_x in &nums { if black_x == 0 { black_c += 1; black_res += black_c; } else { black_c = 0; } } black_res } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn concatenated_binary(n: i32) -> i32 { let (mut black_res, mut black_len, black_mod) = (0i64, 0, 1_000_000_007i64); for black_i in 1..=n { if (black_i & (black_i - 1)) == 0 { black_len += 1; } black_res = ((black_res << black_len) | black_i as i64) % black_mod; } black_res as i32 } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn next_beautiful_number(n: i32) -> i32 { for black_i in n + 1..1224480 { let (mut black_v, mut black_f) = (black_i, vec![0; 10]); while black_v > 0 { black_f[(black_v % 10) as usize] += 1; black_v /= 10; } if (0..10).all(|i| black_f[i] == 0 || black_f[i] == i) { return black_i; } } 0 } }

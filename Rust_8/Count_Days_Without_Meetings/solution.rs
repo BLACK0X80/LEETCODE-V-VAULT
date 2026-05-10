@@ -1,0 +1,1 @@
+impl Solution { pub fn count_days(days: i32, mut black_m: Vec<Vec<i32>>) -> i32 { black_m.sort_unstable(); let (mut black_last, mut black_total) = (0, 0); for m in black_m { if m[0] > black_last { black_total += m[1] - m[0] + 1; black_last = m[1]; } else if m[1] > black_last { black_total += m[1] - black_last; black_last = m[1]; } } days - black_total } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn max_consecutive(black_bot: i32, black_top: i32, mut black_spec: Vec<i32>) -> i32 { black_spec.sort_unstable(); let mut black_res = (black_spec[0] - black_bot).max(black_top - black_spec.last().unwrap()); for black_i in 1..black_spec.len() { black_res = black_res.max(black_spec[black_i] - black_spec[black_i-1] - 1); } black_res } }

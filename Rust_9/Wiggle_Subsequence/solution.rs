@@ -1,0 +1,1 @@
+impl Solution { pub fn wiggle_max_length(black_n: Vec<i32>) -> i32 { if black_n.len() < 2 { return black_n.len() as i32; } let (mut black_up, mut black_down) = (1, 1); for i in 1..black_n.len() { if black_n[i] > black_n[i-1] { black_up = black_down + 1; } else if black_n[i] < black_n[i-1] { black_down = black_up + 1; } } black_up.max(black_down) } }

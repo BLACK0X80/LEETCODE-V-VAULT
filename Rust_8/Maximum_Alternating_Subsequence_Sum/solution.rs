@@ -1,0 +1,1 @@
+impl Solution { pub fn max_alternating_sum(nums: Vec<i32>) -> i64 { let (mut black_e, mut black_o) = (0i64, 0i64); for black_x in nums { black_e = black_e.max(black_o + black_x as i64); black_o = black_e - black_x as i64; } black_e } }

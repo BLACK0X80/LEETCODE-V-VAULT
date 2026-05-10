@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_importance(black_n: i32, black_roads: Vec<Vec<i32>>) -> i64 { let mut black_deg = vec![0i64; black_n as usize]; for black_r in black_roads { black_deg[black_r[0] as usize] += 1; black_deg[black_r[1] as usize] += 1; } black_deg.sort_unstable(); black_deg.into_iter().enumerate().map(|(black_i, black_d)| black_d * (black_i as i64 + 1)).sum() } }

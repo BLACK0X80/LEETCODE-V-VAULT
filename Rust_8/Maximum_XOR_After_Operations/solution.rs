@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_xor(nums: Vec<i32>) -> i32 { nums.iter().fold(0, |black_a, &black_b| black_a | black_b) } }
