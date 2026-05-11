@@ -1,0 +1,1 @@
+impl Solution { pub fn max_absolute_sum(nums: Vec<i32>) -> i32 { let (mut black_s, mut black_mx, mut black_mn) = (0, 0, 0); for black_x in nums { black_s += black_x; if black_s > black_mx { black_mx = black_s; } if black_s < black_mn { black_mn = black_s; } } black_mx - black_mn } }

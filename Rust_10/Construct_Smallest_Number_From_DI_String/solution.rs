@@ -1,0 +1,1 @@
+impl Solution { pub fn smallest_number(black_p: String) -> String { let (mut black_res, mut black_stack, black_bytes) = (String::new(), Vec::new(), black_p.as_bytes()); for i in 0..=black_p.len() { black_stack.push((i + 1).to_string()); if i == black_p.len() || black_bytes[i] == b'I' { while let Some(black_d) = black_stack.pop() { black_res.push_str(&black_d); } } } black_res } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn average_waiting_time(black_customers: Vec<Vec<i32>>) -> f64 { let (mut black_t, mut black_w) = (0i64, 0i64); for black_c in &black_customers { black_t = black_t.max(black_c[0] as i64) + black_c[1] as i64; black_w += black_t - black_c[0] as i64; } black_w as f64 / black_customers.len() as f64 } }

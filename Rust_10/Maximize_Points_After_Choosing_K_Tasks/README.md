@@ -1,0 +1,88 @@
+# Maximize Points After Choosing K Tasks
+
+**Difficulty:** Medium
+**Tags:** Array, Greedy, Sorting, Heap (Priority Queue)
+
+---
+
+## Problem
+
+<p>You are given two integer arrays, <code>technique1</code> and <code>technique2</code>, each of length <code>n</code>, where <code>n</code> represents the number of tasks to complete.</p>
+
+<ul>
+	<li>If the <code>i<sup>th</sup></code> task is completed using technique 1, you earn <code>technique1[i]</code> points.</li>
+	<li>If it is completed using technique 2, you earn <code>technique2[i]</code> points.</li>
+</ul>
+
+<p>You are also given an integer <code>k</code>, representing the <strong>minimum</strong> number of tasks that <strong>must</strong> be completed using technique 1.</p>
+
+<p>You <strong>must</strong> complete <strong>at least</strong> <code>k</code> tasks using technique 1 (they do not need to be the first <code>k</code> tasks).</p>
+
+<p>The remaining tasks may be completed using <strong>either</strong> technique.</p>
+
+<p>Return an integer denoting the <strong>maximum total points</strong> you can earn.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">technique1 = [5,2,10], technique2 = [10,3,8], k = 2</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">22</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>We must complete at least <code>k = 2</code> tasks using <code>technique1</code>.</p>
+
+<p>Choosing <code>technique1[1]</code> and <code>technique1[2]</code> (completed using technique 1), and <code>technique2[0]</code> (completed using technique 2), yields the maximum points: <code>2 + 10 + 10 = 22</code>.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">technique1 = [10,20,30], technique2 = [5,15,25], k = 2</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">60</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>We must complete at least <code>k = 2</code> tasks using <code>technique1</code>.</p>
+
+<p>Choosing all tasks using technique 1 yields the maximum points: <code>10 + 20 + 30 = 60</code>.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">technique1 = [1,2,3], technique2 = [4,5,6], k = 0</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">15</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>Since <code>k = 0</code>, we are not required to choose any task using <code>technique1</code>.</p>
+
+<p>Choosing all tasks using technique 2 yields the maximum points: <code>4 + 5 + 6 = 15</code>.</p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n == technique1.length == technique2.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= technique1[i], technique2​​​​​​​[i] &lt;= 10<sup>​​​​​​​5</sup></code></li>
+	<li><code>0 &lt;= k &lt;= n</code></li>
+</ul>
+
+
+## Hints
+
+1. Initially complete all tasks using way 1; let the initial total be <code>sum(reward1)</code>.
+2. The delta when switching task <code>i</code> from way 1 to way 2 is <code>reward2[i] - reward1[i]</code>.
+3. Sort deltas descending and apply the largest <code>n - k</code>; after each switch update the maximum.
+
+## Solution
+
+```rust
+impl Solution { pub fn max_points(technique1: Vec<i32>, technique2: Vec<i32>, k: i32) -> i64 { let mut black_diffs: Vec<(i32, i32, i32)> = technique1.into_iter().zip(technique2.into_iter()).map(|(black_t1, black_t2)| (black_t1 - black_t2, black_t1, black_t2)).collect(); black_diffs.sort_unstable_by_key(|black_x| std::cmp::Reverse(black_x.0)); let mut black_ans = 0i64; for black_i in 0..black_diffs.len() { if black_i < k as usize { black_ans += black_diffs[black_i].1 as i64; } else { black_ans += black_diffs[black_i].1.max(black_diffs[black_i].2) as i64; } } black_ans } }
+```

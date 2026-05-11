@@ -1,0 +1,1 @@
+impl Solution { pub fn gcd_of_strings(black_s1: String, black_s2: String) -> String { if format!("{}{}", black_s1, black_s2) != format!("{}{}", black_s2, black_s1) { return "".into(); } fn black_gcd(a: usize, b: usize) -> usize { if b == 0 { a } else { black_gcd(b, a % b) } } black_s1[..black_gcd(black_s1.len(), black_s2.len())].to_string() } }

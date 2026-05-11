@@ -1,0 +1,1 @@
+impl Solution { pub fn can_construct(black_s: String, black_k: i32) -> bool { if black_s.len() < black_k as usize { return false; } let mut black_counts = [0; 26]; black_s.bytes().for_each(|black_b| black_counts[(black_b - b'a') as usize] += 1); let black_odd = black_counts.iter().filter(|&&black_c| black_c % 2 != 0).count(); black_odd <= black_k as usize } }

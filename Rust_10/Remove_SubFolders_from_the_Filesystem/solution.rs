@@ -1,0 +1,1 @@
+impl Solution { pub fn remove_subfolders(mut folder: Vec<String>) -> Vec<String> { folder.sort(); let mut black_res: Vec<String> = vec![]; for f in folder { if black_res.is_empty() || !f.starts_with(&(black_res.last().unwrap().to_owned() + "/")) { black_res.push(f); } } black_res } }

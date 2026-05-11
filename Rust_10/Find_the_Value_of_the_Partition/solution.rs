@@ -1,0 +1,1 @@
+impl Solution { pub fn find_value_of_partition(mut black_n: Vec<i32>) -> i32 { black_n.sort_unstable(); black_n.windows(2).map(|black_w| black_w[1] - black_w[0]).min().unwrap() } }

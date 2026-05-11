@@ -1,0 +1,1 @@
+impl Solution { pub fn best_closing_time(black_c: String) -> i32 { let (mut black_cur, mut black_min, mut black_ans) = (0, 0, 0); for (i, b) in black_c.bytes().enumerate() { if b == b'Y' { black_cur -= 1; } else { black_cur += 1; } if black_cur < black_min { black_min = black_cur; black_ans = i as i32 + 1; } } black_ans } }

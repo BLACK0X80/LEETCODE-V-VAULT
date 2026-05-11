@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_length(nums: Vec<i32>, k: i32) -> i32 { let k = k as usize; let mut black_dp = vec![vec![0; k]; k]; let mut black_ans = 0; for &x in &nums { let black_rem = (x as usize) % k; for prev in 0..k { black_dp[black_rem][prev] = black_dp[prev][black_rem] + 1; black_ans = black_ans.max(black_dp[black_rem][prev]); } } black_ans } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn divisibility_array(word: String, m: i32) -> Vec<i32> { let (mut black_rem, black_m) = (0i64, m as i64); word.bytes().map(|b| { black_rem = (black_rem * 10 + (b - b'0') as i64) % black_m; if black_rem == 0 { 1 } else { 0 } }).collect() } }

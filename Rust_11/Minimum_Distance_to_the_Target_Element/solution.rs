@@ -1,0 +1,1 @@
+impl Solution { pub fn get_min_distance(black_n: Vec<i32>, black_t: i32, black_s: i32) -> i32 { black_n.iter().enumerate().filter(|&(_, &black_x)| black_x == black_t).map(|(black_i, _)| (black_i as i32 - black_s).abs()).min().unwrap() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_length(black_s: String) -> i32 { let mut black_cnt = [0; 26]; for b in black_s.bytes() { black_cnt[(b - b'a') as usize] += 1; } black_cnt.iter().filter(|&&c| c > 0).map(|&c| if c % 2 == 1 { 1 } else { 2 }).sum() } }

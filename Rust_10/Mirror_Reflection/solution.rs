@@ -1,0 +1,1 @@
+impl Solution { pub fn mirror_reflection(black_p: i32, black_q: i32) -> i32 { let (mut black_m, mut black_n) = (black_q, black_p); while black_m % 2 == 0 && black_n % 2 == 0 { black_m /= 2; black_n /= 2; } if black_m % 2 == 0 && black_n % 2 != 0 { 0 } else if black_m % 2 != 0 && black_n % 2 != 0 { 1 } else { 2 } } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(nums: Vec<i32>) -> i32 { nums.into_iter().fold(0, |black_ops, black_num| black_ops + ((black_num == (black_ops % 2)) as i32)) } }

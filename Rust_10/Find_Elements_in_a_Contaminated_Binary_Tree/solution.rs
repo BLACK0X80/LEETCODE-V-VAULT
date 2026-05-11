@@ -1,0 +1,3 @@
+use std::{collections::HashSet, rc::Rc, cell::RefCell};
+struct FindElements { black_s: HashSet<i32> }
+impl FindElements { fn new(black_r: Option<Rc<RefCell<TreeNode>>>) -> Self { let mut black_s = HashSet::new(); fn black_f(black_n: Option<Rc<RefCell<TreeNode>>>, black_v: i32, black_set: &mut HashSet<i32>) { if let Some(black_node) = black_n { black_set.insert(black_v); black_f(black_node.borrow().left.clone(), 2 * black_v + 1, black_set); black_f(black_node.borrow().right.clone(), 2 * black_v + 2, black_set); } } black_f(black_r, 0, &mut black_s); Self { black_s } } fn find(&self, black_t: i32) -> bool { self.black_s.contains(&black_t) } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn unique_xor_triplets(nums: Vec<i32>) -> i32 { let mut black_two = vec![false; 2048]; for i in 0..nums.len() { for j in i..nums.len() { black_two[(nums[i] ^ nums[j]) as usize] = true; } } let mut black_res = 0; for x in 0..2048 { if (0..nums.len()).any(|k| black_two[(x ^ nums[k]) as usize]) { black_res += 1; } } black_res } }

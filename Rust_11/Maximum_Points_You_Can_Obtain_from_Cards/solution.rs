@@ -1,0 +1,1 @@
+impl Solution { pub fn max_score(black_c: Vec<i32>, black_k: i32) -> i32 { let (black_k, black_n) = (black_k as usize, black_c.len()); let mut black_s: i32 = black_c.iter().take(black_k).sum(); let mut black_res = black_s; for black_i in 0..black_k { black_s += black_c[black_n - 1 - black_i] - black_c[black_k - 1 - black_i]; black_res = black_res.max(black_s); } black_res } }

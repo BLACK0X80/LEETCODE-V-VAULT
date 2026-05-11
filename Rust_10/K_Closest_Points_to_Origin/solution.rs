@@ -1,0 +1,1 @@
+impl Solution { pub fn k_closest(mut black_p: Vec<Vec<i32>>, black_k: i32) -> Vec<Vec<i32>> { black_p.sort_unstable_by_key(|black_v| black_v[0] * black_v[0] + black_v[1] * black_v[1]); black_p.into_iter().take(black_k as usize).collect() } }

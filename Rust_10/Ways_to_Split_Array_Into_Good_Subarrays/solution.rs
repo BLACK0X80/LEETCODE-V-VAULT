@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_good_subarray_splits(nums: Vec<i32>) -> i32 { let black_ones: Vec<usize> = nums.iter().enumerate().filter(|&(_, &x)| x == 1).map(|(i, _)| i).collect(); if black_ones.is_empty() { return 0; } black_ones.windows(2).fold(1i64, |black_acc, w| (black_acc * (w[1] - w[0]) as i64) % 1_000_000_007) as i32 } }

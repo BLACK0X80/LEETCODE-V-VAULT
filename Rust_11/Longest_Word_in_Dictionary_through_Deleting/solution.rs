@@ -1,0 +1,1 @@
+impl Solution { pub fn find_longest_word(black_s: String, mut black_d: Vec<String>) -> String { black_d.sort_unstable_by(|a, b| b.len().cmp(&a.len()).then(a.cmp(b))); for black_w in black_d { let mut black_it = black_s.chars(); if black_w.chars().all(|c| black_it.any(|x| x == c)) { return black_w; } } "".to_string() } }

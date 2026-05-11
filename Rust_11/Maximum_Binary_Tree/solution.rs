@@ -1,0 +1,2 @@
+use std::rc::Rc; use std::cell::RefCell;
+impl Solution { pub fn construct_maximum_binary_tree(black_n: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> { if black_n.is_empty() { None } else { let (black_idx, &black_max) = black_n.iter().enumerate().max_by_key(|&(_, x)| x).unwrap(); let mut black_root = TreeNode::new(black_max); black_root.left = Self::construct_maximum_binary_tree(black_n[..black_idx].to_vec()); black_root.right = Self::construct_maximum_binary_tree(black_n[black_idx + 1..].to_vec()); Some(Rc::new(RefCell::new(black_root))) } } }

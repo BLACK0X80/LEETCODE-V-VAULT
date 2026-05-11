@@ -1,0 +1,1 @@
+use std::collections::HashSet; impl Solution { pub fn max_count(black_b: Vec<i32>, black_n: i32, black_m: i32) -> i32 { let black_s: HashSet<i32> = black_b.into_iter().collect(); (1..=black_n).filter(|black_i| !black_s.contains(black_i)).scan(0, |black_a, black_x| { *black_a += black_x; Some(*black_a) }).take_while(|&black_sum| black_sum <= black_m).count() as i32 } }

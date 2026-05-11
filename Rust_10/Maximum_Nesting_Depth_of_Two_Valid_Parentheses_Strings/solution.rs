@@ -1,0 +1,1 @@
+impl Solution { pub fn max_depth_after_split(black_seq: String) -> Vec<i32> { black_seq.as_bytes().iter().enumerate().map(|(black_i, &black_c)| if black_c == b'(' { (black_i % 2) as i32 } else { (1 - black_i % 2) as i32 }).collect() } }

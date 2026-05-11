@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_weak_characters(mut black_p: Vec<Vec<i32>>) -> i32 { black_p.sort_unstable_by(|black_a, black_b| black_b[0].cmp(&black_a[0]).then_with(|| black_a[1].cmp(&black_b[1]))); let (mut black_max, mut black_count) = (0, 0); for black_char in black_p { if black_char[1] < black_max { black_count += 1; } else { black_max = black_char[1]; } } black_count } }

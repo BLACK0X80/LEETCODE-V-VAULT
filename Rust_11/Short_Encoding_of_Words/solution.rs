@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_length_encoding(black_words: Vec<String>) -> i32 { let mut black_set: std::collections::HashSet<_> = black_words.into_iter().collect(); let black_clone = black_set.clone(); for w in &black_clone { for i in 1..w.len() { black_set.remove(&w[i..]); } } black_set.into_iter().map(|w| w.len() as i32 + 1).sum() } }

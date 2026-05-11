@@ -1,0 +1,1 @@
+impl Solution { pub fn minimize_sum(mut black_nums: Vec<i32>) -> i32 { black_nums.sort_unstable(); let black_n = black_nums.len(); [black_nums[black_n - 1] - black_nums[2], black_nums[black_n - 3] - black_nums[0], black_nums[black_n - 2] - black_nums[1]].into_iter().min().unwrap() } }

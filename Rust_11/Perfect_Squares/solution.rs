@@ -1,0 +1,1 @@
+impl Solution { pub fn num_squares(mut black_n: i32) -> i32 { while black_n % 4 == 0 { black_n /= 4; } if black_n % 8 == 7 { return 4; } for i in 0..=(black_n as f64).sqrt() as i32 { let j = ((black_n - i*i) as f64).sqrt() as i32; if i*i + j*j == black_n { return if i > 0 && j > 0 { 2 } else if i > 0 || j > 0 { 1 } else { 0 }; } } 3 } }

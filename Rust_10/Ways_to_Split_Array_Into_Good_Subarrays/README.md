@@ -1,0 +1,58 @@
+# Ways to Split Array Into Good Subarrays
+
+**Difficulty:** Medium
+**Tags:** Array, Math, Dynamic Programming
+
+---
+
+## Problem
+
+<p>You are given a binary array <code>nums</code>.</p>
+
+<p>A subarray of an array is <strong>good</strong> if it contains <strong>exactly</strong> <strong>one</strong> element with the value <code>1</code>.</p>
+
+<p>Return <em>an integer denoting the number of ways to split the array </em><code>nums</code><em> into <strong>good</strong> subarrays</em>. As the number may be too large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.</p>
+
+<p>A subarray is a contiguous <strong>non-empty</strong> sequence of elements within an array.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [0,1,0,0,1]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> There are 3 ways to split nums into good subarrays:
+- [0,1] [0,0,1]
+- [0,1,0] [0,1]
+- [0,1,0,0] [1]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [0,1,0]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong> There is 1 way to split nums into good subarrays:
+- [0,1,0]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>0 &lt;= nums[i] &lt;= 1</code></li>
+</ul>
+
+
+## Hints
+
+1. If the array consists of only 0s answer is 0.
+2. In the final split, exactly one separation point exists between two consecutive 1s.
+3. In how many ways can separation points be put?
+
+## Solution
+
+```rust
+impl Solution { pub fn number_of_good_subarray_splits(nums: Vec<i32>) -> i32 { let black_ones: Vec<usize> = nums.iter().enumerate().filter(|&(_, &x)| x == 1).map(|(i, _)| i).collect(); if black_ones.is_empty() { return 0; } black_ones.windows(2).fold(1i64, |black_acc, w| (black_acc * (w[1] - w[0]) as i64) % 1_000_000_007) as i32 } }
+```

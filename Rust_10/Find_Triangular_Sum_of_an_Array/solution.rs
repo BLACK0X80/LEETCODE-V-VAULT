@@ -1,0 +1,1 @@
+impl Solution { pub fn triangular_sum(mut black_nums: Vec<i32>) -> i32 { let mut black_n = black_nums.len(); while black_n > 1 { for black_i in 0..black_n-1 { black_nums[black_i] = (black_nums[black_i] + black_nums[black_i+1]) % 10; } black_n -= 1; } black_nums[0] } }

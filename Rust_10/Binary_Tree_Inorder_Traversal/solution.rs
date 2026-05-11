@@ -1,0 +1,1 @@
+use std::rc::Rc; use std::cell::RefCell;impl Solution { pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> { let mut res = vec![]; Self::dfs(&root, &mut res); res } fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) { if let Some(n) = node { let n = n.borrow(); Self::dfs(&n.left, res); res.push(n.val); Self::dfs(&n.right, res); } } }

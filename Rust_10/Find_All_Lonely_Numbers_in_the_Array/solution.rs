@@ -1,0 +1,1 @@
+impl Solution { pub fn find_lonely(nums: Vec<i32>) -> Vec<i32> { let mut black_m = std::collections::HashMap::new(); for &x in &nums { *black_m.entry(x).or_insert(0) += 1; } nums.into_iter().filter(|&x| black_m[&x] == 1 && !black_m.contains_key(&(x+1)) && !black_m.contains_key(&(x-1))).collect() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn min_swaps(s: String) -> i32 { let (mut black_size, black_str) = (0, s.as_bytes()); for &black_c in black_str { if black_c == b'[' { black_size += 1; } else if black_size > 0 { black_size -= 1; } } (black_size + 1) / 2 } }

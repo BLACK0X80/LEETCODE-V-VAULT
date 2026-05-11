@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_score(a: i32, b: i32, c: i32) -> i32 { let mut black_v = vec![a, b, c]; black_v.sort(); (black_v[0] + black_v[1]).min((black_v[0] + black_v[1] + black_v[2]) / 2) } }

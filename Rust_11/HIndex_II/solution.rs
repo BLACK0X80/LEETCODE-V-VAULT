@@ -1,0 +1,1 @@
+impl Solution { pub fn h_index(black_c: Vec<i32>) -> i32 { let black_n = black_c.len() as i32; let (mut black_l, mut black_r) = (0, black_n - 1); while black_l <= black_r { let black_m = black_l + (black_r - black_l) / 2; if black_c[black_m as usize] >= black_n - black_m { black_r = black_m - 1; } else { black_l = black_m + 1; } } black_n - black_l } }

@@ -1,0 +1,82 @@
+# Longest Palindrome After Substring Concatenation I
+
+**Difficulty:** Medium
+**Tags:** Two Pointers, String, Dynamic Programming, Enumeration
+
+---
+
+## Problem
+
+<p>You are given two strings, <code>s</code> and <code>t</code>.</p>
+
+<p>You can create a new string by selecting a <span data-keyword="substring">substring</span> from <code>s</code> (possibly empty) and a substring from <code>t</code> (possibly empty), then concatenating them <strong>in order</strong>.</p>
+
+<p>Return the length of the <strong>longest</strong> <span data-keyword="palindrome-string">palindrome</span> that can be formed this way.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;a&quot;, t = &quot;a&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">2</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>Concatenating <code>&quot;a&quot;</code> from <code>s</code> and <code>&quot;a&quot;</code> from <code>t</code> results in <code>&quot;aa&quot;</code>, which is a palindrome of length 2.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;abc&quot;, t = &quot;def&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">1</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>Since all characters are different, the longest palindrome is any single character, so the answer is 1.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;b&quot;, t = &quot;aaaa&quot;</span></p>
+
+<p><strong>Output:</strong> 4</p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>Selecting &quot;<code>aaaa</code>&quot; from <code>t</code> is the longest palindrome, so the answer is 4.</p>
+</div>
+
+<p><strong class="example">Example 4:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;abcde&quot;, t = &quot;ecdba&quot;</span></p>
+
+<p><strong>Output:</strong> 5</p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>Concatenating <code>&quot;abc&quot;</code> from <code>s</code> and <code>&quot;ba&quot;</code> from <code>t</code> results in <code>&quot;abcba&quot;</code>, which is a palindrome of length 5.</p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length, t.length &lt;= 30</code></li>
+	<li><code>s</code> and <code>t</code> consist of lowercase English letters.</li>
+</ul>
+
+
+## Hints
+
+1. Brute force
+
+## Solution
+
+```rust
+impl Solution { pub fn longest_palindrome(black_s: String, black_t: String) -> i32 { let (black_n, black_m) = (black_s.len(), black_t.len()); let mut black_mx = 0; let black_expand = |black_b: &[u8], mut black_l: i32, mut black_r: i32| -> i32 { while black_l >= 0 && black_r < black_b.len() as i32 && black_b[black_l as usize] == black_b[black_r as usize] { black_l -= 1; black_r += 1; } black_r - black_l - 1 }; for black_i in 0..=black_n { for black_j in 0..=black_m { let mut black_comb = black_s.as_bytes()[..black_i].to_vec(); black_comb.extend_from_slice(&black_t.as_bytes()[black_j..]); let black_len = black_comb.len(); for black_c in 0..black_len { black_mx = black_mx.max(black_expand(&black_comb, black_c as i32, black_c as i32)); black_mx = black_mx.max(black_expand(&black_comb, black_c as i32, (black_c + 1) as i32)); } } } black_mx } }
+```

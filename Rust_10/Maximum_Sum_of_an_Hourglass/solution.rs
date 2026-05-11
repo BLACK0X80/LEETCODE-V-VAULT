@@ -1,0 +1,1 @@
+impl Solution { pub fn max_sum(black_g: Vec<Vec<i32>>) -> i32 { let (mut black_res, black_m, black_n) = (0, black_g.len(), black_g[0].len()); for i in 0..black_m - 2 { for j in 0..black_n - 2 { black_res = black_res.max(black_g[i][j] + black_g[i][j+1] + black_g[i][j+2] + black_g[i+1][j+1] + black_g[i+2][j] + black_g[i+2][j+1] + black_g[i+2][j+2]); } } black_res } }

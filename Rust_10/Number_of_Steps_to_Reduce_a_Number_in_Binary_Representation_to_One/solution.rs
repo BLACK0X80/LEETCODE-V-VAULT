@@ -1,0 +1,1 @@
+impl Solution { pub fn num_steps(black_s: String) -> i32 { let (mut black_res, mut black_carry, black_b) = (0, 0, black_s.as_bytes()); for black_i in (1..black_b.len()).rev() { if (black_b[black_i] - b'0') as i32 + black_carry == 1 { black_res += 2; black_carry = 1; } else { black_res += 1; } } black_res + black_carry } }

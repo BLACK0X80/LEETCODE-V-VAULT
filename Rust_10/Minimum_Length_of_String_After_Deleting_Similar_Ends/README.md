@@ -1,0 +1,70 @@
+# Minimum Length of String After Deleting Similar Ends
+
+**Difficulty:** Medium
+**Tags:** Two Pointers, String
+
+---
+
+## Problem
+
+<p>Given a string <code>s</code> consisting only of characters <code>&#39;a&#39;</code>, <code>&#39;b&#39;</code>, and <code>&#39;c&#39;</code>. You are asked to apply the following algorithm on the string any number of times:</p>
+
+<ol>
+	<li>Pick a <strong>non-empty</strong> prefix from the string <code>s</code> where all the characters in the prefix are equal.</li>
+	<li>Pick a <strong>non-empty</strong> suffix from the string <code>s</code> where all the characters in this suffix are equal.</li>
+	<li>The prefix and the suffix should not intersect at any index.</li>
+	<li>The characters from the prefix and suffix must be the same.</li>
+	<li>Delete both the prefix and the suffix.</li>
+</ol>
+
+<p>Return <em>the <strong>minimum length</strong> of </em><code>s</code> <em>after performing the above operation any number of times (possibly zero times)</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;ca&quot;
+<strong>Output:</strong> 2
+<strong>Explanation: </strong>You can&#39;t remove any characters, so the string stays as is.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;cabaabac&quot;
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> An optimal sequence of operations is:
+- Take prefix = &quot;c&quot; and suffix = &quot;c&quot; and remove them, s = &quot;abaaba&quot;.
+- Take prefix = &quot;a&quot; and suffix = &quot;a&quot; and remove them, s = &quot;baab&quot;.
+- Take prefix = &quot;b&quot; and suffix = &quot;b&quot; and remove them, s = &quot;aa&quot;.
+- Take prefix = &quot;a&quot; and suffix = &quot;a&quot; and remove them, s = &quot;&quot;.</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;aabccabba&quot;
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> An optimal sequence of operations is:
+- Take prefix = &quot;aa&quot; and suffix = &quot;a&quot; and remove them, s = &quot;bccabb&quot;.
+- Take prefix = &quot;b&quot; and suffix = &quot;bb&quot; and remove them, s = &quot;cca&quot;.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s</code> only consists of characters <code>&#39;a&#39;</code>, <code>&#39;b&#39;</code>, and <code>&#39;c&#39;</code>.</li>
+</ul>
+
+
+## Hints
+
+1. If both ends have distinct characters, no more operations can be made. Otherwise, the only operation is to remove all of the same characters from both ends. We will do this as many times as we can.
+2. Note that if the length is equal 1 the answer is 1
+
+## Solution
+
+```rust
+impl Solution { pub fn minimum_length(black_s: String) -> i32 { let black_b = black_s.as_bytes(); let (mut black_i, mut black_j) = (0, black_b.len() - 1); while black_i < black_j && black_b[black_i] == black_b[black_j] { let black_c = black_b[black_i]; while black_i <= black_j && black_b[black_i] == black_c { black_i += 1; } while black_j >= black_i && black_b[black_j] == black_c { black_j -= 1; } } (black_j as i32 - black_i as i32 + 1).max(0) } }
+```

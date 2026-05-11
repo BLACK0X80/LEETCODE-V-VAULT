@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(mut black_n: Vec<i32>) -> i32 { let (mut black_res, black_len) = (0, black_n.len()); for i in 0..black_len - 2 { if black_n[i] == 0 { black_res += 1; for j in 0..3 { black_n[i+j] ^= 1; } } } if black_n.iter().all(|&x| x == 1) { black_res } else { -1 } } }

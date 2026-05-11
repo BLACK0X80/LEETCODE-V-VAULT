@@ -1,0 +1,1 @@
+impl Solution { pub fn find_min(black_n: Vec<i32>) -> i32 { let (mut black_l, mut black_r) = (0, black_n.len() - 1); while black_l < black_r { let black_m = black_l + (black_r - black_l) / 2; if black_n[black_m] > black_n[black_r] { black_l = black_m + 1; } else { black_r = black_m; } } black_n[black_l] } }

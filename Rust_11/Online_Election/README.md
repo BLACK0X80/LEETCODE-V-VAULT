@@ -1,0 +1,62 @@
+# Online Election
+
+**Difficulty:** Medium
+**Tags:** Array, Hash Table, Binary Search, Design
+
+---
+
+## Problem
+
+<p>You are given two integer arrays <code>persons</code> and <code>times</code>. In an election, the <code>i<sup>th</sup></code> vote was cast for <code>persons[i]</code> at time <code>times[i]</code>.</p>
+
+<p>For each query at a time <code>t</code>, find the person that was leading the election at time <code>t</code>. Votes cast at time <code>t</code> will count towards our query. In the case of a tie, the most recent vote (among tied candidates) wins.</p>
+
+<p>Implement the <code>TopVotedCandidate</code> class:</p>
+
+<ul>
+	<li><code>TopVotedCandidate(int[] persons, int[] times)</code> Initializes the object with the <code>persons</code> and <code>times</code> arrays.</li>
+	<li><code>int q(int t)</code> Returns the number of the person that was leading the election at time <code>t</code> according to the mentioned rules.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;TopVotedCandidate&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;]
+[[[0, 1, 1, 0, 0, 1, 0], [0, 5, 10, 15, 20, 25, 30]], [3], [12], [25], [15], [24], [8]]
+<strong>Output</strong>
+[null, 0, 1, 1, 0, 0, 1]
+
+<strong>Explanation</strong>
+TopVotedCandidate topVotedCandidate = new TopVotedCandidate([0, 1, 1, 0, 0, 1, 0], [0, 5, 10, 15, 20, 25, 30]);
+topVotedCandidate.q(3); // return 0, At time 3, the votes are [0], and 0 is leading.
+topVotedCandidate.q(12); // return 1, At time 12, the votes are [0,1,1], and 1 is leading.
+topVotedCandidate.q(25); // return 1, At time 25, the votes are [0,1,1,0,0,1], and 1 is leading (as ties go to the most recent vote.)
+topVotedCandidate.q(15); // return 0
+topVotedCandidate.q(24); // return 0
+topVotedCandidate.q(8); // return 1
+
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= persons.length &lt;= 5000</code></li>
+	<li><code>times.length == persons.length</code></li>
+	<li><code>0 &lt;= persons[i] &lt; persons.length</code></li>
+	<li><code>0 &lt;= times[i] &lt;= 10<sup>9</sup></code></li>
+	<li><code>times</code> is sorted in a strictly increasing order.</li>
+	<li><code>times[0] &lt;= t &lt;= 10<sup>9</sup></code></li>
+	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>q</code>.</li>
+</ul>
+
+
+
+## Solution
+
+```rust
+struct TopVotedCandidate { black_times: Vec<i32>, black_winners: Vec<i32> }
+impl TopVotedCandidate { fn new(persons: Vec<i32>, times: Vec<i32>) -> Self { let mut black_counts = std::collections::HashMap::new(); let (mut black_winners, mut black_lead) = (vec![], -1); for &p in &persons { let count = black_counts.entry(p).or_insert(0); *count += 1; if black_lead == -1 || *count >= *black_counts.get(&black_lead).unwrap() { black_lead = p; } black_winners.push(black_lead); } Self { black_times: times, black_winners } } fn q(&self, t: i32) -> i32 { let idx = match self.black_times.binary_search(&t) { Ok(i) => i, Err(i) => i - 1 }; self.black_winners[idx] } }
+```

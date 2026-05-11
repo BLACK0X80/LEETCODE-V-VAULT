@@ -1,0 +1,1 @@
+impl Solution { pub fn get_good_indices(v: Vec<Vec<i32>>, t: i32) -> Vec<i32> { let black_p = |mut a: i32, mut b: i32, m: i32| { let mut r = 1; a %= m; while b > 0 { if b % 2 == 1 { r = (r * a) % m; } a = (a * a) % m; b /= 2; } r }; v.iter().enumerate().filter(|(_, v)| black_p(black_p(v[0], v[1], 10), v[2], v[3]) == t).map(|(i, _)| i as i32).collect() } }

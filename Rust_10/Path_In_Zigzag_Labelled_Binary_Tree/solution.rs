@@ -1,0 +1,1 @@
+impl Solution { pub fn path_in_zig_zag_tree(mut black_l: i32) -> Vec<i32> { let mut black_res = vec![]; while black_l > 0 { black_res.push(black_l); let black_d = (black_l as f64).log2() as u32; black_l = ((1 << black_d) + (1 << (black_d + 1)) - 1 - black_l) / 2; } black_res.reverse(); black_res } }

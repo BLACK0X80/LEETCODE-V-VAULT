@@ -1,0 +1,1 @@
+impl Solution { pub fn remove_occurrences(black_s: String, black_part: String) -> String { let mut black_res = String::new(); let black_p = black_part.as_str(); for black_c in black_s.chars() { black_res.push(black_c); if black_res.ends_with(black_p) { black_res.truncate(black_res.len() - black_p.len()); } } black_res } }
