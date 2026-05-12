@@ -1,0 +1,1 @@
+impl Solution { pub fn length_of_longest_subsequence(nums: Vec<i32>, target: i32) -> i32 { let mut black_dp = vec![-1; target as usize + 1]; black_dp[0] = 0; for x in nums { for j in (x as usize..=target as usize).rev() { if black_dp[j - x as usize] != -1 { black_dp[j] = black_dp[j].max(black_dp[j - x as usize] + 1); } } } black_dp[target as usize] } }

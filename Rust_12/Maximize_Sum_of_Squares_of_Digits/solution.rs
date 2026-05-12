@@ -1,0 +1,1 @@
+impl Solution { pub fn max_sum_of_squares(black_n: i32, mut black_s: i32) -> String { if black_s > black_n * 9 { return "".to_string(); } (0..black_n).map(|_| { let black_d = black_s.min(9); black_s -= black_d; (black_d as u8 + b'0') as char }).collect() } }

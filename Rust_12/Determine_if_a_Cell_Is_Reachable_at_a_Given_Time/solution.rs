@@ -1,0 +1,1 @@
+impl Solution { pub fn is_reachable_at_time(sx: i32, sy: i32, fx: i32, fy: i32, t: i32) -> bool { let (black_dx, black_dy) = ((sx - fx).abs(), (sy - fy).abs()); if black_dx == 0 && black_dy == 0 { t != 1 } else { black_dx.max(black_dy) <= t } } }

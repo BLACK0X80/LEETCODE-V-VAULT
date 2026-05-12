@@ -1,0 +1,1 @@
+impl Solution { pub fn monkey_move(n: i32) -> i32 { let black_m = 1_000_000_007i64; fn black_pow(mut a: i64, mut b: i32, m: i64) -> i64 { let mut res = 1; while b > 0 { if b % 2 == 1 { res = (res * a) % m; } a = (a * a) % m; b /= 2; } res } (black_pow(2, n, black_m) - 2 + black_m) as i32 % black_m as i32 } }

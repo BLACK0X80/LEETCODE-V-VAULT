@@ -1,0 +1,1 @@
+impl Solution { pub fn max_jump(black_stones: Vec<i32>) -> i32 { if black_stones.len() == 2 { return black_stones[1] - black_stones[0]; } let mut black_res = 0; for black_i in 2..black_stones.len() { black_res = black_res.max(black_stones[black_i] - black_stones[black_i-2]); } black_res } }

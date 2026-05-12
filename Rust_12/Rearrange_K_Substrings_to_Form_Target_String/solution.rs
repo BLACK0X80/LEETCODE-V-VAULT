@@ -1,0 +1,1 @@
+impl Solution { pub fn is_possible_to_rearrange(s: String, t: String, k: i32) -> bool { let (n, mut black_map) = (s.len() / k as usize, std::collections::HashMap::new()); s.as_bytes().chunks(n).for_each(|c| *black_map.entry(c).or_insert(0) += 1); t.as_bytes().chunks(n).all(|c| { let count = black_map.entry(c).or_insert(0); if *count > 0 { *count -= 1; true } else { false } }) } }

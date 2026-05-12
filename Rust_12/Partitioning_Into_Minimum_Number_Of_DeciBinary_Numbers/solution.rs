@@ -1,0 +1,1 @@
+impl Solution { pub fn min_partitions(black_n: String) -> i32 { black_n.chars().map(|c| c.to_digit(10).unwrap() as i32).max().unwrap() } }

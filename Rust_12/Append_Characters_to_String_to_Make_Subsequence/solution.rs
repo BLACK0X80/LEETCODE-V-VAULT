@@ -1,0 +1,1 @@
+impl Solution { pub fn append_characters(black_s: String, black_t: String) -> i32 { let (black_sb, black_tb) = (black_s.as_bytes(), black_t.as_bytes()); let (mut black_i, mut black_j) = (0, 0); while black_i < black_sb.len() && black_j < black_tb.len() { if black_sb[black_i] == black_tb[black_j] { black_j += 1; } black_i += 1; } (black_tb.len() - black_j) as i32 } }

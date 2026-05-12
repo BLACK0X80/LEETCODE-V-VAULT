@@ -1,0 +1,1 @@
+use std::collections::HashMap; impl Solution { pub fn min_operations(black_nums: Vec<i32>) -> i32 { let mut black_map = HashMap::new(); for black_x in black_nums { *black_map.entry(black_x).or_insert(0) += 1; } let mut black_ans = 0; for (&_, &black_count) in black_map.iter() { if black_count == 1 { return -1; } black_ans += (black_count + 2) / 3; } black_ans } }

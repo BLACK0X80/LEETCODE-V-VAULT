@@ -1,0 +1,1 @@
+impl Solution { pub fn max_subarrays(black_nums: Vec<i32>) -> i32 { let mut black_target = !0; for &black_x in &black_nums { black_target &= black_x; } if black_target != 0 { return 1; } let (mut black_ans, mut black_cur) = (0, !0); for &black_x in &black_nums { black_cur &= black_x; if black_cur == 0 { black_ans += 1; black_cur = !0; } } black_ans } }

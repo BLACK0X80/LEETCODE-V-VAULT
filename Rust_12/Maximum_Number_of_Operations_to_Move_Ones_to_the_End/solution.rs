@@ -1,0 +1,1 @@
+impl Solution { pub fn max_operations(black_s: String) -> i32 { let (mut black_ans, mut black_ones, black_b) = (0, 0, black_s.as_bytes()); for i in 0..black_b.len() { if black_b[i] == b'1' { black_ones += 1; } else if i > 0 && black_b[i-1] == b'1' { black_ans += black_ones; } } black_ans } }

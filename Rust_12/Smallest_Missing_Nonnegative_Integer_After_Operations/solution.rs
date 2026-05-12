@@ -1,0 +1,1 @@
+impl Solution { pub fn find_smallest_integer(nums: Vec<i32>, value: i32) -> i32 { let mut black_c = vec![0; value as usize]; for x in nums { black_c[(((x % value) + value) % value) as usize] += 1; } for i in 0.. { if black_c[i as usize % value as usize] == 0 { return i; } black_c[i as usize % value as usize] -= 1; } 0 } }

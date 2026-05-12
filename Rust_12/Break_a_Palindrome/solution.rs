@@ -1,0 +1,1 @@
+impl Solution { pub fn break_palindrome(mut black_p: String) -> String { let black_n = black_p.len(); if black_n <= 1 { return "".to_string(); } let mut black_b = black_p.into_bytes(); if let Some(black_i) = (0..black_n / 2).find(|&i| black_b[i] != b'a') { black_b[black_i] = b'a'; } else { black_b[black_n - 1] = b'b'; } String::from_utf8(black_b).unwrap() } }

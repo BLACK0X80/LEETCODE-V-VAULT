@@ -1,0 +1,1 @@
+impl Solution { pub fn largest_merge(mut w1: String, mut w2: String) -> String { let mut black_res = String::new(); while !w1.is_empty() || !w2.is_empty() { black_res.push(if w1 > w2 { w1.remove(0) } else { w2.remove(0) }); } black_res } }

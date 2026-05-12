@@ -1,0 +1,60 @@
+# Maximum Value after Insertion
+
+**Difficulty:** Medium
+**Tags:** String, Greedy
+
+---
+
+## Problem
+
+<p>You are given a very large integer <code>n</code>, represented as a string,​​​​​​ and an integer digit <code>x</code>. The digits in <code>n</code> and the digit <code>x</code> are in the <strong>inclusive</strong> range <code>[1, 9]</code>, and <code>n</code> may represent a <b>negative</b> number.</p>
+
+<p>You want to <strong>maximize </strong><code>n</code><strong>&#39;s numerical value</strong> by inserting <code>x</code> anywhere in the decimal representation of <code>n</code>​​​​​​. You <strong>cannot</strong> insert <code>x</code> to the left of the negative sign.</p>
+
+<ul>
+	<li>For example, if <code>n = 73</code> and <code>x = 6</code>, it would be best to insert it between <code>7</code> and <code>3</code>, making <code>n = 763</code>.</li>
+	<li>If <code>n = -55</code> and <code>x = 2</code>, it would be best to insert it before the first <code>5</code>, making <code>n = -255</code>.</li>
+</ul>
+
+<p>Return <em>a string representing the <strong>maximum</strong> value of </em><code>n</code><em>​​​​​​ after the insertion</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = &quot;99&quot;, x = 9
+<strong>Output:</strong> &quot;999&quot;
+<strong>Explanation:</strong> The result is the same regardless of where you insert 9.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = &quot;-13&quot;, x = 2
+<strong>Output:</strong> &quot;-123&quot;
+<strong>Explanation:</strong> You can make n one of {-213, -123, -132}, and the largest of those three is -123.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= x &lt;= 9</code></li>
+	<li>The digits in <code>n</code>​​​ are in the range <code>[1, 9]</code>.</li>
+	<li><code>n</code> is a valid representation of an integer.</li>
+	<li>In the case of a negative <code>n</code>,​​​​​​ it will begin with <code>&#39;-&#39;</code>.</li>
+</ul>
+
+
+## Hints
+
+1. Note that if the number is negative it's the same as positive but you look for the minimum instead.
+2. In the case of maximum, if s[i] < x it's optimal that x is put before s[i].
+3. In the case of minimum, if s[i] > x it's optimal that x is put before s[i].
+
+## Solution
+
+```rust
+impl Solution { pub fn max_value(n: String, x: i32) -> String { let (black_x, mut black_res, black_b) = ((x as u8 + b'0'), n.clone(), n.as_bytes()); let black_neg = black_b[0] == b'-'; let mut black_i = if black_neg { 1 } else { 0 }; while black_i < black_b.len() && (if black_neg { black_b[black_i] <= black_x } else { black_b[black_i] >= black_x }) { black_i += 1; } black_res.insert(black_i, black_x as char); black_res } }
+```

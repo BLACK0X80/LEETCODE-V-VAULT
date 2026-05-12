@@ -1,0 +1,1 @@
+impl Solution { pub fn longest_continuous_substring(black_s: String) -> i32 { let (mut black_max, mut black_cur, black_b) = (1, 1, black_s.as_bytes()); for i in 1..black_b.len() { if black_b[i] == black_b[i-1] + 1 { black_cur += 1; } else { black_cur = 1; } black_max = black_max.max(black_cur); } black_max } }

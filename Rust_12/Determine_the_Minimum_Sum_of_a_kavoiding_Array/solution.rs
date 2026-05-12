@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_sum(n: i32, k: i32) -> i32 { let black_m = (k / 2).min(n); (black_m * (black_m + 1) / 2) + ((n - black_m) * (2 * k + (n - black_m - 1)) / 2) } }

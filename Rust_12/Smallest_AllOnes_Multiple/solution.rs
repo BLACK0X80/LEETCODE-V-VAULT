@@ -1,0 +1,1 @@
+impl Solution { pub fn min_all_one_multiple(black_k: i32) -> i32 { if black_k % 2 == 0 || black_k % 5 == 0 { return -1; } let (mut black_r, mut black_l) = (1 % black_k, 1); while black_r != 0 { black_r = (black_r * 10 + 1) % black_k; black_l += 1; } black_l } }

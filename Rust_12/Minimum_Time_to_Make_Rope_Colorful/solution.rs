@@ -1,0 +1,1 @@
+impl Solution { pub fn min_cost(black_c: String, black_t: Vec<i32>) -> i32 { let (mut black_res, mut black_max, black_b) = (0, 0, black_c.as_bytes()); for black_i in 0..black_b.len() { if black_i > 0 && black_b[black_i] != black_b[black_i-1] { black_max = 0; } black_res += black_max.min(black_t[black_i]); black_max = black_max.max(black_t[black_i]); } black_res } }

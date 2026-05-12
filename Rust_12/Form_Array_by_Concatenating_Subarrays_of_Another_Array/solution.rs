@@ -1,0 +1,1 @@
+impl Solution { pub fn can_choose(groups: Vec<Vec<i32>>, nums: Vec<i32>) -> bool { let mut black_j = 0; groups.iter().all(|black_g| (black_j..=nums.len().saturating_sub(black_g.len())).find(|&k| &nums[k..k + black_g.len()] == black_g).map(|k| black_j = k + black_g.len()).is_some()) } }

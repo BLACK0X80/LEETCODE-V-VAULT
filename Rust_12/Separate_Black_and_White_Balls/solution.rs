@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_steps(black_s: String) -> i64 { let (mut black_ans, mut black_ones) = (0i64, 0i64); for black_b in black_s.bytes() { if black_b == b'1' { black_ones += 1; } else { black_ans += black_ones; } } black_ans } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn count_house_placements(n: i32) -> i32 { let (mut black_a, mut black_b, black_mod) = (1i64, 1i64, 1_000_000_007i64); for _ in 0..n { let black_tmp = (black_a + black_b) % black_mod; black_a = black_b; black_b = black_tmp; } ((black_b * black_b) % black_mod) as i32 } }

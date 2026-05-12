@@ -1,0 +1,1 @@
+impl Solution { pub fn successful_pairs(black_s: Vec<i32>, mut black_p: Vec<i32>, black_target: i64) -> Vec<i32> { black_p.sort_unstable(); black_s.into_iter().map(|black_v| { let black_req = (black_target + black_v as i64 - 1) / black_v as i64; (black_p.len() - black_p.partition_point(|&black_val| (black_val as i64) < black_req)) as i32 }).collect() } }

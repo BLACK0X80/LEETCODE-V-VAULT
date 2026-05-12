@@ -1,0 +1,1 @@
+use std::collections::HashSet; impl Solution { pub fn max_distinct(black_s: String) -> i32 { black_s.chars().collect::<HashSet<_>>().len() as i32 } }

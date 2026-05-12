@@ -1,0 +1,1 @@
+impl Solution { pub fn find_the_winner(n: i32, k: i32) -> i32 { (1..=n).fold(0, |black_acc, black_i| (black_acc + k) % black_i) + 1 } }

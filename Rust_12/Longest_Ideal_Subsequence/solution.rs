@@ -1,0 +1,1 @@
+impl Solution { pub fn longest_ideal_string(s: String, k: i32) -> i32 { let mut black_dp = vec![0; 26]; for black_c in s.bytes() { let black_v = (black_c - b'a') as usize; let (black_l, black_r) = (black_v.saturating_sub(k as usize), (black_v + k as usize).min(25)); black_dp[black_v] = 1 + *black_dp[black_l..=black_r].iter().max().unwrap(); } *black_dp.iter().max().unwrap() } }

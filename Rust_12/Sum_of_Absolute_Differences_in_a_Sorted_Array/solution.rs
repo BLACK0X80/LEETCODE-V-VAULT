@@ -1,0 +1,1 @@
+impl Solution { pub fn get_sum_absolute_differences(nums: Vec<i32>) -> Vec<i32> { let (black_n, black_total) = (nums.len(), nums.iter().sum::<i32>()); let mut black_pre = 0; nums.iter().enumerate().map(|(i, &black_x)| { let black_res = (black_x * i as i32 - black_pre) + (black_total - black_pre - black_x * (black_n - i) as i32); black_pre += black_x; black_res }).collect() } }

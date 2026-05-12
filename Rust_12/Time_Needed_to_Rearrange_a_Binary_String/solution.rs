@@ -1,0 +1,1 @@
+impl Solution { pub fn seconds_to_remove_occurrences(s: String) -> i32 { let (mut black_ans, mut black_zeros) = (0, 0); for &black_b in s.as_bytes() { if black_b == b'0' { black_zeros += 1; } else if black_zeros > 0 { black_ans = (black_ans + 1).max(black_zeros); } } black_ans } }

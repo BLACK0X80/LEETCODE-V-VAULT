@@ -1,0 +1,1 @@
+impl Solution { pub fn minimize_array_value(nums: Vec<i32>) -> i32 { let (mut black_sum, mut black_ans) = (0i64, 0i64); for (i, &black_x) in nums.iter().enumerate() { black_sum += black_x as i64; black_ans = black_ans.max((black_sum + i as i64) / (i as i64 + 1)); } black_ans as i32 } }

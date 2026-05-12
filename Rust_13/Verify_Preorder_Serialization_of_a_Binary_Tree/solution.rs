@@ -1,0 +1,1 @@
+impl Solution { pub fn is_valid_serialization(black_p: String) -> bool { let (mut black_slots, black_nodes) = (1, black_p.split(',')); for node in black_nodes { black_slots -= 1; if black_slots < 0 { return false; } if node != "#" { black_slots += 2; } } black_slots == 0 } }

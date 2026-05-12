@@ -1,0 +1,1 @@
+impl Solution { pub fn max_array_value(black_nums: Vec<i32>) -> i64 { let mut black_res = *black_nums.last().unwrap() as i64; for black_i in (0..black_nums.len() - 1).rev() { if black_nums[black_i] as i64 <= black_res { black_res += black_nums[black_i] as i64; } else { black_res = black_nums[black_i] as i64; } } black_res } }

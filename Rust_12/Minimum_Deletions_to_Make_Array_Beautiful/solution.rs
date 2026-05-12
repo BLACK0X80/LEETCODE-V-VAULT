@@ -1,0 +1,1 @@
+impl Solution { pub fn min_deletion(black_nums: Vec<i32>) -> i32 { let (mut black_del, black_n) = (0, black_nums.len()); for black_i in 0..black_n-1 { if (black_i - black_del) % 2 == 0 && black_nums[black_i] == black_nums[black_i+1] { black_del += 1; } } if (black_n - black_del) % 2 != 0 { black_del += 1; } black_del as i32 } }

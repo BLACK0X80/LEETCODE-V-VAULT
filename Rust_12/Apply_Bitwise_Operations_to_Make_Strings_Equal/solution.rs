@@ -1,0 +1,1 @@
+impl Solution { pub fn make_strings_equal(black_s: String, black_t: String) -> bool { black_s.contains('1') == black_t.contains('1') } }
