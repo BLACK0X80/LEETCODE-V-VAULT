@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_energy(energy: Vec<i32>, k: i32) -> i32 { let (n, k) = (energy.len(), k as usize); let mut black_dp = energy.clone(); for i in (0..n-k).rev() { black_dp[i] += black_dp[i+k]; } *black_dp.iter().max().unwrap() } }

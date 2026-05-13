@@ -1,0 +1,1 @@
+impl Solution { pub fn min_length_after_removals(black_s: String) -> i32 { (black_s.chars().filter(|&black_c| black_c == 'a').count() as i32 - black_s.chars().filter(|&black_c| black_c == 'b').count() as i32).abs() } }

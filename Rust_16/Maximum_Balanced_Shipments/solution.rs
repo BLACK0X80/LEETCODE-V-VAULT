@@ -1,0 +1,1 @@
+impl Solution { pub fn max_balanced_shipments(black_w: Vec<i32>) -> i32 { let (mut black_res, mut black_max) = (0, 0); for black_a in black_w { black_max = black_max.max(black_a); if black_a < black_max { black_res += 1; black_max = 0; } } black_res } }

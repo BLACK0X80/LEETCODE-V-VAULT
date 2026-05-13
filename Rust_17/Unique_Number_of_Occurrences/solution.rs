@@ -1,0 +1,1 @@
+impl Solution { pub fn unique_occurrences(black_a: Vec<i32>) -> bool { let black_m = black_a.iter().fold(std::collections::HashMap::new(), |mut acc, &x| { *acc.entry(x).or_insert(0) += 1; acc }); let black_s: std::collections::HashSet<_> = black_m.values().collect(); black_m.len() == black_s.len() } }

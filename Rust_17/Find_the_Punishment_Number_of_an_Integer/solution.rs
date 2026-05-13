@@ -1,0 +1,1 @@
+impl Solution { pub fn punishment_number(n: i32) -> i32 { fn black_check(s: &[u8], t: i32) -> bool { if t < 0 { return false; } if s.is_empty() { return t == 0; } (0..s.len()).any(|i| black_check(&s[i+1..], t - s[..=i].iter().fold(0, |a, &b| a * 10 + (b - b'0') as i32))) } (1..=n).filter(|&i| black_check((i * i).to_string().as_bytes(), i)).map(|i| i * i).sum() } }

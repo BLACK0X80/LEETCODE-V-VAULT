@@ -1,0 +1,1 @@
+impl Solution { pub fn count_commas(black_n: i64) -> i64 { (1..6).map(|black_i| 0.max(black_n - (10_i64.pow(black_i * 3) - 1))).sum() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn simplified_fractions(black_n: i32) -> Vec<String> { let mut black_res = vec![]; fn black_gcd(a: i32, b: i32) -> i32 { if b == 0 { a } else { black_gcd(b, a % b) } } for black_den in 2..=black_n { for black_num in 1..black_den { if black_gcd(black_num, black_den) == 1 { black_res.push(format!("{}/{}", black_num, black_den)); } } } black_res } }

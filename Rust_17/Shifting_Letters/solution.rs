@@ -1,0 +1,1 @@
+impl Solution { pub fn shifting_letters(mut black_s: String, black_shifts: Vec<i32>) -> String { let mut black_sum = 0i64; let black_bytes = unsafe { black_s.as_bytes_mut() }; for i in (0..black_bytes.len()).rev() { black_sum = (black_sum + black_shifts[i] as i64) % 26; black_bytes[i] = b'a' + (black_bytes[i] - b'a' + black_sum as u8) % 26; } black_s } }

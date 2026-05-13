@@ -1,0 +1,1 @@
+impl Solution { pub fn max_num_of_marked_indices(mut black_nums: Vec<i32>) -> i32 { black_nums.sort_unstable(); let (mut black_i, black_n) = (0, black_nums.len()); ( (black_n + 1) / 2 .. black_n ).for_each(|black_j| if black_i < black_n / 2 && 2 * black_nums[black_i] <= black_nums[black_j] { black_i += 1; }); (black_i * 2) as i32 } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_length(nums: Vec<i32>) -> i32 { let mut black_dp = [[0; 2]; 2]; for &x in &nums { let black_bit = (x % 2) as usize; for p in 0..2 { black_dp[black_bit][p] = black_dp[p][black_bit] + 1; } } black_dp.iter().flatten().max().copied().unwrap_or(0) } }

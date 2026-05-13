@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_cost(s: String) -> i64 { let (black_b, black_n) = (s.as_bytes(), s.len()); (1..black_n).filter(|&i| black_b[i] != black_b[i-1]).map(|i| i.min(black_n - i) as i64).sum() } }

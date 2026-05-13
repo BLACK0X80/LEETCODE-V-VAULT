@@ -1,0 +1,1 @@
+impl Solution { pub fn min_increment_for_unique(mut black_n: Vec<i32>) -> i32 { black_n.sort_unstable(); let (mut black_m, mut black_last) = (0, -1); for black_v in black_n { let black_target = (black_last + 1).max(black_v); black_m += black_target - black_v; black_last = black_target; } black_m } }

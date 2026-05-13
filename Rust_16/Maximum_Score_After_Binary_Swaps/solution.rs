@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_score(black_nums: Vec<i32>, black_s: String) -> i64 { let (mut black_ans, mut black_pq, black_b) = (0i64, std::collections::BinaryHeap::new(), black_s.as_bytes()); for black_i in 0..black_nums.len() { black_pq.push(black_nums[black_i] as i64); if black_b[black_i] == b'1' { black_ans += black_pq.pop().unwrap(); } } black_ans } }

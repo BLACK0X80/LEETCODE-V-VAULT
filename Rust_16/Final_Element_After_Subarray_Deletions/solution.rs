@@ -1,0 +1,1 @@
+impl Solution { pub fn final_element(black_nums: Vec<i32>) -> i32 { black_nums[0].max(black_nums[black_nums.len() - 1]) } }

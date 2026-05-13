@@ -1,0 +1,1 @@
+impl Solution { pub fn count_lattice_points(circles: Vec<Vec<i32>>) -> i32 { let mut black_pts = std::collections::HashSet::new(); for black_c in circles { let (x, y, r) = (black_c[0], black_c[1], black_c[2]); for i in x-r..=x+r { for j in y-r..=y+r { if (i-x).pow(2) + (j-y).pow(2) <= r.pow(2) { black_pts.insert((i, j)); } } } } black_pts.len() as i32 } }

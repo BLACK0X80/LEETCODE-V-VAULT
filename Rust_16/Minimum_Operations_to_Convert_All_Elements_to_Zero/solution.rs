@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(black_nums: Vec<i32>) -> i32 { let mut black_stk = vec![0]; let mut black_ans = 0; for black_x in black_nums { while *black_stk.last().unwrap() > black_x { black_stk.pop(); } if *black_stk.last().unwrap() < black_x { black_ans += 1; black_stk.push(black_x); } } black_ans } }

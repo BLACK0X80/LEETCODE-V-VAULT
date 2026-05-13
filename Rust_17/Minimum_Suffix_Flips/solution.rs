@@ -1,0 +1,1 @@
+impl Solution { pub fn min_flips(black_target: String) -> i32 { black_target.bytes().fold((0, b'0'), |(black_cnt, black_prev), black_curr| if black_curr != black_prev { (black_cnt + 1, black_curr) } else { (black_cnt, black_prev) }).0 } }

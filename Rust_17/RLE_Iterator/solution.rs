@@ -1,0 +1,3 @@
+struct RLEIterator { black_v: Vec<i32>, black_i: usize }
+impl RLEIterator { fn new(black_e: Vec<i32>) -> Self { Self { black_v: black_e, black_i: 0 } }
+fn next(&mut self, mut black_n: i32) -> i32 { while self.black_i < self.black_v.len() { if black_n <= self.black_v[self.black_i] { self.black_v[self.black_i] -= black_n; return self.black_v[self.black_i + 1]; } black_n -= self.black_v[self.black_i]; self.black_i += 2; } -1 } }

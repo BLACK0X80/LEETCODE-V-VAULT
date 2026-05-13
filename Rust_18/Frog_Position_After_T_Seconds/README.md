@@ -1,0 +1,95 @@
+# Frog Position After T Seconds
+
+**Difficulty:** Hard
+**Tags:** Tree, Depth-First Search, Breadth-First Search, Graph Theory
+
+---
+
+## Problem
+
+<p>Given an undirected tree consisting of <code>n</code> vertices numbered from <code>1</code> to <code>n</code>. A frog starts jumping from <strong>vertex 1</strong>. In one second, the frog jumps from its current vertex to another <strong>unvisited</strong> vertex if they are directly connected. The frog can not jump back to a visited vertex. In case the frog can jump to several vertices, it jumps randomly to one of them with the same probability. Otherwise, when the frog can not jump to any unvisited vertex, it jumps forever on the same vertex.</p>
+
+<p>The edges of the undirected tree are given in the array <code>edges</code>, where <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> means that exists an edge connecting the vertices <code>a<sub>i</sub></code> and <code>b<sub>i</sub></code>.</p>
+
+<p><em>Return the probability that after <code>t</code> seconds the frog is on the vertex <code>target</code>. </em>Answers within <code>10<sup>-5</sup></code> of the actual answer will be accepted.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/12/21/frog1.jpg" style="width: 338px; height: 304px;" />
+<pre>
+<strong>Input:</strong> n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 2, target = 4
+<strong>Output:</strong> 0.16666666666666666 
+<strong>Explanation:</strong> The figure above shows the given graph. The frog starts at vertex 1, jumping with 1/3 probability to the vertex 2 after <strong>second 1</strong> and then jumping with 1/2 probability to vertex 4 after <strong>second 2</strong>. Thus the probability for the frog is on the vertex 4 after 2 seconds is 1/3 * 1/2 = 1/6 = 0.16666666666666666. 
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<strong><img alt="" src="https://assets.leetcode.com/uploads/2021/12/21/frog2.jpg" style="width: 304px; height: 304px;" /></strong>
+
+<pre>
+<strong>Input:</strong> n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 1, target = 7
+<strong>Output:</strong> 0.3333333333333333
+<strong>Explanation: </strong>The figure above shows the given graph. The frog starts at vertex 1, jumping with 1/3 = 0.3333333333333333 probability to the vertex 7 after <strong>second 1</strong>. 
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 100</code></li>
+	<li><code>edges.length == n - 1</code></li>
+	<li><code>edges[i].length == 2</code></li>
+	<li><code>1 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt;= n</code></li>
+	<li><code>1 &lt;= t &lt;= 50</code></li>
+	<li><code>1 &lt;= target &lt;= n</code></li>
+</ul>
+
+
+## Hints
+
+1. Use a variation of DFS with parameters 'curent_vertex' and 'current_time'.
+2. Update the probability considering to jump to one of the children vertices.
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn frog_position(n: i32, edges: Vec<Vec<i32>>, t: i32, target: i32) -> f64 {
+        let n = n as usize;
+        let mut adj = vec![vec![]; n + 1];
+        for e in &edges {
+            adj[e[0] as usize].push(e[1] as usize);
+            adj[e[1] as usize].push(e[0] as usize);
+        }
+
+        let mut prob = vec![0.0f64; n + 1];
+        let mut visited = vec![false; n + 1];
+        let mut time = vec![0i32; n + 1];
+        prob[1] = 1.0;
+        visited[1] = true;
+
+        let mut queue = std::collections::VecDeque::new();
+        queue.push_back(1usize);
+
+        while let Some(u) = queue.pop_front() {
+            let children: Vec<usize> = adj[u].iter().filter(|&&v| !visited[v]).copied().collect();
+            for &v in &children {
+                visited[v] = true;
+                prob[v] = prob[u] / children.len() as f64;
+                time[v] = time[u] + 1;
+                queue.push_back(v);
+            }
+            if children.is_empty() { time[u] = time[u]; }
+        }
+
+        let tgt = target as usize;
+        let children_count = adj[tgt].iter().filter(|&&v| !visited[v] || time[v] == time[tgt] + 1).count();
+        let unvisited = adj[tgt].iter().filter(|&&v| time[v] == time[tgt] + 1).count();
+
+        if time[tgt] == t || (time[tgt] < t && unvisited == 0) {
+            prob[tgt]
+        } else {
+            0.0
+        }
+    }
+}
+```

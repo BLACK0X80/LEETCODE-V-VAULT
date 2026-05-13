@@ -1,0 +1,1 @@
+impl Solution { pub fn pivot_array(black_nums: Vec<i32>, black_p: i32) -> Vec<i32> { black_nums.iter().filter(|&&black_x| black_x < black_p).chain(black_nums.iter().filter(|&&black_x| black_x == black_p)).chain(black_nums.iter().filter(|&&black_x| black_x > black_p)).copied().collect() } }

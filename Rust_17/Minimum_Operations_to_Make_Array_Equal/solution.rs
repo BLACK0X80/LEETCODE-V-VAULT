@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(n: i32) -> i32 { let black_n = n as i64; (black_n * black_n / 4) as i32 } }

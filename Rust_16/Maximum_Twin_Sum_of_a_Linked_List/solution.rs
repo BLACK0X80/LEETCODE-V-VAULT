@@ -1,0 +1,1 @@
+impl Solution { pub fn pair_sum(black_head: Option<Box<ListNode>>) -> i32 { let (mut black_v, mut black_curr) = (vec![], black_head); while let Some(black_node) = black_curr { black_v.push(black_node.val); black_curr = black_node.next; } (0..black_v.len()/2).map(|black_i| black_v[black_i] + black_v[black_v.len()-1-black_i]).max().unwrap() } }

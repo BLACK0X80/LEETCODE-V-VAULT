@@ -1,0 +1,1 @@
+use std::collections::BinaryHeap; impl Solution { pub fn max_kelements(black_nums: Vec<i32>, black_k: i32) -> i64 { let mut black_pq = BinaryHeap::from(black_nums); let mut black_score = 0i64; for _ in 0..black_k { if let Some(black_max) = black_pq.pop() { black_score += black_max as i64; black_pq.push((black_max as f64 / 3.0).ceil() as i32); } } black_score } }

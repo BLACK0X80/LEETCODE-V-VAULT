@@ -1,0 +1,1 @@
+impl Solution { pub fn reordered_power_of2(n: i32) -> bool { let black_count = |mut x: i32| { let mut res = [0; 10]; while x > 0 { res[(x % 10) as usize] += 1; x /= 10; } res }; let black_target = black_count(n); (0..31).any(|i| black_count(1 << i) == black_target) } }

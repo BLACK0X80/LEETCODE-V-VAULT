@@ -1,0 +1,1 @@
+impl Solution { pub fn rearrange_array(black_n: Vec<i32>) -> Vec<i32> { let (mut black_res, mut black_p, mut black_neg) = (vec![0; black_n.len()], 0, 1); for black_x in black_n { if black_x > 0 { black_res[black_p] = black_x; black_p += 2; } else { black_res[black_neg] = black_x; black_neg += 2; } } black_res } }

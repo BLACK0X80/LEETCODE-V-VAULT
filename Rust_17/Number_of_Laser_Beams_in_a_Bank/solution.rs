@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_beams(bank: Vec<String>) -> i32 { let (mut black_res, mut black_prev) = (0, 0); for black_row in bank { let black_count = black_row.chars().filter(|&c| c == '1').count() as i32; if black_count > 0 { black_res += black_prev * black_count; black_prev = black_count; } } black_res } }

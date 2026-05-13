@@ -1,0 +1,1 @@
+impl Solution { pub fn bowl_subarrays(black_nums: Vec<i32>) -> i64 { let (mut black_stk, mut black_ans) = (vec![], 0i64); for &black_x in &black_nums { while let Some(&black_top) = black_stk.last() { if black_top < black_x { black_stk.pop(); if !black_stk.is_empty() { black_ans += 1; } } else { break; } } black_stk.push(black_x); } black_ans } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn max_total_reward(mut reward_values: Vec<i32>) -> i32 { reward_values.sort(); let mut black_dp = vec![false; 4001]; black_dp[0] = true; for &v in &reward_values { for x in 0..v as usize { if black_dp[x] { black_dp[x + v as usize] = true; } } } black_dp.iter().enumerate().rev().find(|&(_, &b)| b).unwrap().0 as i32 } }

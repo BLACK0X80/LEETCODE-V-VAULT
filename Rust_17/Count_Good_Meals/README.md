@@ -1,0 +1,53 @@
+# Count Good Meals
+
+**Difficulty:** Medium
+**Tags:** Array, Hash Table
+
+---
+
+## Problem
+
+<p>A <strong>good meal</strong> is a meal that contains <strong>exactly two different food items</strong> with a sum of deliciousness equal to a power of two.</p>
+
+<p>You can pick <strong>any</strong> two different foods to make a good meal.</p>
+
+<p>Given an array of integers <code>deliciousness</code> where <code>deliciousness[i]</code> is the deliciousness of the <code>i<sup>​​​​​​th</sup>​​​​</code>​​​​ item of food, return <em>the number of different <strong>good meals</strong> you can make from this list modulo</em> <code>10<sup>9</sup> + 7</code>.</p>
+
+<p>Note that items with different indices are considered different even if they have the same deliciousness value.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> deliciousness = [1,3,5,7,9]
+<strong>Output:</strong> 4
+<strong>Explanation: </strong>The good meals are (1,3), (1,7), (3,5) and, (7,9).
+Their respective sums are 4, 8, 8, and 16, all of which are powers of 2.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> deliciousness = [1,1,1,3,3,3,7]
+<strong>Output:</strong> 15
+<strong>Explanation: </strong>The good meals are (1,1) with 3 ways, (1,3) with 9 ways, and (1,7) with 3 ways.</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= deliciousness.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>0 &lt;= deliciousness[i] &lt;= 2<sup>20</sup></code></li>
+</ul>
+
+
+## Hints
+
+1. Note that the number of powers of 2 is at most 21 so this turns the problem to a classic find the number of pairs that sum to a certain value but for 21 values
+2. You need to use something fasters than the NlogN approach since there is already the log of iterating over the powers so one idea is two pointers
+
+## Solution
+
+```rust
+impl Solution { pub fn count_pairs(black_d: Vec<i32>) -> i32 { let (mut black_map, mut black_res, black_mod) = (std::collections::HashMap::new(), 0i64, 1_000_000_007i64); for black_x in black_d { for black_i in 0..22 { let black_target = (1 << black_i); if let Some(&black_count) = black_map.get(&(black_target - black_x)) { black_res += black_count as i64; } } *black_map.entry(black_x).or_insert(0) += 1; } (black_res % black_mod) as i32 } }
+```

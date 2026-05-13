@@ -1,0 +1,1 @@
+impl Solution { pub fn find_different_binary_string(nums: Vec<String>) -> String { nums.iter().enumerate().map(|(black_i, black_s)| if black_s.as_bytes()[black_i] == b'0' { '1' } else { '0' }).collect() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn min_cost(black_n: i32) -> i32 { let black_n = black_n as i64; (black_n * (black_n - 1) / 2) as i32 } }

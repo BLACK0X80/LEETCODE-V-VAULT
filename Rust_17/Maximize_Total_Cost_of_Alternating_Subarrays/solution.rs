@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_total_cost(nums: Vec<i32>) -> i64 { let (mut black_add, mut black_sub) = (nums[0] as i64, -1000000000000000i64); for i in 1..nums.len() { let (prev_a, prev_s) = (black_add, black_sub); black_add = (prev_a.max(prev_s)) + nums[i] as i64; black_sub = prev_a - nums[i] as i64; } black_add.max(black_sub) } }

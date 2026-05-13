@@ -1,0 +1,1 @@
+impl Solution { pub fn validate_stack_sequences(black_pu: Vec<i32>, black_po: Vec<i32>) -> bool { let (mut black_stk, mut black_i) = (vec![], 0); for black_x in black_pu { black_stk.push(black_x); while !black_stk.is_empty() && black_stk.last() == Some(&black_po[black_i]) { black_stk.pop(); black_i += 1; } } black_i == black_po.len() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn perfect_pairs(nums: Vec<i32>) -> i64 { let mut black_v: Vec<i64> = nums.into_iter().map(|black_x| (black_x as i64).abs()).collect(); black_v.sort_unstable(); let (mut black_ans, mut black_j) = (0i64, 0); for black_i in 0..black_v.len() { while black_v[black_j] * 2 < black_v[black_i] { black_j += 1; } black_ans += (black_i - black_j) as i64; } black_ans } }
