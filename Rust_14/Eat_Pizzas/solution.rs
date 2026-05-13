@@ -1,0 +1,1 @@
+impl Solution { pub fn max_weight(mut black_p: Vec<i32>) -> i64 { black_p.sort_unstable(); let (n, mut black_ans) = (black_p.len(), 0i64); let (odd, even) = ((n / 4 + 1) / 2, (n / 4) / 2); for i in 0..odd { black_ans += black_p[n - 1 - i] as i64; } for i in 0..even { black_ans += black_p[n - 1 - odd - 2 * i - 1] as i64; } black_ans } }

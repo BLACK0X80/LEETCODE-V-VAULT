@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_weeks(milestones: Vec<i32>) -> i64 { let (black_sum, black_max) = (milestones.iter().map(|&x| x as i64).sum::<i64>(), *milestones.iter().max().unwrap() as i64); if black_max > black_sum - black_max + 1 { (black_sum - black_max) * 2 + 1 } else { black_sum } } }

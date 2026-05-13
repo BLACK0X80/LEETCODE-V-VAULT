@@ -1,0 +1,1 @@
+struct SeatManager { black_h: std::collections::BinaryHeap<std::cmp::Reverse<i32>> } impl SeatManager { fn new(black_n: i32) -> Self { Self { black_h: (1..=black_n).map(std::cmp::Reverse).collect() } } fn reserve(&mut self) -> i32 { self.black_h.pop().unwrap().0 } fn unreserve(&mut self, black_s: i32) { self.black_h.push(std::cmp::Reverse(black_s)); } }

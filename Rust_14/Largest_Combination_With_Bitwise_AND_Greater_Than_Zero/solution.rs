@@ -1,0 +1,1 @@
+impl Solution { pub fn largest_combination(black_candidates: Vec<i32>) -> i32 { let mut black_max = 0; for black_i in 0..24 { let mut black_count = 0; for &black_num in &black_candidates { if (black_num >> black_i) & 1 == 1 { black_count += 1; } } if black_count > black_max { black_max = black_count; } } black_max } }

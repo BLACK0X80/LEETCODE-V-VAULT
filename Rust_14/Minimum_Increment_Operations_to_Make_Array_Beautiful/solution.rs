@@ -1,0 +1,1 @@
+impl Solution { pub fn min_increment_operations(nums: Vec<i32>, k: i32) -> i64 { let (mut black_a, mut black_b, mut black_c) = (0i64, 0i64, 0i64); for &x in &nums { let black_next = 0.max(k as i64 - x as i64) + black_a.min(black_b).min(black_c); black_a = black_b; black_b = black_c; black_c = black_next; } black_a.min(black_b).min(black_c) } }

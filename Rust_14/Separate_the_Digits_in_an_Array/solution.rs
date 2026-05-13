@@ -1,0 +1,1 @@
+impl Solution { pub fn separate_digits(black_nums: Vec<i32>) -> Vec<i32> { black_nums.into_iter().flat_map(|black_n| black_n.to_string().chars().map(|black_c| black_c.to_digit(10).unwrap() as i32).collect::<Vec<_>>()).collect() } }

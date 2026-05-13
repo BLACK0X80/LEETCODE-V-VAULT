@@ -1,0 +1,1 @@
+impl Solution { pub fn add_minimum(word: String) -> i32 { let (mut black_ans, mut black_curr, black_b) = (0, 0, word.as_bytes()); while black_curr < black_b.len() { for &black_target in b"abc" { if black_curr < black_b.len() && black_b[black_curr] == black_target { black_curr += 1; } else { black_ans += 1; } } } black_ans } }

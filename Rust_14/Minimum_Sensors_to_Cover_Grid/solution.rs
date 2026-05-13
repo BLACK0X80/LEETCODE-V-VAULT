@@ -1,0 +1,1 @@
+impl Solution { pub fn min_sensors(black_n: i32, black_m: i32, black_k: i32) -> i32 { let black_s = 2 * black_k + 1; ((black_n + black_s - 1) / black_s) * ((black_m + black_s - 1) / black_s) } }

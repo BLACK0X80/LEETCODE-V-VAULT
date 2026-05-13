@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_possible_size(black_nums: Vec<i32>) -> i32 { let mut black_stk: Vec<i32> = vec![]; for black_x in black_nums { let mut black_cur = black_x; while let Some(&black_top) = black_stk.last() { if black_top > black_cur { black_cur = black_top; black_stk.pop(); } else { break; } } black_stk.push(black_cur); } black_stk.len() as i32 } }

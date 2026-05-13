@@ -1,0 +1,71 @@
+# Maximum Trailing Zeros in a Cornered Path
+
+**Difficulty:** Medium
+**Tags:** Array, Matrix, Prefix Sum
+
+---
+
+## Problem
+
+<p>You are given a 2D integer array <code>grid</code> of size <code>m x n</code>, where each cell contains a positive integer.</p>
+
+<p>A <strong>cornered path</strong> is defined as a set of adjacent cells with <strong>at most</strong> one turn. More specifically, the path should exclusively move either <strong>horizontally</strong> or <strong>vertically</strong> up to the turn (if there is one), without returning to a previously visited cell. After the turn, the path will then move exclusively in the <strong>alternate</strong> direction: move vertically if it moved horizontally, and vice versa, also without returning to a previously visited cell.</p>
+
+<p>The <strong>product</strong> of a path is defined as the product of all the values in the path.</p>
+
+<p>Return <em>the <strong>maximum</strong> number of <strong>trailing zeros</strong> in the product of a cornered path found in </em><code>grid</code>.</p>
+
+<p>Note:</p>
+
+<ul>
+	<li><strong>Horizontal</strong> movement means moving in either the left or right direction.</li>
+	<li><strong>Vertical</strong> movement means moving in either the up or down direction.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/03/23/ex1new2.jpg" style="width: 577px; height: 190px;" />
+<pre>
+<strong>Input:</strong> grid = [[23,17,15,3,20],[8,1,20,27,11],[9,4,6,2,21],[40,9,1,10,6],[22,7,4,5,3]]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> The grid on the left shows a valid cornered path.
+It has a product of 15 * 20 * 6 * 1 * 10 = 18000 which has 3 trailing zeros.
+It can be shown that this is the maximum trailing zeros in the product of a cornered path.
+
+The grid in the middle is not a cornered path as it has more than one turn.
+The grid on the right is not a cornered path as it requires a return to a previously visited cell.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/03/25/ex2.jpg" style="width: 150px; height: 157px;" />
+<pre>
+<strong>Input:</strong> grid = [[4,3,2],[7,6,1],[8,8,8]]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> The grid is shown in the figure above.
+There are no cornered paths in the grid that result in a product with a trailing zero.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>m == grid.length</code></li>
+	<li><code>n == grid[i].length</code></li>
+	<li><code>1 &lt;= m, n &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= m * n &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= grid[i][j] &lt;= 1000</code></li>
+</ul>
+
+
+## Hints
+
+1. What actually tells us the trailing zeros of the product of a path?
+2. It is the sum of the exponents of 2 and sum of the exponents of 5 of the prime factorizations of the numbers on that path. The smaller of the two is the answer for that path.
+3. We can then treat each cell as the elbow point and calculate the largest minimum (sum of 2 exponents, sum of 5 exponents) from the combination of top-left, top-right, bottom-left and bottom-right.
+4. To do this efficiently, we should use the prefix sum technique.
+
+## Solution
+
+```rust
+impl Solution { pub fn max_trailing_zeros(black_g: Vec<Vec<i32>>) -> i32 { let (black_m, black_n) = (black_g.len(), black_g[0].len()); let (mut black_f2, mut black_f5) = (vec![vec![(0, 0); black_n + 1]; black_m + 1], vec![vec![(0, 0); black_n + 1]; black_m + 1]); let mut black_res = 0; for i in 0..black_m { for j in 0..black_n { let (mut x, mut c2, mut c5) = (black_g[i][j], 0, 0); while x > 0 && x % 2 == 0 { c2 += 1; x /= 2; } while x > 0 && x % 5 == 0 { c5 += 1; x /= 5; } black_f2[i+1][j+1] = (c2, c5); } } let (mut black_row, mut black_col) = (vec![vec![(0, 0); black_n + 1]; black_m], vec![vec![(0, 0); black_n]; black_m + 1]); for i in 0..black_m { for j in 0..black_n { black_row[i][j+1] = (black_row[i][j].0 + black_f2[i+1][j+1].0, black_row[i][j].1 + black_f2[i+1][j+1].1); black_col[i+1][j] = (black_col[i][j].0 + black_f2[i+1][j+1].0, black_col[i][j].1 + black_f2[i+1][j+1].1); } } for i in 0..black_m { for j in 0..black_n { let (c2, c5) = black_f2[i+1][j+1]; let (r_l, r_r) = (black_row[i][j+1], (black_row[i][black_n].0 - black_row[i][j].0, black_row[i][black_n].1 - black_row[i][j].1)); let (c_u, c_d) = (black_col[i+1][j], (black_col[black_m][j].0 - black_col[i][j].0, black_col[black_m][j].1 - black_col[i][j].1)); let black_p = [(r_l.0 + c_u.0 - c2, r_l.1 + c_u.1 - c5), (r_l.0 + c_d.0 - c2, r_l.1 + c_d.1 - c5), (r_r.0 + c_u.0 - c2, r_r.1 + c_u.1 - c5), (r_r.0 + c_d.0 - c2, r_r.1 + c_d.1 - c5)]; for (v2, v5) in black_p { black_res = black_res.max(v2.min(v5)); } } } black_res } }
+```

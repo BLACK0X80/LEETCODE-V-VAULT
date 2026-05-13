@@ -1,0 +1,1 @@
+impl Solution { pub fn count_collisions(black_d: String) -> i32 { let black_s = black_d.trim_start_matches('L').trim_end_matches('R'); black_s.chars().filter(|&c| c != 'S').count() as i32 } }

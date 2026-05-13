@@ -1,0 +1,1 @@
+impl Solution { pub fn min_operations(black_s: String) -> i32 { let mut black_ans = 0; for black_b in black_s.bytes() { black_ans = black_ans.max(if black_b == b'a' { 0 } else { 26 - (black_b - b'a') as i32 }); } black_ans } }

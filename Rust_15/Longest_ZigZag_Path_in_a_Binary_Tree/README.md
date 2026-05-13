@@ -1,0 +1,66 @@
+# Longest ZigZag Path in a Binary Tree
+
+**Difficulty:** Medium
+**Tags:** Dynamic Programming, Tree, Depth-First Search, Binary Tree
+
+---
+
+## Problem
+
+<p>You are given the <code>root</code> of a binary tree.</p>
+
+<p>A ZigZag path for a binary tree is defined as follow:</p>
+
+<ul>
+	<li>Choose <strong>any </strong>node in the binary tree and a direction (right or left).</li>
+	<li>If the current direction is right, move to the right child of the current node; otherwise, move to the left child.</li>
+	<li>Change the direction from right to left or from left to right.</li>
+	<li>Repeat the second and third steps until you can&#39;t move in the tree.</li>
+</ul>
+
+<p>Zigzag length is defined as the number of nodes visited - 1. (A single node has a length of 0).</p>
+
+<p>Return <em>the longest <strong>ZigZag</strong> path contained in that tree</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/01/22/sample_1_1702.png" style="width: 221px; height: 383px;" />
+<pre>
+<strong>Input:</strong> root = [1,null,1,1,1,null,null,1,1,null,1,null,null,null,1]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> Longest ZigZag path in blue nodes (right -&gt; left -&gt; right).
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/01/22/sample_2_1702.png" style="width: 157px; height: 329px;" />
+<pre>
+<strong>Input:</strong> root = [1,1,1,null,1,null,null,1,1,null,1]
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> Longest ZigZag path in blue nodes (left -&gt; right -&gt; left -&gt; right).
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> root = [1]
+<strong>Output:</strong> 0
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[1, 5 * 10<sup>4</sup>]</code>.</li>
+	<li><code>1 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+
+
+## Hints
+
+1. Create this function maxZigZag(node, direction) maximum zigzag given a node and direction (right or left).
+
+## Solution
+
+```rust
+use std::rc::Rc; use std::cell::RefCell; impl Solution { pub fn longest_zig_zag(root: Option<Rc<RefCell<TreeNode>>>) -> i32 { let mut black_max = 0; Self::black_dfs(&root, true, 0, &mut black_max); Self::black_dfs(&root, false, 0, &mut black_max); black_max } fn black_dfs(black_node: &Option<Rc<RefCell<TreeNode>>>, black_is_left: bool, black_len: i32, black_res: &mut i32) { if let Some(black_n) = black_node { *black_res = (*black_res).max(black_len); let black_inner = black_n.borrow(); if black_is_left { Self::black_dfs(&black_inner.left, false, black_len + 1, black_res); Self::black_dfs(&black_inner.right, true, 1, black_res); } else { Self::black_dfs(&black_inner.right, true, black_len + 1, black_res); Self::black_dfs(&black_inner.left, false, 1, black_res); } } } }
+```

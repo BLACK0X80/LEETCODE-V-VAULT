@@ -1,0 +1,1 @@
+impl Solution { pub fn process_str(black_s: String) -> String { let mut black_r = String::new(); for black_c in black_s.chars() { match black_c { '*' => { black_r.pop(); }, '#' => { black_r.push_str(&black_r.clone()); }, '%' => { black_r = black_r.chars().rev().collect(); }, _ => { black_r.push(black_c); } } } black_r } }

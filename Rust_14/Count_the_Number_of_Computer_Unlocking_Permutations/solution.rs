@@ -1,0 +1,1 @@
+impl Solution { pub fn count_permutations(black_c: Vec<i32>) -> i32 { let black_min = *black_c.iter().min().unwrap(); if black_c[0] != black_min || black_c.iter().filter(|&&x| x == black_min).count() > 1 { return 0; } let (mut black_ans, black_mod) = (1i64, 1_000_000_007i64); for i in 1..black_c.len() as i64 { black_ans = (black_ans * i) % black_mod; } black_ans as i32 } }

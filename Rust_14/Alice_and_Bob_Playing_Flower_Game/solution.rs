@@ -1,0 +1,1 @@
+impl Solution { pub fn flower_game(n: i32, m: i32) -> i64 { let (n, m) = (n as i64, m as i64); let (even_n, odd_n) = (n / 2, (n + 1) / 2); let (even_m, odd_m) = (m / 2, (m + 1) / 2); odd_n * even_m + even_n * odd_m } }

@@ -1,0 +1,2 @@
+use std::rc::Rc; use std::cell::RefCell;
+impl Solution { pub fn prune_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { root.and_then(|black_node| { let black_l = Self::prune_tree(black_node.borrow_mut().left.take()); let black_r = Self::prune_tree(black_node.borrow_mut().right.take()); if black_node.borrow().val == 0 && black_l.is_none() && black_r.is_none() { None } else { black_node.borrow_mut().left = black_l; black_node.borrow_mut().right = black_r; Some(black_node) } }) } }

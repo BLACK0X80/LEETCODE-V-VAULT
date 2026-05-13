@@ -1,0 +1,1 @@
+impl Solution { pub fn resulting_string(black_s: String) -> String { let mut black_st: Vec<char> = vec![]; for black_c in black_s.chars() { if let Some(&black_last) = black_st.last() { let black_diff = (black_c as i32 - black_last as i32).abs(); if black_diff == 1 || black_diff == 25 { black_st.pop(); continue; } } black_st.push(black_c); } black_st.into_iter().collect() } }

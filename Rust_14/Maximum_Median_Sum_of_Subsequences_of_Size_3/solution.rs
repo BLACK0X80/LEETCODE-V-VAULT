@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_median_sum(mut black_nums: Vec<i32>) -> i64 { black_nums.sort_unstable(); let (black_n, mut black_ans) = (black_nums.len(), 0i64); for black_i in 0..black_n / 3 { black_ans += black_nums[black_n - 2 - 2 * black_i] as i64; } black_ans } }

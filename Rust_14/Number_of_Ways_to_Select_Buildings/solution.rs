@@ -1,0 +1,1 @@
+impl Solution { pub fn number_of_ways(s: String) -> i64 { let (mut black_0, mut black_1, mut black_01, mut black_10, mut black_ans) = (0, 0, 0, 0, 0); for black_c in s.chars() { if black_c == '0' { black_ans += black_10; black_01 += black_1; black_0 += 1; } else { black_ans += black_01; black_10 += black_0; black_1 += 1; } } black_ans } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn min_changes(black_s: String) -> i32 { let black_b = black_s.as_bytes(); (0..black_b.len()).step_by(2).filter(|&i| black_b[i] != black_b[i+1]).count() as i32 } }

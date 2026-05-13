@@ -1,0 +1,1 @@
+use std::collections::HashMap; impl Solution { pub fn prefix_connected(black_words: Vec<String>, black_k: i32) -> i32 { let mut black_m = HashMap::new(); for black_w in black_words.iter().filter(|black_w| black_w.len() >= black_k as usize) { *black_m.entry(&black_w[..black_k as usize]).or_insert(0) += 1; } black_m.values().filter(|&&black_v| black_v >= 2).count() as i32 } }

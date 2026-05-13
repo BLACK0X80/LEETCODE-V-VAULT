@@ -1,0 +1,1 @@
+impl Solution { pub fn maximum_happiness_sum(mut black_h: Vec<i32>, black_k: i32) -> i64 { black_h.sort_unstable_by(|a, b| b.cmp(a)); (0..black_k as usize).map(|i| (black_h[i] - i as i32).max(0) as i64).sum() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn print_vertically(s: String) -> Vec<String> { let b_w: Vec<&str> = s.split_whitespace().collect(); let b_max = b_w.iter().map(|w| w.len()).max().unwrap_or(0); (0..b_max).map(|i| b_w.iter().map(|w| w.chars().nth(i).unwrap_or(' ')).collect::<String>().trim_end().to_string()).collect() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn string_hash(black_s: String, black_k: i32) -> String { black_s.as_bytes().chunks(black_k as usize).map(|chunk| { let black_sum: u32 = chunk.iter().map(|&b| (b - b'a') as u32).sum(); ((black_sum % 26) as u8 + b'a') as char }).collect() } }

@@ -1,0 +1,57 @@
+# Disconnect Path in a Binary Matrix by at Most One Flip
+
+**Difficulty:** Medium
+**Tags:** Array, Dynamic Programming, Depth-First Search, Breadth-First Search, Matrix
+
+---
+
+## Problem
+
+<p>You are given a <strong>0-indexed</strong> <code>m x n</code> <strong>binary</strong> matrix <code>grid</code>. You can move from a cell <code>(row, col)</code> to any of the cells <code>(row + 1, col)</code> or <code>(row, col + 1)</code> that has the value <code>1</code>.&nbsp;The matrix is <strong>disconnected</strong> if there is no path from <code>(0, 0)</code> to <code>(m - 1, n - 1)</code>.</p>
+
+<p>You can flip the value of <strong>at most one</strong> (possibly none) cell. You <strong>cannot flip</strong> the cells <code>(0, 0)</code> and <code>(m - 1, n - 1)</code>.</p>
+
+<p>Return <code>true</code> <em>if it is possible to make the matrix disconnect or </em><code>false</code><em> otherwise</em>.</p>
+
+<p><strong>Note</strong> that flipping a cell changes its value from <code>0</code> to <code>1</code> or from <code>1</code> to <code>0</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/12/07/yetgrid2drawio.png" style="width: 441px; height: 151px;" />
+<pre>
+<strong>Input:</strong> grid = [[1,1,1],[1,0,0],[1,1,1]]
+<strong>Output:</strong> true
+<strong>Explanation:</strong> We can change the cell shown in the diagram above. There is no path from (0, 0) to (2, 2) in the resulting grid.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/12/07/yetgrid3drawio.png" />
+<pre>
+<strong>Input:</strong> grid = [[1,1,1],[1,0,1],[1,1,1]]
+<strong>Output:</strong> false
+<strong>Explanation:</strong> It is not possible to change at most one cell such that there is not path from (0, 0) to (2, 2).
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>m == grid.length</code></li>
+	<li><code>n == grid[i].length</code></li>
+	<li><code>1 &lt;= m, n &lt;= 1000</code></li>
+	<li><code>1 &lt;= m * n &lt;= 10<sup>5</sup></code></li>
+	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
+	<li><code>grid[0][0] == grid[m - 1][n - 1] == 1</code></li>
+</ul>
+
+
+## Hints
+
+1. We can consider the grid a graph with edges between adjacent cells.
+2. If you can find two non-intersecting paths from (0, 0) to (m - 1, n - 1) then the answer is false. Otherwise, it is always true.
+
+## Solution
+
+```rust
+impl Solution { pub fn is_possible_to_cut_path(mut grid: Vec<Vec<i32>>) -> bool { fn black_dfs(r: usize, c: usize, g: &mut Vec<Vec<i32>>) -> bool { if r == g.len() - 1 && c == g[0].len() - 1 { return true; } g[r][c] = 0; (r + 1 < g.len() && g[r+1][c] == 1 && black_dfs(r+1, c, g)) || (c + 1 < g[0].len() && g[r][c+1] == 1 && black_dfs(r, c+1, g)) } !black_dfs(0, 0, &mut grid) || !black_dfs(0, 0, &mut grid) } }
+```

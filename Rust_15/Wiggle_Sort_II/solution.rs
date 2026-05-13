@@ -1,0 +1,1 @@
+impl Solution { pub fn wiggle_sort(black_n: &mut Vec<i32>) { let (mut black_v, black_len) = (black_n.clone(), black_n.len()); black_v.sort_unstable(); let (mut black_l, mut black_r) = ((black_len + 1) / 2, black_len); for black_i in 0..black_len { black_n[black_i] = if black_i % 2 == 0 { black_l -= 1; black_v[black_l] } else { black_r -= 1; black_v[black_r] }; } } }

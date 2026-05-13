@@ -1,0 +1,1 @@
+impl Solution { pub fn count_alternating_subarrays(nums: Vec<i32>) -> i64 { let (mut black_ans, mut cur) = (1i64, 1i64); for i in 1..nums.len() { cur = if nums[i] != nums[i-1] { cur + 1 } else { 1 }; black_ans += cur; } black_ans } }

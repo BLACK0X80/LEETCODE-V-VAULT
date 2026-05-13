@@ -1,0 +1,2 @@
+struct MapSum { black_map: std::collections::HashMap<String, i32> }
+impl MapSum { fn new() -> Self { Self { black_map: std::collections::HashMap::new() } } fn insert(&mut self, black_key: String, black_val: i32) { self.black_map.insert(black_key, black_val); } fn sum(&self, black_prefix: String) -> i32 { self.black_map.iter().filter(|(k, _)| k.starts_with(&black_prefix)).map(|(_, v)| v).sum() } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn value_after_k_seconds(n: i32, k: i32) -> i32 { let (mut black_a, black_mod) = (vec![1i64; n as usize], 1_000_000_007i64); for _ in 0..k { for i in 1..n as usize { black_a[i] = (black_a[i] + black_a[i - 1]) % black_mod; } } black_a[(n - 1) as usize] as i32 } }

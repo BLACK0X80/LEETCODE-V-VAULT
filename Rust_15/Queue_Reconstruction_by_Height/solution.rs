@@ -1,0 +1,1 @@
+impl Solution { pub fn reconstruct_queue(mut black_p: Vec<Vec<i32>>) -> Vec<Vec<i32>> { black_p.sort_unstable_by(|a, b| if a[0] == b[0] { a[1].cmp(&b[1]) } else { b[0].cmp(&a[0]) }); let mut black_res = Vec::with_capacity(black_p.len()); for black_person in black_p { black_res.insert(black_person[1] as usize, black_person); } black_res } }

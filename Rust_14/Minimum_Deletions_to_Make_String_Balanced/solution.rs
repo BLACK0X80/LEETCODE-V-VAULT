@@ -1,0 +1,1 @@
+impl Solution { pub fn minimum_deletions(s: String) -> i32 { let (mut black_ans, mut black_b) = (0, 0); for c in s.chars() { if c == 'b' { black_b += 1; } else { black_ans = (black_ans + 1).min(black_b); } } black_ans } }

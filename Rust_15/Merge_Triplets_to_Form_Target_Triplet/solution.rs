@@ -1,0 +1,1 @@
+impl Solution { pub fn merge_triplets(triplets: Vec<Vec<i32>>, target: Vec<i32>) -> bool { let mut black_res = vec![false; 3]; for black_t in triplets { if black_t[0] <= target[0] && black_t[1] <= target[1] && black_t[2] <= target[2] { for black_i in 0..3 { if black_t[black_i] == target[black_i] { black_res[black_i] = true; } } } } black_res.iter().all(|&x| x) } }

@@ -1,0 +1,1 @@
+impl Solution { pub fn num_rabbits(black_answers: Vec<i32>) -> i32 { let mut black_map = std::collections::HashMap::new(); for &a in &black_answers { *black_map.entry(a).or_insert(0) += 1; } black_map.into_iter().map(|(x, count)| ((count + x) / (x + 1)) * (x + 1)).sum() } }

@@ -1,0 +1,103 @@
+# Longest Subsequence Repeated k Times
+
+**Difficulty:** Hard
+**Tags:** Hash Table, Two Pointers, String, Backtracking, Counting, Enumeration
+
+---
+
+## Problem
+
+<p>You are given a string <code>s</code> of length <code>n</code>, and an integer <code>k</code>. You are tasked to find the <strong>longest subsequence repeated</strong> <code>k</code> times in string <code>s</code>.</p>
+
+<p>A <strong>subsequence</strong> is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.</p>
+
+<p>A subsequence <code>seq</code> is <strong>repeated</strong> <code>k</code> times in the string <code>s</code> if <code>seq * k</code> is a subsequence of <code>s</code>, where <code>seq * k</code> represents a string constructed by concatenating <code>seq</code> <code>k</code> times.</p>
+
+<ul>
+	<li>For example, <code>&quot;bba&quot;</code> is repeated <code>2</code> times in the string <code>&quot;bababcba&quot;</code>, because the string <code>&quot;bbabba&quot;</code>, constructed by concatenating <code>&quot;bba&quot;</code> <code>2</code> times, is a subsequence of the string <code>&quot;<strong><u>b</u></strong>a<strong><u>bab</u></strong>c<strong><u>ba</u></strong>&quot;</code>.</li>
+</ul>
+
+<p>Return <em>the <strong>longest subsequence repeated</strong> </em><code>k</code><em> times in string </em><code>s</code><em>. If multiple such subsequences are found, return the <strong>lexicographically largest</strong> one. If there is no such subsequence, return an <strong>empty</strong> string</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="example 1" src="https://assets.leetcode.com/uploads/2021/08/30/longest-subsequence-repeat-k-times.png" style="width: 457px; height: 99px;" />
+<pre>
+<strong>Input:</strong> s = &quot;letsleetcode&quot;, k = 2
+<strong>Output:</strong> &quot;let&quot;
+<strong>Explanation:</strong> There are two longest subsequences repeated 2 times: &quot;let&quot; and &quot;ete&quot;.
+&quot;let&quot; is the lexicographically largest one.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;bb&quot;, k = 2
+<strong>Output:</strong> &quot;b&quot;
+<strong>Explanation:</strong> The longest subsequence repeated 2 times is &quot;b&quot;.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;ab&quot;, k = 2
+<strong>Output:</strong> &quot;&quot;
+<strong>Explanation:</strong> There is no subsequence repeated 2 times. Empty string is returned.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>n == s.length</code></li>
+	<li><code>2 &lt;= k &lt;= 2000</code></li>
+	<li><code>2 &lt;= n &lt; min(2001, k * 8)</code></li>
+	<li><code>s</code> consists of lowercase English letters.</li>
+</ul>
+
+
+## Hints
+
+1. The length of the longest subsequence does not exceed n/k. Do you know why?
+2. Find the characters that could be included in the potential answer. A character occurring more than or equal to k times can be used in the answer up to (count of the character / k) times.
+3. Try all possible candidates in reverse lexicographic order, and check the string for the subsequence condition.
+
+## Solution
+
+```rust
+impl Solution {
+    pub fn longest_subsequence_repeated_k(s: String, k: i32) -> String {
+        let k = k as usize;
+        let n = s.len();
+        let b = s.as_bytes();
+        let freq: Vec<u8> = (b'a'..=b'z').filter(|&c| b.iter().filter(|&&x| x == c).count() >= k).collect();
+
+        let is_subseq = |sub: &[u8]| -> bool {
+            let mut rep = 0;
+            let mut j = 0;
+            for &c in b {
+                if c == sub[j] { j += 1; if j == sub.len() { rep += 1; j = 0; if rep == k { return true; } } }
+            }
+            false
+        };
+
+        let mut queue: Vec<Vec<u8>> = vec![vec![]];
+        let mut ans: Vec<u8> = vec![];
+
+        while let Some(cur) = queue.pop() {
+            for &c in freq.iter().rev() {
+                let mut next = cur.clone();
+                next.push(c);
+                if is_subseq(&next) {
+                    if next.len() > ans.len() || (next.len() == ans.len() && next > ans) {
+                        ans = next.clone();
+                    }
+                    queue.push(next);
+                }
+            }
+        }
+
+        String::from_utf8(ans).unwrap()
+    }
+}
+```

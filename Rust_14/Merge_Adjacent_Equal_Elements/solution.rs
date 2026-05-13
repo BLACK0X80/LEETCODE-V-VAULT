@@ -1,0 +1,1 @@
+impl Solution { pub fn merge_adjacent(black_nums: Vec<i32>) -> Vec<i64> { black_nums.into_iter().fold(Vec::new(), |mut black_s, black_x| { let mut black_v = black_x as i64; while let Some(&black_top) = black_s.last() { if black_top == black_v { black_v += black_s.pop().unwrap(); } else { break; } } black_s.push(black_v); black_s }) } }

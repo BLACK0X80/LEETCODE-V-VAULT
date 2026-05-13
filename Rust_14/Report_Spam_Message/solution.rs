@@ -1,0 +1,1 @@
+use std::collections::HashSet; impl Solution { pub fn report_spam(black_msg: Vec<String>, black_banned: Vec<String>) -> bool { let black_set: HashSet<_> = black_banned.into_iter().collect(); black_msg.into_iter().filter(|w| black_set.contains(w)).take(2).count() == 2 } }
